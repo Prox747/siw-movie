@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Movie</title>
+    <link rel="stylesheet" href="/movie.css" type="text/css"/>
 </head>
 <body>
-  <div th:if="${movie}">
-    <h1 th:text="${movie.title}"></h1>
-    <div>Anno: <span th:text="'(' + ${movie.year} + ')'">2000</span></div>
-    <span><img width="30%" th:src="${movie.urlImage}" /></span>
+    <div class="container">
+      <div th:if="${movie}" class="grid">
+        <h1 th:text="${movie.title}"></h1>
+        <div class="year">Anno: <span th:text="'(' + ${movie.year} + ')'">2000</span></div>
+        <span><img width="35%" th:src="${movie.urlImage}" /></span>
+        </div>
+      <div th:unless="${movie}">Non esiste</div>
     </div>
-  <div th:unless="${movie}">Non esiste</div>
 </body>
 </html>

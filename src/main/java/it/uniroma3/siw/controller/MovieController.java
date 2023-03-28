@@ -38,7 +38,7 @@ public class MovieController {
 
     @GetMapping("/movies")
     public String showMovies(Model model) {
-        model.addAttribute("movies", this.movieRepository.findAll());
+        model.addAttribute("movies", this.movieRepository.findAllByOrderByYearDesc());
         return "movies.html";
     }
 
