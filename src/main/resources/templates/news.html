@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News</title>
+</head>
+
+<body>
+<!-- non ho il logo <div><a href="/"><img src="/logo-siw.png" width="50%"/></a></div> -->
+<h1>News</h1>
+<div th:if="${allNews.isEmpty()}">Ancora nessuna news 😔</div>
+<ul>
+    <li th:each="news : ${allNews}">
+        <a th:href="@{'/news' + '/' + ${news.id}}"
+           th:text="${news.title} + ' (' + ${news.date} + ')'">Vittoria lotteria! (2007-12-03T10:15:30)</a>
+    </li>
+</ul>
+</body>
+
+</html>

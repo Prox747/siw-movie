@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+  <meta charset="UTF-8">
+  <title>FormSearchMovies</title>
+</head>
+<body>
+  <form th:action="@{/searchMovies}" method="POST">
+    <div>
+      <label for="year" >Anno:</label>
+      <input required type="text" id="year" name="year" maxlength="255"/>
+    </div>
+    <div>
+      <span><button type="submit">Cerca</button></span>
+    </div>
+  </form>
+</body>
+</html>

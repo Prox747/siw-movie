@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>FormNewMovie</title>
+    <link rel="stylesheet" href="/form_add_style.css" type="text/css"/>
+</head>
+<body>
+    <form class="container" th:action="@{/addedMovie}" method="POST" th:object="${movie}">
+      <span th:if="${messaggioErrore}" th:text="${messaggioErrore}">Errore</span>
+
+      <label for="titolo">Titolo:</label>
+      <input id="titolo" required type="text" th:field="${movie.title}" maxlength="255"/>
+
+      <label for="anno">Anno:</label>
+      <input id="anno" required type="text" th:field="${movie.year}" maxlength="255"/>
+
+      <label for="img">URL immagine:</label>
+      <input id="img" type="url" th:field="${movie.urlImage}" maxlength="255"/>
+
+      <button type="submit" class="bottone">Inserisci</button>
+    </form>
+</body>
+</html>
