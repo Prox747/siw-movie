@@ -10,7 +10,7 @@
       <div th:if="${movie}" class="grid">
         <h1 th:text="${movie.title}"></h1>
         <div class="year">Anno: <span th:text="'(' + ${movie.year} + ')'">2000</span></div>
-        <span><img width="35%" th:src="${movie.urlImage}" /></span>
+        <div class="card"><img width="100%" th:src="${movie.urlImage}" /></div>
         </div>
       <div th:unless="${movie}">Non esiste</div>
     </div>
