@@ -1,6 +1,7 @@
 package it.uniroma3.siw.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 import java.util.Objects;
@@ -12,14 +13,14 @@ public class Movie {
     private String title;
     private Integer year;
     private String urlImage;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name="artist_id_director")
+    private Artist director;
     @OneToMany
     @JoinColumn(name = "movie_id")
     private List<News> news;
-    @ManyToOne
-    @JoinColumn(name = "artists_id_director")
-    private Artist director;
     @ManyToMany
-    //@Column(nullable = false) //chissa che fa ahah
     private List<Artist> actors;
 
     public Movie() {
@@ -46,6 +47,22 @@ public class Movie {
         this.id = id;
     }
 
+    public Artist getDirector() {
+        return director;
+    }
+
+    public void setDirector(Artist director) {
+        this.director = director;
+    }
+
+    public List<Artist> getActors() {
+        return actors;
+    }
+
+    public void setActors(List<Artist> actors) {
+        this.actors = actors;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -69,4 +86,4 @@ public class Movie {
     public void setUrlImage(String urlImage) {
         this.urlImage = urlImage;
     }
-    }
+}

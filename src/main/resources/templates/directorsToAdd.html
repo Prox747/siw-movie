@@ -2,9 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>addDirector</title>
 </head>
 <body>
-
+<h1 th:text="'Scegli un Regista per ' + ${movie.title}">Scegli un Regista per ...</h1>
+<div th:if="${directors.isEmpty()}">Non ci sono artisti nel sistema</div>
+<ul>
+    <li th:each="director : ${directors}">
+        <a th:href="@{'/addDirectorToMovie' + '/' + ${movie.id} + '/' + ${director.id}}" th:text="${director.name} + ' ' + ${director.surname} +  ' (' + ${director.dateOfBirth} + ')'">Pippo
+        </a>
+    </li>
+</ul>
 </body>
 </html>

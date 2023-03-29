@@ -11,8 +11,9 @@
 
     --space-s-l: clamp(1.00rem, calc(-0.31rem + 3.28vw), 3.75rem);
 
-    --grid-max-width: 116.25rem;
+    --grid-max-width: 75rem;
     --grid-gutter: var(--space-s-l, clamp(1.00rem, calc(-0.44rem + 3.61vw), 3.75rem));
+    --mygrid-gutter: clamp(1rem, calc(3vw + 0.5rem), 2rem);
     --grid-columns: 12;
 
     --clr-1: #0e4b50;
@@ -43,7 +44,7 @@ h1 {
 
 .grid {
     display: grid;
-    gap: var(--grid-gutter);
+    gap: var(--mygrid-gutter);
 }
 
 .card {
@@ -77,7 +78,7 @@ img {
     filter: blur(3.5rem);
 }
 
-.year {
+.info {
     font-size: 20pt;
     color: white;
 }

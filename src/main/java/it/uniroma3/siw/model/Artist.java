@@ -2,6 +2,7 @@ package it.uniroma3.siw.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
@@ -13,7 +14,7 @@ public class Artist {
     private String name;
     private String surname;
     private String nationality;
-    private LocalTime dateOfBirth;
+    private LocalDate dateOfBirth;
     @OneToMany(mappedBy = "director")
     private List<Movie> directedMovies;
     @ManyToMany(mappedBy = "actors")
@@ -67,11 +68,11 @@ public class Artist {
         this.nationality = nationality;
     }
 
-    public LocalTime getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalTime dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 }

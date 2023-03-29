@@ -15,6 +15,12 @@
       <label for="anno">Anno:</label>
       <input id="anno" required type="text" th:field="${movie.year}" maxlength="255"/>
 
+      <label for="dirName">Regista (nome):</label>
+      <input id="dirName" required type="text" th:field="${movie.director.name}"/>
+
+      <label for="dirSurname">Regista (cognome):</label>
+      <input id="dirSurname" required type="text" th:field="${movie.director.surname}"/>
+
       <label for="img">URL immagine:</label>
       <input id="img" type="url" th:field="${movie.urlImage}" maxlength="255"/>
 
