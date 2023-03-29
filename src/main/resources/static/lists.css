@@ -30,54 +30,34 @@ body {
 }
 
 h1 {
-    font-size: 55pt;
-    margin: 0.5rem;
+    font-size: 35pt;
+    margin: 2rem 0.5rem;
     color: var(--clr-2);
 }
 
-.container {
-    max-width: var(--grid-max-width);
-    padding-inline: var(--grid-gutter);
-    margin-inline: var(--space-2xs);
-}
-
-.grid {
-    display: grid;
-    gap: var(--mygrid-gutter);
-}
-
-.card {
-    border-radius: 1rem;
-    width: 35%;
-    position: relative;
-}
-
-img {
-    border-radius: inherit;
-}
-
-.card::before,
-.card::after {
-    z-index: -1;
-    content: "";
-    position: absolute;
-    inset: -.5rem;
-    background: conic-gradient(
-        from 0deg,
-        var(--clr-1),
-        var(--clr-2),
-        var(--clr-3),
-        var(--clr-2),
-        var(--clr-1)
-    );
-    border-radius: inherit;
-}
-
-.card::after {
-    filter: blur(3.5rem);
-}
-
-.info {
+a {
+    text-decoration: none;
     font-size: 20pt;
     color: white;
+}
+
+li{
+    margin: 0.5rem;
+}
+
+li::marker {
+    vertical-align: center;
+}
+
+ul{
+    list-style-type: circle;
+    list-style-position: outside;
+    color: white;
+}
+
+a:hover{
+    border-radius: 5px;
+    text-decoration: underline;
+    background-color: #2d8f85;
+    transition: background-color 150ms ease-out;
 }

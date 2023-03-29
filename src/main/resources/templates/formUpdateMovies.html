@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>formUpdateMovies</title>
+    <link rel="stylesheet" href="/form_add_style.css" type="text/css"/>
 </head>
 <body>
 <h1>Aggiorna Film</h1>
-<div th:text="${movie.title} + ' (' + ${movie.year} + ')'">Peppino a mare (2069)</div>
-<div><span th:text="'Regista:' + ${movie.director.name} + ' ' + ${movie.director.surname} +  ' (' + ${director.dateOfBirth} + ')    '">Regista: Peppino </span><a th:href="@{'/directorsToAdd' + '/' + ${movie.id}}">Cambia regista</a></div>
-<div>Attori: modifica(finto)</div>
+<div class="info" th:text="${movie.title} + ' (' + ${movie.year} + ')'">Peppino a mare (2069)</div>
+<div><span class="info" th:text="'Regista:' + ${movie.director.name} + ' ' + ${movie.director.surname} +  ' (' + ${director.dateOfBirth} + ')    '">Regista: Peppino </span><a th:href="@{'/directorsToAdd' + '/' + ${movie.id}}">Cambia regista</a></div>
+<div class="info">Attori: modifica(finto)</div>
 </body>
 </html>

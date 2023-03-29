@@ -7,7 +7,7 @@ body {
 body {
     height: 100vh;
     width: 100vw;
-    background: aliceblue;
+    background:  #0A0A0A;
 }
 
 * {
@@ -24,12 +24,8 @@ body {
     height: 100%;
 }
 
-img {
-
-}
-
 .wrapperbox {
-    border: 4px solid dodgerblue;
+    border: 4px solid #0e4b50;
     border-radius: 15px;
 }
 
@@ -37,6 +33,7 @@ h1 {
     margin: 2rem 4rem;
     font-size: 40pt;
     text-decoration: none;
+    color: #637c54;
 }
 
 .container-operazioni {
@@ -59,17 +56,17 @@ h1 {
 }
 
 .operazione:hover {
-    border: 4px solid dodgerblue;
-    background-color: aqua;
+    border: 4px solid #0e4b50;
+    background-color: #2d8f85;
 }
 
 a:link, a:visited{
-    color: darkslateblue;
+    color: #0e4b50;
     text-decoration: none;
 }
 
 a:hover{
-    color: cornflowerblue;
+    color: #0e4b50;
     text-decoration: underline;
     transition: color 200ms ease-in-out;
 }

@@ -7,17 +7,41 @@ body {
 body {
     height: 100vh;
     width: 100vw;
+    background: #0A0A0A;
 }
 
 * {
-    font-family: Tahoma, sans-serif;
+    font-family: Rockwell, sans-serif;
     box-sizing: border-box;
+}
+
+h1 {
+    font-size: 35pt;
+    color: #637c54;
+    margin: auto;
+}
+
+a:link, a:visited{
+    color: #637c54;
+    text-decoration: none;
+    margin: auto;
+}
+
+a:hover{
+    margin: auto;
+    text-decoration: underline;
+}
+
+.info {
+    color: white;
+    margin: auto;
 }
 
 .bottone {
     width: 200px;
     height: 50px;
-    background-color: burlywood;
+    background-color: #0e4b50;
+    color: white;
     cursor: pointer;
     horiz-align: center;
     column-span: 2;
@@ -26,7 +50,7 @@ body {
 }
 
 .bottone:hover {
-    background-color: bisque;
+    background-color: #2d8f85;
 }
 
 .container {
@@ -43,10 +67,12 @@ label {
     grid-column: 1;
     text-align: left;
     font-size: 20pt;
+    color: white;
 }
 
 input {
     grid-column: 2;
     border-radius: 5px;
     font-size: 20pt;
+    color: white;
 }
