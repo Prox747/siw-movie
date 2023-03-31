@@ -1,7 +1,6 @@
 package it.uniroma3.siw.model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 import java.util.Objects;
@@ -20,7 +19,7 @@ public class Movie {
     @OneToMany
     @JoinColumn(name = "movie_id")
     private List<News> news;
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Artist> actors;
 
     public Movie() {

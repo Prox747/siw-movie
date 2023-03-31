@@ -35,6 +35,11 @@ h1 {
     color: var(--clr-2);
 }
 
+h2 {
+    color: #637c54;
+    font-size: 1.6rem;
+}
+
 a {
     text-decoration: none;
     font-size: 20pt;
@@ -60,4 +65,8 @@ a:hover{
     text-decoration: underline;
     background-color: #2d8f85;
     transition: background-color 150ms ease-out;
+}
+
+.actorinfo {
+    font-size: 1.3rem;
 }

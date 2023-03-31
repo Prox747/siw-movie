@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedList;
+import java.util.List;
+
 @Controller
 public class MovieController {
     @Autowired MovieRepository movieRepository;
@@ -63,7 +66,7 @@ public class MovieController {
     }
     @GetMapping("/gestisciMovies")
     public String gestisciMovies(Model model) {
-        model.addAttribute("movies", movieRepository.findAll());
+        model.addAttribute("movies", movieRepository.findAllByOrderByYearDesc());
         return "gestisciMovies.html";
     }
     @GetMapping("/formUpdateMovies/{id}")
@@ -86,7 +89,61 @@ public class MovieController {
         Artist dir = artistRepository.findById(dirId).get();
         movie.setDirector(dir);
         movieRepository.save(movie);
-        model.addAttribute("movies", movieRepository.findAll());
+        model.addAttribute("movies", movieRepository.findAllByOrderByYearDesc());
         return "gestisciMovies.html";
+    }
+
+    @GetMapping("/allActorsForMovie/{movieId}")
+    public String showActorListForMovie(@PathVariable("movieId") Long idM, Model model) {
+        Movie movie = movieRepository.findById(idM).get();
+        List<Artist> inMovieActors = artistRepository.findAllByMoviesActedInIsContaining(movie);
+        model.addAttribute("movie", movie);
+        //così il movie in caso c'ha i suoi attori
+        if(movie.getActors() == null) {
+            movie.setActors(new LinkedList<Artist>(inMovieActors));
+            movieRepository.save(movie);
+        }
+
+        model.addAttribute("notInMovieActors", artistRepository.findAllByMoviesActedInIsNotContaining(movie));
+        model.addAttribute("inMovieActors", inMovieActors);
+        return "allActorsForMovie.html";
+    }
+
+    @GetMapping("/removeActorFromMovie/{movieId}/{actorId}")
+    public String removeActorFromMovie(@PathVariable("actorId") Long idA, @PathVariable("movieId") Long idM, Model model) {
+        Movie movie = movieRepository.findById(idM).get();
+        List<Artist> notInMovieActors = artistRepository.findAllByMoviesActedInIsNotContaining(movie);
+        List<Artist> inMovieActors = artistRepository.findAllByMoviesActedInIsContaining(movie);
+
+        Artist actorToRemove = artistRepository.findById(idA).get();
+        inMovieActors.remove(actorToRemove);
+        notInMovieActors.add(actorToRemove);
+
+        movie.getActors().remove(actorToRemove);
+        movieRepository.save(movie);
+
+        model.addAttribute("movie", movie);
+        model.addAttribute("notInMovieActors", notInMovieActors);
+        model.addAttribute("inMovieActors", inMovieActors);
+        return "allActorsForMovie.html";
+    }
+
+    @GetMapping("/addActorInMovie/{movieId}/{actorId}")
+    public String addActorInMovie(@PathVariable("actorId") Long idA, @PathVariable("movieId") Long idM, Model model) {
+        Movie movie = movieRepository.findById(idM).get();
+        List<Artist> notInMovieActors = artistRepository.findAllByMoviesActedInIsNotContaining(movie);
+        List<Artist> inMovieActors = artistRepository.findAllByMoviesActedInIsContaining(movie);
+
+        Artist actorToAdd = artistRepository.findById(idA).get();
+        inMovieActors.add(actorToAdd);
+        notInMovieActors.remove(actorToAdd);
+
+        movie.getActors().add(actorToAdd);
+        movieRepository.save(movie);
+
+        model.addAttribute("movie", movie);
+        model.addAttribute("notInMovieActors", notInMovieActors);
+        model.addAttribute("inMovieActors", inMovieActors);
+        return "allActorsForMovie.html";
     }
 }

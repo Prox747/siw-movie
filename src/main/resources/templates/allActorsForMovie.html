@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>allActorsForFilm</title>
+    <link rel="stylesheet" href="/lists.css">
+</head>
+<body>
+  <h1 th:text="'Scegli attori da aggiungere o rimuovere per il film: ' + ${movie.title}">Attori per film ...</h1>
+  <ul class="attori" id="attoriNelFilm">
+    <h2><em>Attori presenti nel film:</em></h2>
+    <li th:each="actor : ${inMovieActors}">
+      <span class="actorinfo" th:text="${actor.name} + ' ' + ${actor.surname} + ':   -   '">Pippetto</span>
+      <a class="actorinfo" th:href="@{'/removeActorFromMovie' + '/' + ${movie.id} + '/' + ${actor.id}}"><em>Rimuovi</em></a>
+    </li>
+  </ul>
+  <ul class="attori" id="attoriNonNelFilm">
+      <h2><em>Attori non presenti nel film:</em></h2>
+      <li th:each="actor : ${notInMovieActors}">
+          <span  class="actorinfo" th:text="${actor.name} + ' ' + ${actor.surname} + ':   -   '">Pippetto</span>
+          <a class="actorinfo" th:href="@{'/addActorInMovie' + '/' + ${movie.id} + '/' + ${actor.id}}"><em>Aggiungi</em></a>
+      </li>
+  </ul>
+</body>
+</html>
