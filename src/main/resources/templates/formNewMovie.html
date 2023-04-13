@@ -9,6 +9,7 @@
     <form class="container" th:action="@{/addedMovie}" method="POST" th:object="${movie}">
       <span th:if="${messaggioErrore}" th:text="${messaggioErrore}">Errore</span>
 
+
       <label for="titolo">Titolo:</label>
       <input id="titolo" required type="text" th:field="${movie.title}" maxlength="255"/>
 
