@@ -36,7 +36,7 @@ h1 {
 }
 
 h2 {
-    color: #637c54;
+    color: var(--clr-2);
     font-size: 1.6rem;
 }
 
@@ -69,4 +69,8 @@ a:hover{
 
 .actorinfo {
     font-size: 1.3rem;
+}
+
+#noMovies {
+    color:white;
 }

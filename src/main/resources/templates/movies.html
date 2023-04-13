@@ -8,7 +8,7 @@
 <body>
 <!-- non ho il logo <div><a href="/"><img src="/logo-siw.png" width="50%"/></a></div> -->
 <h1>Film</h1>
-<div th:if="${movies.isEmpty()}">Non ci sono film nel sistema</div>
+<div id="noMovies" th:if="${movies.isEmpty()}">Non ci sono film nel sistema</div>
 <ul>
   <li th:each="movie : ${movies}">
     <a th:href="@{'/movies' + '/' + ${movie.id}}"

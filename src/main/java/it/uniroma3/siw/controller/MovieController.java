@@ -30,6 +30,7 @@ public class MovieController {
     @PostMapping("/addedMovie")
     public String newMovie(@ModelAttribute("movie") Movie movie, Model model) {
         if (!movieRepository.existsByTitleAndYear(movie.getTitle(), movie.getYear())) {
+            //movie.getDirector().getDirectedMovies().add(movie); //non serve piu, guarda setDirector()
             this.movieRepository.save(movie);
             model.addAttribute("movie", movie);
             return "movie.html";
@@ -40,7 +41,14 @@ public class MovieController {
     }
     @GetMapping("/movies/{id}")
     public String getMovie(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("movie", this.movieRepository.findById(id).get());
+        Movie movie = this.movieRepository.findById(id).get();
+
+        if(movie.getActors().size()==0) {
+            movie.setActors(this.artistRepository.findAllByMoviesActedInIsContaining(movie));
+            movieRepository.save(movie);
+        }
+
+        model.addAttribute("movie", movie);
         return "movie.html";
     }
 
@@ -87,6 +95,10 @@ public class MovieController {
     public String addDirectorToMovie(@PathVariable("movieId") Long movieId, @PathVariable("dirId") Long dirId, Model model){
         Movie movie = movieRepository.findById(movieId).get();
         Artist dir = artistRepository.findById(dirId).get();
+
+        //dobbiamo rimuovere il film dai film diretti da quell'artista
+        movie.getDirector().getDirectedMovies().remove(movie);
+
         movie.setDirector(dir);
         movieRepository.save(movie);
         model.addAttribute("movies", movieRepository.findAllByOrderByYearDesc());
@@ -98,6 +110,7 @@ public class MovieController {
         Movie movie = movieRepository.findById(idM).get();
         List<Artist> inMovieActors = artistRepository.findAllByMoviesActedInIsContaining(movie);
         model.addAttribute("movie", movie);
+        //non puo esse che dobbiamo aggiornare tutto ogni volta, mi ammazzo, vabbe mo lo famo così
         //così il movie in caso c'ha i suoi attori
         if(movie.getActors() == null) {
             movie.setActors(new LinkedList<Artist>(inMovieActors));
@@ -118,8 +131,9 @@ public class MovieController {
         Artist actorToRemove = artistRepository.findById(idA).get();
         inMovieActors.remove(actorToRemove);
         notInMovieActors.add(actorToRemove);
-
         movie.getActors().remove(actorToRemove);
+        actorToRemove.getMoviesActedIn().remove(movie);
+
         movieRepository.save(movie);
 
         model.addAttribute("movie", movie);
@@ -137,8 +151,9 @@ public class MovieController {
         Artist actorToAdd = artistRepository.findById(idA).get();
         inMovieActors.add(actorToAdd);
         notInMovieActors.remove(actorToAdd);
-
         movie.getActors().add(actorToAdd);
+        actorToAdd.getMoviesActedIn().add(movie);
+
         movieRepository.save(movie);
 
         model.addAttribute("movie", movie);

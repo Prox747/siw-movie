@@ -2,6 +2,7 @@ package it.uniroma3.siw.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 @Entity
@@ -13,16 +14,18 @@ public class Movie {
     private Integer year;
     private String urlImage;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name="artist_id_director")
     private Artist director;
     @OneToMany
     @JoinColumn(name = "movie_id")
     private List<News> news;
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.ALL})
     private List<Artist> actors;
 
     public Movie() {
+        this.news = new ArrayList<News>();
+        this.actors = new ArrayList<Artist>();
     }
 
     @Override
@@ -52,6 +55,7 @@ public class Movie {
 
     public void setDirector(Artist director) {
         this.director = director;
+        director.getDirectedMovies().add(this);
     }
 
     public List<Artist> getActors() {
@@ -60,6 +64,11 @@ public class Movie {
 
     public void setActors(List<Artist> actors) {
         this.actors = actors;
+    }
+
+    public void addActor(Artist actor) {
+        this.actors.add(actor);
+        actor.getMoviesActedIn().add(this);
     }
 
     public String getTitle() {

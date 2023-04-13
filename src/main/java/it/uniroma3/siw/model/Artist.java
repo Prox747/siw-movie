@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 @Entity
@@ -21,6 +22,8 @@ public class Artist {
     private List<Movie> moviesActedIn;
 
     public Artist() {
+        this.directedMovies = new ArrayList<Movie>();
+        this.moviesActedIn = new ArrayList<Movie>();
     }
 
     @Override
@@ -74,6 +77,22 @@ public class Artist {
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public List<Movie> getDirectedMovies() {
+        return directedMovies;
+    }
+
+    public void setDirectedMovies(List<Movie> directedMovies) {
+        this.directedMovies = directedMovies;
+    }
+
+    public List<Movie> getMoviesActedIn() {
+        return moviesActedIn;
+    }
+
+    public void setMoviesActedIn(List<Movie> moviesActedIn) {
+        this.moviesActedIn = moviesActedIn;
     }
 }
 
