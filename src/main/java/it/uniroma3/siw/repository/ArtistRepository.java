@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface ArtistRepository extends CrudRepository<Artist, Long> {
     public List<Artist> findAllByMoviesActedInIsNotContaining(Movie movie);
-
     public List<Artist> findAllByMoviesActedInIsContaining(Movie movie);
+    public Artist findByDirectedMoviesIsContaining(Movie movie);
 }

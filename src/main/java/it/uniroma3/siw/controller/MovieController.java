@@ -43,10 +43,12 @@ public class MovieController {
     public String getMovie(@PathVariable("id") Long id, Model model) {
         Movie movie = this.movieRepository.findById(id).get();
 
+        //PER SINCRONIZZARCI SOL DATABASE ALL'INIZIO
         if(movie.getActors().size()==0) {
             movie.setActors(this.artistRepository.findAllByMoviesActedInIsContaining(movie));
             movieRepository.save(movie);
         }
+        ////////////////////////////////////////////
 
         model.addAttribute("movie", movie);
         return "movie.html";

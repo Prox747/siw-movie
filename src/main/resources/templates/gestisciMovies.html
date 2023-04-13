@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Scegli un Film da aggiornare</h1>
-<div th:if="${movies.isEmpty()}">Non ci sono film nel sistema</div>
+<div class="noMovies" th:if="${movies.isEmpty()}">Non ci sono film nel sistema</div>
 <ul>
     <li th:each="movie : ${movies}">
         <a th:href="@{'/formUpdateMovies' + '/' + ${movie.id}}"

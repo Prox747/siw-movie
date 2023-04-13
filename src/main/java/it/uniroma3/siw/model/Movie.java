@@ -58,9 +58,7 @@ public class Movie {
         director.getDirectedMovies().add(this);
     }
 
-    public List<Artist> getActors() {
-        return actors;
-    }
+    public List<Artist> getActors() {return actors;}
 
     public void setActors(List<Artist> actors) {
         this.actors = actors;
