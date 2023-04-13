@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>News</title>
+    <link rel="stylesheet" href="/lists.css"/>
 </head>
 
 <body>
 <!-- non ho il logo <div><a href="/"><img src="/logo-siw.png" width="50%"/></a></div> -->
 <h1>News</h1>
-<div th:if="${allNews.isEmpty()}">Ancora nessuna news 😔</div>
+<div class="emptyList" th:if="${allNews.isEmpty()}">Ancora nessuna news 😔</div>
 <ul>
     <li th:each="news : ${allNews}">
         <a th:href="@{'/news' + '/' + ${news.id}}"

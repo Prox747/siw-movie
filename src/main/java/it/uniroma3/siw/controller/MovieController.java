@@ -20,6 +20,16 @@ public class MovieController {
     public String index() {
         return "index.html";
     }
+
+    @GetMapping("/operazioniMovies")
+    public String operazioniMovies(){
+        return "operazioniMovies.html";
+    }
+
+    @GetMapping("/operazioniNews")
+    public String operazioniNews(){
+        return "operazioniNews.html";
+    }
     @GetMapping("/formNewMovie")
     public String formNewMovie(Model model){
         Movie movie = new Movie();
@@ -70,10 +80,7 @@ public class MovieController {
         model.addAttribute("movies", this.movieRepository.findByYear(year));
         return "foundMovies.html";
     }
-    @GetMapping("/operazioniMovies")
-    public String operazioniMovies(){
-        return "operazioniMovies.html";
-    }
+
     @GetMapping("/gestisciMovies")
     public String gestisciMovies(Model model) {
         model.addAttribute("movies", movieRepository.findAllByOrderByYearDesc());

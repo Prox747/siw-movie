@@ -1,7 +1,7 @@
 html,
 body {
-    margin: 5px;
-    padding: 5px;
+    margin: .5rem;
+    padding: .5rem;
 }
 
 body {
@@ -17,24 +17,27 @@ body {
 
 h1 {
     font-size: 35pt;
-    color: #637c54;
-    margin: auto;
+    color: #2d8f85;
+    margin: .5rem;
 }
 
 a:link, a:visited{
-    color: #637c54;
+    color: #2d8f85;
     text-decoration: none;
-    margin: auto;
+}
+
+a {
+    font-size: 1.3rem;
 }
 
 a:hover{
-    margin: auto;
     text-decoration: underline;
 }
 
 .info {
     color: white;
-    margin: auto;
+    font-size: 1.3rem;
+    margin: .5rem;
 }
 
 .bottone {
@@ -47,6 +50,7 @@ a:hover{
     column-span: 2;
     font-size: 20pt;
     border-radius: 5px;
+    margin: .5rem;
 }
 
 .bottone:hover {
@@ -68,6 +72,7 @@ label {
     text-align: left;
     font-size: 20pt;
     color: white;
+    margin: .5rem;
 }
 
 input {
@@ -77,4 +82,5 @@ input {
     color: black;
     background-color: white;
     padding: .5rem;
+    margin: .5rem;
 }
