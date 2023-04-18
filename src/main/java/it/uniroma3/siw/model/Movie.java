@@ -2,6 +2,8 @@ package it.uniroma3.siw.model;
 
 import jakarta.persistence.*;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

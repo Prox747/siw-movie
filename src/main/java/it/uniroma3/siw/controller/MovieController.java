@@ -4,18 +4,24 @@ import it.uniroma3.siw.model.Artist;
 import it.uniroma3.siw.model.Movie;
 import it.uniroma3.siw.repository.ArtistRepository;
 import it.uniroma3.siw.repository.MovieRepository;
+import it.uniroma3.siw.validator.MovieValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedList;
 import java.util.List;
+import javax.validation.*;
 
 @Controller
 public class MovieController {
     @Autowired MovieRepository movieRepository;
     @Autowired ArtistRepository artistRepository;
+
+    @Autowired
+    MovieValidator movieValidator;
     @GetMapping("/index")
     public String index() {
         return "index.html";
@@ -38,14 +44,15 @@ public class MovieController {
         return "formNewMovie.html";
     }
     @PostMapping("/addedMovie")
-    public String newMovie(@ModelAttribute("movie") Movie movie, Model model) {
-        if (!movieRepository.existsByTitleAndYear(movie.getTitle(), movie.getYear())) {
+    public String newMovie(@Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult, Model model) {
+        movieValidator.validate(movie, bindingResult);
+        if (!bindingResult.hasErrors()) {
             //movie.getDirector().getDirectedMovies().add(movie); //non serve piu, guarda setDirector()
             this.movieRepository.save(movie);
             model.addAttribute("movie", movie);
             return "movie.html";
         } else {
-            model.addAttribute("messaggioErrore", "Questo film esiste già");
+            model.addAttribute("messaggioErrore", "Questo film esiste già, inseriscine uno nuovo :)");
             return "formNewMovie.html";
         }
     }
