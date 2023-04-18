@@ -7,7 +7,7 @@
 </head>
 <body>
     <form class="container" th:action="@{/addedMovie}" method="POST" th:object="${movie}">
-      <span th:if="${messaggioErrore}" th:text="${messaggioErrore}">Errore</span>
+      <span class="errorMessage" th:if="${messaggioErrore}" th:text="${messaggioErrore}">Errore</span>
 
 
       <label for="titolo">Titolo:</label>
