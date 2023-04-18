@@ -7,14 +7,19 @@
 </head>
 <body>
     <form class="container" th:action="@{/addedMovie}" method="POST" th:object="${movie}">
-      <span class="errorMessage" th:if="${messaggioErrore}" th:text="${messaggioErrore}">Errore</span>
+<!--      <span class="errorMessage" th:if="${messaggioErrore}" th:text="${messaggioErrore}">Errore</span>-->
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+        </div>
 
-
-      <label for="titolo">Titolo:</label>
+        <label for="titolo">Titolo:</label>
       <input id="titolo" required type="text" th:field="${movie.title}" maxlength="255"/>
+        <span th:if="${#fields.hasErrors('title')}" th:errors="${movie.title}"></span>
 
-      <label for="anno">Anno:</label>
+
+        <label for="anno">Anno:</label>
       <input id="anno" required type="text" th:field="${movie.year}" maxlength="255"/>
+        <span th:if="${#fields.hasErrors('year')}" th:errors="${movie.year}"></span>
 
       <label for="dirName">Regista (nome):</label>
       <input id="dirName" required type="text" th:field="${movie.director.name}"/>
