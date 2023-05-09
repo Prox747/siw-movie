@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" content="text/html">
     <title>LoginPage</title>
+    <link rel="stylesheet" href="/css/form_style.css" type="text/css"/>
 </head>
 <body>
     <header>
@@ -17,11 +18,11 @@
 
     <h1>Login</h1>
     <form th:action="@{/login}" method="POST">
-        <label for="username">Username: </label>
-        <input id="username" required type="text"/><br>
+        <label>Username: </label>
+        <input required type="text" name="username"/><br>
 
-        <label for="password">Password: </label>
-        <input id="password" required type="password"/><br>
+        <label>Password: </label>
+        <input required type="password" name="password"/><br>
 
         <div class="errorMessage" th:if="${param.error != null}">Username o password errati</div>
 

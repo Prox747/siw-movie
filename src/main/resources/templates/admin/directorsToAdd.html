@@ -10,7 +10,7 @@
 <div th:if="${directors.isEmpty()}">Non ci sono artisti nel sistema</div>
 <ul>
     <li th:each="director : ${directors}">
-        <a th:href="@{'/addDirectorToMovie' + '/' + ${movie.id} + '/' + ${director.id}}" th:text="${director.name} + ' ' + ${director.surname} +  ' (' + ${director.dateOfBirth} + ')'">Pippo
+        <a th:href="@{'/admin/addDirectorToMovie' + '/' + ${movie.id} + '/' + ${director.id}}" th:text="${director.name} + ' ' + ${director.surname} +  ' (' + ${director.dateOfBirth} + ')'">Pippo
         </a>
     </li>
 </ul>

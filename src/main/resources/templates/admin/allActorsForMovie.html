@@ -11,14 +11,14 @@
     <h2><em>Attori presenti nel film:</em></h2>
     <li th:each="actor : ${inMovieActors}">
       <span class="actorinfo" th:text="${actor.name} + ' ' + ${actor.surname} + ':   -   '">Pippetto</span>
-      <a class="actorinfo" th:href="@{'/removeActorFromMovie' + '/' + ${movie.id} + '/' + ${actor.id}}"><em>Rimuovi</em></a>
+      <a class="actorinfo" th:href="@{'/admin/removeActorFromMovie' + '/' + ${movie.id} + '/' + ${actor.id}}"><em>Rimuovi</em></a>
     </li>
   </ul>
   <ul class="attori" id="attoriNonNelFilm">
       <h2><em>Attori non presenti nel film:</em></h2>
       <li th:each="actor : ${notInMovieActors}">
           <span  class="actorinfo" th:text="${actor.name} + ' ' + ${actor.surname} + ':   -   '">Pippetto</span>
-          <a class="actorinfo" th:href="@{'/addActorInMovie' + '/' + ${movie.id} + '/' + ${actor.id}}"><em>Aggiungi</em></a>
+          <a class="actorinfo" th:href="@{'/admin/addActorInMovie' + '/' + ${movie.id} + '/' + ${actor.id}}"><em>Aggiungi</em></a>
       </li>
   </ul>
 </body>

@@ -40,16 +40,16 @@ public class AuthenticationController {
     public String index(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication instanceof AnonymousAuthenticationToken) {
-            return "index.html";
+            return "index";
         }
         else {
             UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
             if (credentials.getRuolo().equals(Credentials.ADMIN_ROLE)) {
-                return "admin/indexAdmin.html";
+                return "admin/indexAdmin";
             }
         }
-        return "index.html";
+        return "index";
     }
 
     @GetMapping("/success")
@@ -58,9 +58,9 @@ public class AuthenticationController {
         UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
         if (credentials.getRuolo().equals(Credentials.ADMIN_ROLE)) {
-            return "admin/indexAdmin.html";
+            return "admin/indexAdmin";
         }
-        return "index.html";
+        return "index";
     }
 
     @PostMapping("/register")
@@ -77,6 +77,8 @@ public class AuthenticationController {
             model.addAttribute("user", user);
             return "registrationSuccessful";
         }
-        return "registerUser";
+        //SBAGLIATO??? il prof ha messo "registerUser" invece di
+        // "formRegisterUser" ma non esiste una pagina con quel nome
+        return "formRegisterUser";
     }
 }
