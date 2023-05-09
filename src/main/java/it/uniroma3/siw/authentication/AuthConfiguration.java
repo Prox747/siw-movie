@@ -36,7 +36,7 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
                 // AUTORIZZAZIONE: qui definiamo chi può accedere a cosa
                 .authorizeRequests()
                 // chiunque (autenticato o no) può accedere alle pagine index, login, register, ai css e alle immagini
-                .antMatchers(HttpMethod.GET, "/", "/index", "/login", "/register", "/css/**", "/images/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/", "/index", "/login", "/register", "/css/**", "/images/**", "favicon.ico").permitAll()
                 // chiunque (autenticato o no) può mandare richieste POST al punto di accesso per login e register
                 .antMatchers(HttpMethod.POST, "/login", "/register").permitAll()
                 // solo gli utenti autenticati con ruolo ADMIN possono accedere a risorse con path /admin/**
@@ -75,7 +75,7 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication()
                 .dataSource(this.datasource)
                 //query per recuperare username e ruolo
-                .authoritiesByUsernameQuery("SELECT username, role FROM credentials WHERE username=?")
+                .authoritiesByUsernameQuery("SELECT username, ruolo FROM credentials WHERE username=?")
                 //query per username e password. Il flag boolean flag specifica se l'utente user è abilitato o no (va sempre a true)
                 .usersByUsernameQuery("SELECT username, password, 1 as enabled FROM credentials WHERE username=?");
     }
