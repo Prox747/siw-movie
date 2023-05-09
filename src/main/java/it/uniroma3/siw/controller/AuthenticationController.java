@@ -2,7 +2,6 @@ package it.uniroma3.siw.controller;
 
 import javax.validation.Valid;
 
-import it.uniroma3.siw.model.Ruolo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,19 +24,19 @@ public class AuthenticationController {
     @Autowired
     private CredentialsService credentialsService;
 
-    @GetMapping(value = "/register")
+    @GetMapping("/register")
     public String showRegisterForm (Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("credentials", new Credentials());
         return "formRegisterUser";
     }
 
-    @GetMapping(value = "/login")
+    @GetMapping("/login")
     public String showLoginForm (Model model) {
         return "formLogin";
     }
 
-    @GetMapping(value = "/")
+    @GetMapping("/")
     public String index(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication instanceof AnonymousAuthenticationToken) {
@@ -46,25 +45,25 @@ public class AuthenticationController {
         else {
             UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
-            if (credentials.getRuolo().equals(Ruolo.ADMIN)) {
+            if (credentials.getRuolo().equals(Credentials.ADMIN_ROLE)) {
                 return "admin/indexAdmin.html";
             }
         }
         return "index.html";
     }
 
-    @GetMapping(value = "/success")
+    @GetMapping("/success")
     public String defaultAfterLogin(Model model) {
 
         UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
-        if (credentials.getRuolo().equals(Ruolo.ADMIN)) {
+        if (credentials.getRuolo().equals(Credentials.ADMIN_ROLE)) {
             return "admin/indexAdmin.html";
         }
         return "index.html";
     }
 
-    @PostMapping(value = { "/register" })
+    @PostMapping("/register")
     public String registerUser(@Valid @ModelAttribute("user") User user,
                                BindingResult userBindingResult, @Valid
                                @ModelAttribute("credentials") Credentials credentials,

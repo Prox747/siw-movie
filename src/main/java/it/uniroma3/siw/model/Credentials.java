@@ -4,12 +4,16 @@ import javax.persistence.*;
 
 @Entity
 public class Credentials {
+
+    public static final String ADMIN_ROLE = "ADMIN";
+    public static final String DEFAULT_ROLE = "DEFAULT";
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     String username;
     String password;
-    Ruolo ruolo;
+    String ruolo;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     User user;
@@ -37,11 +41,11 @@ public class Credentials {
         this.password = password;
     }
 
-    public Ruolo getRuolo() {
+    public String getRuolo() {
         return ruolo;
     }
 
-    public void setRuolo(Ruolo ruolo) {
+    public void setRuolo(String ruolo) {
         this.ruolo = ruolo;
     }
 

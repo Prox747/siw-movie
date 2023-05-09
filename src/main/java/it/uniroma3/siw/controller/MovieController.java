@@ -22,10 +22,6 @@ public class MovieController {
 
     @Autowired
     MovieValidator movieValidator;
-    @GetMapping("/index")
-    public String index() {
-        return "index.html";
-    }
 
     @GetMapping("/operazioniMovies")
     public String operazioniMovies(){
