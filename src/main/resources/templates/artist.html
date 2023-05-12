@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SingleNews</title>
+    <link href="/css/single.css" type="text/css">
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+
+    <div class="container">
+        <div class="grid" th:if="${artist}">
+            <h1 th:text="${artist.name} + ' ' + ${artist.surname}"></h1>
+            <div class="info" id="year">Data di nascita: <span th:text="'(' + ${artist.dateOfBirth} + ')'">2000</span></div>
+            <div class="card"><img src="none" alt="artistPhoto"></div>
+        </div>
+        <div th:unless="${artist}">Artista inesistente o errore</div>
+    </div>
+</body>
+</html>

@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="/css/lists.css">
 </head>
 <body>
+    <div th:replace="fragments/header :: header"></div>
+
     <div th:if="${movies.isEmpty()}">Non ci sono film di quell'anno</div>
     <ul>
         <li th:each="movie : ${movies}">

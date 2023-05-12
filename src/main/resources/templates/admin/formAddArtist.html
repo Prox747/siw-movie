@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FormAddNews</title>
+    <link rel="stylesheet" href="/css/form_style.css">
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+
+    <form class="container" th:action="@{/admin/addedArtist}" method="POST" th:object="${artist}">
+        <span th:if="${messaggioErrore}" th:text="${messaggioErrore}">Errore</span>
+
+        <label for="name">Nome:</label>
+        <input id="name" required type="text" th:field="${artist.name}" maxlength="255"/>
+
+        <label for="surname">Cognome:</label>
+        <input id="surname" required type="text" th:field="${artist.surname}" maxlength="255"/>
+
+        <button type="submit" class="bottone">Inserisci</button>
+    </form>
+</body>
+</html>

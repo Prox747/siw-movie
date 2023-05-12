@@ -6,14 +6,17 @@
   <link rel="stylesheet" href="/css/form_style.css" type="text/css"/>
 </head>
 <body>
-  <form th:action="@{/searchMovies}" method="POST">
-    <div>
-      <label for="year" >Anno:</label>
-      <input required type="text" id="year" name="year" maxlength="255"/>
-    </div>
-    <div>
-      <span><button type="submit">Cerca</button></span>
-    </div>
-  </form>
+    <div th:replace="fragments/header :: header"></div>
+
+    <h1>Cerca Film</h1>
+    <form th:action="@{/searchMovies}" method="POST">
+      <div>
+        <label for="year" >Inserisci l'anno di uscita del film:</label>
+        <input required type="text" id="year" name="year" maxlength="255"/>
+      </div>
+      <div>
+        <span><button type="submit">Cerca</button></span>
+      </div>
+    </form>
 </body>
 </html>

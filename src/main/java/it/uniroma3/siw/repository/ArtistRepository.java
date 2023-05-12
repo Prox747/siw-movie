@@ -4,10 +4,11 @@ import it.uniroma3.siw.model.Artist;
 import it.uniroma3.siw.model.Movie;
 import org.springframework.data.repository.CrudRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ArtistRepository extends CrudRepository<Artist, Long> {
     public List<Artist> findAllByMoviesActedInIsNotContaining(Movie movie);
     public List<Artist> findAllByMoviesActedInIsContaining(Movie movie);
-    public Artist findByDirectedMoviesIsContaining(Movie movie);
+    public boolean existsArtistByNameAndSurnameAndDateOfBirth(String name, String surname, LocalDate dateOfBirth);
 }

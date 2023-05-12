@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="/css/form_style.css" type="text/css"/>
 </head>
 <body>
+    <div th:replace="fragments/header :: header"></div>
+
     <form class="container" th:action="@{/admin/addedMovie}" method="POST" th:object="${movie}">
         <div th:if="${#fields.hasGlobalErrors()}">
             <p class="errorMessage" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>

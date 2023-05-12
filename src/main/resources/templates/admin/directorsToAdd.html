@@ -6,13 +6,15 @@
     <link rel="stylesheet" href="/css/lists.css">
 </head>
 <body>
-<h1 th:text="'Scegli un Regista per ' + ${movie.title}">Scegli un Regista per ...</h1>
-<div th:if="${directors.isEmpty()}">Non ci sono artisti nel sistema</div>
-<ul>
-    <li th:each="director : ${directors}">
-        <a th:href="@{'/admin/addDirectorToMovie' + '/' + ${movie.id} + '/' + ${director.id}}" th:text="${director.name} + ' ' + ${director.surname} +  ' (' + ${director.dateOfBirth} + ')'">Pippo
-        </a>
-    </li>
-</ul>
+    <div th:replace="fragments/header :: header"></div>
+
+    <h1 th:text="'Scegli un Regista per ' + ${movie.title}">Scegli un Regista per ...</h1>
+    <div th:if="${directors.isEmpty()}">Non ci sono artisti nel sistema</div>
+    <ul>
+        <li th:each="director : ${directors}">
+            <a th:href="@{'/admin/addDirectorToMovie' + '/' + ${movie.id} + '/' + ${director.id}}" th:text="${director.name} + ' ' + ${director.surname} +  ' (' + ${director.dateOfBirth} + ')'">Pippo
+            </a>
+        </li>
+    </ul>
 </body>
 </html>

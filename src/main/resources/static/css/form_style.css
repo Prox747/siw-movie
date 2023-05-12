@@ -1,3 +1,21 @@
+/* FOR THE HEADER */
+header {
+    height: 10%;
+    width: 100%;
+    background-color: #0e4b50;
+    border-radius: 0px;
+    margin: .5rem;
+}
+
+header.headerElements {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+/*//////////////////////////////*/
+
+
 html,
 body {
     margin: .5rem;

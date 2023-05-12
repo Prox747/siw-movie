@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Movie</title>
-    <link rel="stylesheet" href="/css/movie.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/single.css" type="text/css"/>
 </head>
 <body>
+    <div th:replace="fragments/header :: header"></div>
+
     <div class="container">
       <div th:if="${movie}" class="grid">
         <h1 th:text="${movie.title}"></h1>
         <div class="info" id="year">Anno: <span th:text="'(' + ${movie.year} + ')'">2000</span></div>
         <div class="info" id="regista">Regista: <span th:text="${movie.director.name} + ' ' + ${movie.director.surname}">Pippo Pluto</span></div>
         <div class="card"><img width="100%" th:src="${movie.urlImage}" /></div>
-        </div>
+      </div>
       <div th:unless="${movie}">Non esiste</div>
     </div>
 </body>

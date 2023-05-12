@@ -27,12 +27,7 @@ public class Movie {
     @ManyToMany(cascade = {CascadeType.ALL})
     private List<Artist> actors;
 
-    @OneToMany
-    @JoinColumn(name = "movie_id")
-    private List<News> news;
-
     public Movie() {
-        this.news = new ArrayList<News>();
         this.actors = new ArrayList<Artist>();
     }
 

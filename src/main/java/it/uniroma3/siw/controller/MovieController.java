@@ -28,9 +28,9 @@ public class MovieController {
         return "admin/operazioniMovies.html";
     }
 
-    @GetMapping("/admin/operazioniNews")
-    public String operazioniNews(){
-        return "admin/operazioniNews.html";
+    @GetMapping("/admin/operazioniArtisti")
+    public String operazioniArtisti(){
+        return "admin/operazioniArtisti.html";
     }
     @GetMapping("/admin/formNewMovie")
     public String formNewMovie(Model model){
