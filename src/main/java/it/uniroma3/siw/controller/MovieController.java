@@ -94,7 +94,6 @@ public class MovieController {
         Movie movie = movieRepository.findById(id).get();
         model.addAttribute("movie", movie);
         model.addAttribute("director", movie.getDirector());
-        model.addAttribute("directors", artistRepository.findAll());
         return "admin/formUpdateMovies.html";
     }
     @GetMapping("/admin/directorsToAdd/{movieId}")
@@ -114,7 +113,7 @@ public class MovieController {
         movie.setDirector(dir);
         movieRepository.save(movie);
         model.addAttribute("movies", movieRepository.findAllByOrderByYearDesc());
-        return "admin/gestisciMovies.html";
+        return formUpdateMovies(movieId, model);
     }
 
     @GetMapping("/admin/allActorsForMovie/{movieId}")
