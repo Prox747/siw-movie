@@ -8,6 +8,7 @@
 <body>
     <div th:replace="fragments/header :: header"></div>
 
+    <a th:href="@{'/admin/formUpdateMovies/' + ${movie.id}}"><- Torna al film</a>
     <h1 th:text="'Scegli attori da aggiungere o rimuovere per il film: ' + ${movie.title}">Attori per film ...</h1>
     <ul class="attori" id="attoriNelFilm">
         <h2><em>Attori presenti nel film:</em></h2>

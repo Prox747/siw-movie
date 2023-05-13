@@ -17,6 +17,12 @@
         <label for="surname">Cognome:</label>
         <input id="surname" required type="text" th:field="${artist.surname}" maxlength="255"/>
 
+        <label for="dateofbirth">Data di nascita:</label>
+        <input id="dateofbirth" required type="date" name="dateOfBirthString"/>
+
+        <label for="dateofdeath">Data di morte (opzionale):</label>
+        <input id="dateofdeath" type="date" name="dateOfDeathString"/>
+
         <button type="submit" class="bottone">Inserisci</button>
     </form>
 </body>
