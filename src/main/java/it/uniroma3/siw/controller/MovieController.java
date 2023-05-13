@@ -35,15 +35,15 @@ public class MovieController {
     @GetMapping("/admin/formNewMovie")
     public String formNewMovie(Model model){
         Movie movie = new Movie();
-        movie.setDirector(new Artist());
         model.addAttribute("movie", movie);
+        model.addAttribute("directors", artistRepository.findAll());
         return "admin/formNewMovie.html";
     }
     @PostMapping("/admin/addedMovie")
     public String newMovie(@Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult, Model model) {
         movieValidator.validate(movie, bindingResult);
         if (!bindingResult.hasErrors()) {
-            //movie.getDirector().getDirectedMovies().add(movie); //non serve piu, guarda setDirector()
+            movie.getDirector().getDirectedMovies().add(movie);
             this.movieRepository.save(movie);
             model.addAttribute("movie", movie);
             return "movie.html";

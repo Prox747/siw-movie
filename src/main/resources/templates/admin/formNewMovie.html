@@ -22,14 +22,13 @@
         <input id="anno" required type="text" th:field="${movie.year}" maxlength="255"/>
         <span class="errorMessage" th:if="${#fields.hasErrors('year')}" th:errors="${movie.year}"></span>
 
-        <label for="dirName">Regista (nome):</label>
-        <input id="dirName" required type="text" th:field="${movie.director.name}"/>
-
-        <label for="dirSurname">Regista (cognome):</label>
-        <input id="dirSurname" required type="text" th:field="${movie.director.surname}"/>
+        <label for="regista">Scegli un regista:</label>
+        <select id="regista" required th:field="${movie.director}">
+            <option th:each="director : ${directors}" th:value="${director.id}" th:text="${director.name} + ' ' + ${director.surname}"></option>
+        </select>
 
         <label for="img">URL immagine:</label>
-        <input id="img" type="url" th:field="${movie.urlImage}" maxlength="255"/>
+        <input id="img" type="text" th:field="${movie.imageFileName}" maxlength="255"/>
 
         <button type="submit" class="bottone">Inserisci</button>
     </form>
