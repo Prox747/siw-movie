@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SingleNews</title>
-    <link href="/css/single.css" type="text/css">
+    <title>Artist</title>
+    <link href="/static/css/single.css" type="text/css">
 </head>
 <body>
     <div th:replace="fragments/header :: header"></div>
@@ -11,7 +11,10 @@
     <div class="container">
         <div class="grid" th:if="${artist}">
             <h1 th:text="${artist.name} + ' ' + ${artist.surname}"></h1>
-            <div class="info" id="year">Data di nascita: <span th:text="'(' + ${artist.dateOfBirth} + ')'">2000</span></div>
+            <div class="info" id="year">
+                <span th:text="'Data di nascita: (' + ${artist.dateOfBirth} + ')'">2000</span>
+                <div th:if="${artist.dateOfDeath}"><span th:text="'Data di morte: (' + ${artist.dateOfDeath} + ')'">2000</span> 2020</div>
+            </div>
             <div class="card"><img src="none" alt="artistPhoto"></div>
         </div>
         <div th:unless="${artist}">Artista inesistente o errore</div>

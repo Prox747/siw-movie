@@ -9,10 +9,10 @@
     <header>
         <div class="headerElements" th:if="${#request.userPrincipal}">
             <a href="/">Home</a>
-            <div>
+            <span>
                 <span th:text="${#request.userPrincipal.principal.username} + '  '"></span>
                 <a href="/logout">Logout</a>
-            </div>
+            </span>
         </div>
         <div class="headerElements" th:unless="${#request.userPrincipal}">
             <a href="/">Home</a>

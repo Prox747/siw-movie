@@ -15,6 +15,8 @@ public class Artist {
     private String surname;
     private String nationality;
     private LocalDate dateOfBirth;
+    private LocalDate dateOfDeath;
+    private String imageFileName;
     @OneToMany(mappedBy = "director")
     private List<Movie> directedMovies;
     @ManyToMany(mappedBy = "actors")
@@ -92,6 +94,22 @@ public class Artist {
 
     public void setMoviesActedIn(List<Movie> moviesActedIn) {
         this.moviesActedIn = moviesActedIn;
+    }
+
+    public LocalDate getDateOfDeath() {
+        return dateOfDeath;
+    }
+
+    public void setDateOfDeath(LocalDate dateOfDeath) {
+        this.dateOfDeath = dateOfDeath;
+    }
+
+    public String getImageFileName() {
+        return imageFileName;
+    }
+
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
     }
 }
 

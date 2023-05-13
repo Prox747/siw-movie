@@ -19,7 +19,7 @@ public class Movie {
     @Min(1900)
     @Max(2023)
     private Integer year;
-    private String urlImage;
+    private String imageFileName;
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name="artist_id_director")
@@ -88,11 +88,11 @@ public class Movie {
         this.year = year;
     }
 
-    public String getUrlImage() {
-        return urlImage;
+    public String getImageFileName() {
+        return imageFileName;
     }
 
-    public void setUrlImage(String urlImage) {
-        this.urlImage = urlImage;
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
     }
 }
