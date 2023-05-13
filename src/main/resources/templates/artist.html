@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Artist</title>
-    <link href="/static/css/single.css" type="text/css">
+    <link rel="stylesheet" href="/css/single.css" type="text/css">
 </head>
 <body>
     <div th:replace="fragments/header :: header"></div>
@@ -15,7 +15,7 @@
                 <span th:text="'Data di nascita: (' + ${artist.dateOfBirth} + ')'">2000</span>
                 <div th:if="${artist.dateOfDeath}"><span th:text="'Data di morte: (' + ${artist.dateOfDeath} + ')'">2000</span> 2020</div>
             </div>
-            <div class="card"><img src="none" alt="artistPhoto"></div>
+            <div class="card"><img width="100%" th:src="'/artistsImages/' + ${artist.imageFileName}" alt="image"/></div>
         </div>
         <div th:unless="${artist}">Artista inesistente o errore</div>
     </div>

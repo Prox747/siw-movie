@@ -1,16 +1,16 @@
-19,1989-04-15,, 'watson.jpg',Emma,us,Watson
-17,1981-09-21,, 'gadot.jpg',Gal,us,Gadot
-23,1989-03-10,, 'collins.jpg',Lily,us,Collins
-14,1949-06-22,, 'streep.jpg',Meryl,us,Streep
-25,1989-05-10,, 'roberts.jpg',Emma,us,Roberts
-12,1984-11-22,, 'johansson.jpg',Scarlett,us,Johansson
-24,1989-04-10,, 'hudgens.jpg',Vanessa,us,Hudgens
-16,1990-08-15,, 'lawrence.jpg',Jennifer,us,Lawrence
-20,1984-04-30,, 'kunis.jpg',Mila,us,Kunis
-13,1956-07-09,, 'hanks.jpg',Tom,us,Hanks
-22,1989-02-10,, 'brie.jpg',Brie,us,Larson
-15,1963-12-18,, 'pitt.jpg',Brad,us,Pitt
-11,1974-11-11,, 'dicaprio.jpg',Leonardo,us,DiCaprio
-18,1985-03-15,, 'stone.jpg',Emma,us,Stone
-21,1987-11-23,, 'gomez.jpg',Selena,us,Gomez
-31,1889-04-16,1977-12-25,'chaplin.jpg',Charlie,us,Chaplin
+31,1889-04-16,1977-12-25,chaplin.jpg,Charlie,us,Chaplin
+17,1981-09-21,,gadot.jpg,Gal,is,Gadot
+13,1956-07-09,,hanks.jpg,Tom,us,Hanks
+16,1990-08-15,,lawrence.jpg,Jennifer,us,Lawrence
+11,1974-11-11,,dicaprio.jpg,Leonardo,us,DiCaprio
+12,1984-11-22,,johansson.jpg,Scarlett,us,Johansson
+21,1987-11-23,,gomez.jpg,Selena,us,Gomez
+15,1963-12-18,,pitt.jpg,Brad,us,Pitt
+22,1989-02-10,,brie.jpg,Brie,us,Larson
+20,1984-04-30,,kunis.jpg,Mila,us,Kunis
+14,1949-06-22,,streep.jpg,Meryl,us,Streep
+19,1989-04-15,,watson.jpg,Emma,us,Watson
+18,1985-03-15,,stone.jpg,Emma,us,Stone
+24,1989-04-10,,hudgens.jpg,Vanessa,us,Hudgens
+25,1989-05-10,,roberts.jpg,Emma,us,Roberts
+23,1989-03-10,,collins.jpg,Lily,us,Collins

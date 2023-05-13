@@ -1,34 +1,41 @@
+
 /* FOR THE HEADER */
 header {
-    height: 10%;
+    height: 3.5rem;
     width: 100%;
     background-color: #0e4b50;
     border-radius: 0px;
-    margin: .5rem;
+    margin-bottom: 0.5rem;
 }
 
-header.headerElements {
+.headerElements {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    height: 100%;
+    padding: 0 0.5rem;
+}
+
+.whitespace {
+    width: 1.5rem;
+    display: inline-block;
+}
+
+#home1, #home2, #login, #username, #logout  {
+    color: white;
+    font-size: 1.3rem;
 }
 /*//////////////////////////////*/
 
-html,
 body {
+    background: #0A0A0A;
     margin: 0;
     padding: 0;
 }
 
-body {
-    height: 100vh;
-    width: 100vw;
-    background:  #0A0A0A;
-}
-
 * {
-    font-family: Tahoma, sans-serif;
+    font-family: Rockwell, sans-serif;
     box-sizing: border-box;
 }
 

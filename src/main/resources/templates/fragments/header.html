@@ -8,15 +8,16 @@
   <th:block th:fragment="header">
     <header>
         <div class="headerElements" th:if="${#request.userPrincipal}">
-            <a href="/">Home</a>
-            <span>
-                <span th:text="${#request.userPrincipal.principal.username} + '  '"></span>
-                <a href="/logout">Logout</a>
+            <a class="home" id="home1" href="/">Home</a>
+            <span class="endElements">
+                <span id="username" th:text="${#request.userPrincipal.principal.username}"></span>
+                <span class="whitespace"></span>
+                <a id="logout" href="/logout">Logout</a>
             </span>
         </div>
         <div class="headerElements" th:unless="${#request.userPrincipal}">
-            <a href="/">Home</a>
-            <a href="/login">Login</a>
+            <a class="home" id="home2" href="/">Home</a>
+            <a class="endElements" id="login" href="/login">Login</a>
         </div>
     </header>
     </th:block>

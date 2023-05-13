@@ -18,7 +18,7 @@ public class SiwMovie00Application {
         @Override
         public void addResourceHandlers(ResourceHandlerRegistry registry) {
             registry.addResourceHandler("/**")
-                    .addResourceLocations("classpath:/static/", "classpath:/static/images/")
+                    .addResourceLocations("classpath:/static/", "classpath:/static/images/", "classpath:/static/css/")
                     .setCachePeriod(0);
         }
     }

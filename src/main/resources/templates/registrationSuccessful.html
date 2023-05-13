@@ -3,34 +3,27 @@
 
 <head>
   <title>Registration successful</title>
+    <link rel="stylesheet" href="/css/index_style.css.css" type="text/css"/>
 </head>
 
 <body>
-<header>
-  <div th:if="${#request.userPrincipal}">
-    <span th:text="${#request.userPrincipal.principal.username}"></span>
-    <a href="/logout">Logout</a>
-  </div>
-  <div th:unless="${#request.userPrincipal}">
-    <a href="/login">Login</a>
-  </div>
-</header>
+  <div th:replace="fragments/header :: header"></div>
 
-<div>
-  <a href="/"><img src="/images/logo-siw.png"/></a>
-</div>
-<h1>Congratulazioni ti sei registrato!</h1>
-<div>
-  <span>Nome: </span>
-  <span th:text="${user.name}"></span>
-</div>
-<div>
-  <span>Cognome: </span>
-  <span th:text="${user.surname}"></span>
-</div>
-<div>
-  <span>Email: </span>
-  <span th:text="${user.email}"></span>
-</div>
+  <div>
+    <a href="/"><img src="/images/logo-siw.png"/></a>
+  </div>
+  <h1>Congratulazioni ti sei registrato!</h1>
+  <div>
+    <span>Nome: </span>
+    <span th:text="${user.name}"></span>
+  </div>
+  <div>
+    <span>Cognome: </span>
+    <span th:text="${user.surname}"></span>
+  </div>
+  <div>
+    <span>Email: </span>
+    <span th:text="${user.email}"></span>
+  </div>
 </body>
 </html>
