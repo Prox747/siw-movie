@@ -108,7 +108,8 @@ public class MovieController {
         Artist dir = artistRepository.findById(dirId).get();
 
         //dobbiamo rimuovere il film dai film diretti da quell'artista
-        movie.getDirector().getDirectedMovies().remove(movie);
+        if(movie.getDirector() != null)
+            movie.getDirector().getDirectedMovies().remove(movie);
 
         movie.setDirector(dir);
         movieRepository.save(movie);
