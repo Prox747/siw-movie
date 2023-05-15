@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:color="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>FoundMovies</title>
@@ -8,7 +8,7 @@
 <body>
     <div th:replace="fragments/header :: header"></div>
 
-    <div th:if="${movies.isEmpty()}">Non ci sono film di quell'anno</div>
+    <div class="emptyList" th:if="${movies.isEmpty()}">Non ci sono film di quell'anno</div>
     <ul>
         <li th:each="movie : ${movies}">
             <a th:href="@{'/movies' + '/' + ${movie.id}}"
