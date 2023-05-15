@@ -13,7 +13,7 @@
             <h1 th:text="${artist.name} + ' ' + ${artist.surname}"></h1>
             <div class="info" id="year">
                 <span th:text="'Data di nascita: (' + ${artist.dateOfBirth} + ')'">2000</span>
-                <div th:if="${artist.dateOfDeath}"><span th:text="'Data di morte: (' + ${artist.dateOfDeath} + ')'">2000</span> 2020</div>
+                <div th:if="${artist.dateOfDeath}"><span th:text="'Data di morte: (' + ${artist.dateOfDeath} + ')'">2000</span></div>
             </div>
             <div class="card"><img width="100%" th:src="'/artistsImages/' + ${artist.imageFileName}" alt="image"/></div>
         </div>
