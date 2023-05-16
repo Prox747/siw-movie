@@ -8,14 +8,18 @@
 <body>
     <div th:replace="fragments/header :: header"></div>
 
+    <h1>Inserisci un nuovo artista</h1>
     <form class="container" th:action="@{/admin/addedArtist}" method="POST" th:object="${artist}">
-        <span th:if="${messaggioErrore}" th:text="${messaggioErrore}">Errore</span>
+        <span class="errorMessage" th:if="${messaggioErrore}" th:text="${messaggioErrore}">Errore</span>
 
         <label for="name">Nome:</label>
         <input id="name" required type="text" th:field="${artist.name}" maxlength="255"/>
 
         <label for="surname">Cognome:</label>
         <input id="surname" required type="text" th:field="${artist.surname}" maxlength="255"/>
+
+        <label for="nationality">Nazionalità:</label>
+        <input id="nationality" required type="text" th:field="${artist.nationality}" maxlength="255"/>
 
         <label for="dateofbirth">Data di nascita:</label>
         <input id="dateofbirth" required type="date" name="dateOfBirthString"/>

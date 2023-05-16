@@ -77,7 +77,7 @@ a:hover{
     column-span: 2;
     font-size: 20pt;
     border-radius: 5px;
-    margin: .5rem;
+    margin-top: 1rem;
 }
 
 .bottone:hover {

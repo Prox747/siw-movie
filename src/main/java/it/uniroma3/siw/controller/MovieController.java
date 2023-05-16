@@ -4,14 +4,18 @@ import it.uniroma3.siw.model.Artist;
 import it.uniroma3.siw.model.Movie;
 import it.uniroma3.siw.repository.ArtistRepository;
 import it.uniroma3.siw.repository.MovieRepository;
+import it.uniroma3.siw.service.FileUploadUtil;
 import it.uniroma3.siw.validator.MovieValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -40,10 +44,20 @@ public class MovieController {
         return "admin/formNewMovie.html";
     }
     @PostMapping("/admin/addedMovie")
-    public String newMovie(@Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult, Model model) {
+    public String newMovie(@Valid @ModelAttribute("movie") Movie movie, @RequestParam("image") MultipartFile multipartFile, BindingResult bindingResult, Model model) throws IOException {
         movieValidator.validate(movie, bindingResult);
         if (!bindingResult.hasErrors()) {
-            movie.getDirector().getDirectedMovies().add(movie);
+
+            //questa linea è necessaria per evitare attacchi di iniezione di codice attraverso il nome del file
+            // (possono inserire un nome di file che contiene un path e quindi accedere a file che non dovrebbero o cose simili supercattive)
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            movie.setImageFileName(fileName);
+            String uploadDir = "src/main/resources/static/images/moviesImages/";
+            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+
+            if(movie.getDirector() != null){
+                movie.getDirector().getDirectedMovies().add(movie);
+            }
             this.movieRepository.save(movie);
             model.addAttribute("movie", movie);
             return "movie.html";

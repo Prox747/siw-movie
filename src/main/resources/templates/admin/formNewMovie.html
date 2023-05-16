@@ -8,7 +8,10 @@
 <body>
     <div th:replace="fragments/header :: header"></div>
 
-    <form class="container" th:action="@{/admin/addedMovie}" method="POST" th:object="${movie}">
+    <h1>Inserisci un nuovo film</h1>
+    <!-- nella form dobbiamo mettere enctype="multipart/form-data" per dire al browser che la form deve poter accettare caricamneto di file
+         Mentre sotto dobbiamo mettere nell'input il tipo "file" e per accettare solo immagini mettiamo accept="image/*"-->
+    <form class="container" th:action="@{/admin/addedMovie}" method="POST" th:object="${movie}" enctype="multipart/form-data">
         <div th:if="${#fields.hasGlobalErrors()}">
             <p class="errorMessage" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
         </div>
@@ -27,8 +30,8 @@
             <option th:each="director : ${directors}" th:value="${director.id}" th:text="${director.name} + ' ' + ${director.surname}"></option>
         </select>
 
-        <label for="img">URL immagine:</label>
-        <input id="img" type="text" th:field="${movie.imageFileName}" maxlength="255"/>
+        <label for="image">Immagine:</label>
+        <input id="image" type="file" name="image" accept="image/*"/>
 
         <button type="submit" class="bottone">Inserisci</button>
     </form>
