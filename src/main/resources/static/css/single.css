@@ -65,7 +65,6 @@ body {
 
 h1 {
     font-size: 55pt;
-    margin: 0.5rem;
     color: var(--clr-2);
 }
 
@@ -84,6 +83,7 @@ h1 {
     border-radius: 1rem;
     width: 35%;
     position: relative;
+    margin: 0.5rem;
 }
 
 img {
@@ -114,4 +114,14 @@ img {
 .info {
     font-size: 20pt;
     color: white;
+}
+
+a:link, a:visited{
+    color: #0e4b50;
+    text-decoration: none;
+}
+
+a:hover{
+    color: #0e4b50;
+    text-decoration: underline;
 }

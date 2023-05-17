@@ -9,14 +9,11 @@
     <div th:replace="fragments/header :: header"></div>
 
     <h1>Cerca Film</h1>
-    <form th:action="@{/searchMovies}" method="POST">
-      <div>
-        <label for="year" >Inserisci l'anno di uscita del film:</label>
-        <input required type="text" id="year" name="year" maxlength="255"/>
-      </div>
-      <div>
-        <span><button type="submit">Cerca</button></span>
-      </div>
+    <form class="container" th:action="@{/searchMovies}" method="POST">
+        <label id="labelCercaAnno" for="inputCercaAnno" >Inserisci l'anno di uscita del film:</label>
+        <input required type="text" id="inputCercaAnno" name="year" maxlength="255"/><br>
+
+        <button id="bottoneCercaAnno" class="bottone" type="submit">Cerca</button>
     </form>
 </body>
 </html>

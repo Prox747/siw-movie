@@ -52,7 +52,7 @@ public class MovieController {
             // (possono inserire un nome di file che contiene un path e quindi accedere a file che non dovrebbero o cose simili supercattive)
             String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             movie.setImageFileName(fileName);
-            String uploadDir = "src/main/resources/static/images/moviesImages/";
+            String uploadDir = "src/main/upload/images/moviesImages/";
             FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 
             if(movie.getDirector() != null){
@@ -95,6 +95,8 @@ public class MovieController {
     @PostMapping("/searchMovies")
     public String searchMovies(Model model, @RequestParam Integer year) {
         model.addAttribute("movies", this.movieRepository.findByYear(year));
+        //per dire di che anno sono i film (ripeitiamo l'anno che ci hanno dato)
+        model.addAttribute("year", year);
         return "foundMovies.html";
     }
 

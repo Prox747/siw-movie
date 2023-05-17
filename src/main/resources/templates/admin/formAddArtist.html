@@ -9,7 +9,9 @@
     <div th:replace="fragments/header :: header"></div>
 
     <h1>Inserisci un nuovo artista</h1>
-    <form class="container" th:action="@{/admin/addedArtist}" method="POST" th:object="${artist}">
+    <!-- nella form dobbiamo mettere enctype="multipart/form-data" per dire al browser che la form deve poter accettare caricamneto di file
+         Mentre sotto dobbiamo mettere nell'input il tipo "file" e per accettare solo immagini mettiamo accept="image/*"-->
+    <form class="container" th:action="@{/admin/addedArtist}" method="POST" th:object="${artist}" enctype="multipart/form-data">
         <span class="errorMessage" th:if="${messaggioErrore}" th:text="${messaggioErrore}">Errore</span>
 
         <label for="name">Nome:</label>
@@ -26,6 +28,9 @@
 
         <label for="dateofdeath">Data di morte (opzionale):</label>
         <input id="dateofdeath" type="date" name="dateOfDeathString"/>
+
+        <label for="image">Immagine:</label>
+        <input id="image" type="file" name="image" accept="image/*"/>
 
         <button type="submit" class="bottone">Inserisci</button>
     </form>

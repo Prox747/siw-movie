@@ -15,7 +15,7 @@
                 <span th:text="'Data di nascita: (' + ${artist.dateOfBirth} + ')'">2000</span>
                 <div th:if="${artist.dateOfDeath}"><span th:text="'Data di morte: (' + ${artist.dateOfDeath} + ')'">2000</span></div>
             </div>
-            <div class="card"><img width="100%" th:src="'/artistsImages/' + ${artist.imageFileName}" alt="image"/></div>
+            <div class="card"><img width="100%" th:src="'/upload/images/artistsImages/' + ${artist.imageFileName}" alt="image"/></div>
         </div>
         <div th:unless="${artist}">Artista inesistente o errore</div>
     </div>

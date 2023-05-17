@@ -10,15 +10,13 @@
 
     <h1>Login</h1>
     <form class="container" th:action="@{/login}" method="POST">
-        <label>Username: </label>
-        <input required type="text" name="username"/><br>
+        <label for="usernameInput">Username: </label>
+        <input id="usernameInput" required type="text" name="username"/><br>
 
-        <label>Password: </label>
-        <input required type="password" name="password"/><br>
+        <label for="password">Password: </label>
+        <input id="password" required type="password" name="password"/><br>
 
         <div class="errorMessage" th:if="${param.error != null}">Username o password errati</div>
-
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
         <button type="submit" class="bottone">Login</button><br>
 

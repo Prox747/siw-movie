@@ -46,7 +46,7 @@ body {
     display: grid;
     place-content: center;
     justify-items: center;
-    grid-gap: 4rem;
+    grid-gap: 0;
     width: 100%;
     height: 100%;
 }
@@ -54,6 +54,11 @@ body {
 .wrapperbox {
     border: 4px solid #0e4b50;
     border-radius: 15px;
+}
+
+img {
+    width: min(90vw, 1000px);
+    margin: 2rem;
 }
 
 h1 {

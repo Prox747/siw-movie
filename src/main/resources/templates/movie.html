@@ -14,7 +14,7 @@
         <div class="info" id="year">Anno: <span th:text="'(' + ${movie.year} + ')'">2000</span></div>
         <div th:if="${movie.director}" class="info" id="regista">Regista: <span th:text="${movie.director.name} + ' ' + ${movie.director.surname}">Pippo Pluto</span></div>
         <div th:unless="${movie.director}" class="info">Regista: non specificato</div>
-        <div class="card"><img width="100%" th:src="'/moviesImages/' + ${movie.imageFileName}" alt="image"/></div>
+        <div class="card"><img width="100%" th:src="'/upload/images/moviesImages/' + ${movie.imageFileName}" alt="image"/></div>
       </div>
       <div th:unless="${movie}">Non esiste</div>
     </div>

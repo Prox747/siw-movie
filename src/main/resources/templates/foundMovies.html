@@ -8,6 +8,7 @@
 <body>
     <div th:replace="fragments/header :: header"></div>
 
+    <h1>Film usciti nell'anno: <span th:text="${year}">2000</span></h1>
     <div class="emptyList" th:if="${movies.isEmpty()}">Non ci sono film di quell'anno</div>
     <ul>
         <li th:each="movie : ${movies}">

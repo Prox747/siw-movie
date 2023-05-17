@@ -17,8 +17,9 @@ public class SiwMovie00Application {
     public class WebConfig implements WebMvcConfigurer {
         @Override
         public void addResourceHandlers(ResourceHandlerRegistry registry) {
-            registry.addResourceHandler("/**")
-                    .addResourceLocations("classpath:/static/", "classpath:/static/images/", "classpath:/static/css/")
+            String absolutePathToImages = "C:/Users/Carlo/IdeaProjects/siw-movie-00/src/main/upload";
+            registry.addResourceHandler("/upload/**")
+                    .addResourceLocations("file:" + absolutePathToImages + "/")
                     .setCachePeriod(0);
         }
     }
