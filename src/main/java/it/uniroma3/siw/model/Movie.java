@@ -26,9 +26,12 @@ public class Movie {
     private Artist director;
     @ManyToMany(cascade = {CascadeType.ALL})
     private List<Artist> actors;
+    @OneToMany(cascade = {CascadeType.ALL} , mappedBy = "reviewedMovie")
+    private List<Review> reviews;
 
     public Movie() {
         this.actors = new ArrayList<Artist>();
+        this.reviews = new ArrayList<Review>();
     }
 
     @Override
@@ -93,5 +96,13 @@ public class Movie {
 
     public void setImageFileName(String imageFileName) {
         this.imageFileName = imageFileName;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }

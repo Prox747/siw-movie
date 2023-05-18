@@ -1,7 +1,10 @@
 package it.uniroma3.siw.service;
 
+import it.uniroma3.siw.model.Credentials;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +23,8 @@ public class UserService {
 
     @Autowired
     protected UserRepository userRepository;
+    @Autowired
+    CredentialsService credentialsService;
 
     /**
      * This method retrieves a User from the DB based on its ID.
@@ -30,6 +35,13 @@ public class UserService {
     public User getUser(Long id) {
         Optional<User> result = this.userRepository.findById(id);
         return result.orElse(null);
+    }
+
+    @Transactional
+    public User getCurrentUser() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+        return credentials.getUser();
     }
 
     /**

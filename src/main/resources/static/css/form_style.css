@@ -169,3 +169,27 @@ select {
     }
 }
 /*//////////////////////////////*/
+
+/*Cambia colore alle stelline quando sono premute, posso poi accedere al valore nel controller*/
+/*PER LE RECENSIONI*/
+.star-rating {
+    display: flex;
+    align-items: center;
+}
+
+/*nascondo i radio button*/
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.star-rating label {
+    font-size: 30px;
+    color: #ddd;
+    cursor: pointer;
+}
+
+/*è più comodo se mettiamo qui il contenuto invece che nell'html*/
+.star-rating label:before {
+    content: "\2605";
+}
+/*//////////////////////////////*/

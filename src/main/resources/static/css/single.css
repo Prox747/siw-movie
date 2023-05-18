@@ -125,3 +125,8 @@ a:hover{
     color: #0e4b50;
     text-decoration: underline;
 }
+
+.reviews {
+    color: white;
+    font-size: inherit;
+}

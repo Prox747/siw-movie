@@ -42,8 +42,13 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
                 // solo gli utenti autenticati con ruolo ADMIN possono accedere a risorse con path /admin/**
                 .antMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(Credentials.ADMIN_ROLE)
                 .antMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(Credentials.ADMIN_ROLE)
-                // tutti gli utenti autenticati possono accere alle pagine rimanenti
-                .anyRequest().authenticated()
+                // solo gli utenti autenticati con ruolo ADMIN o DEFAULT possono accedere a risorse con path /registered/**
+                .antMatchers(HttpMethod.GET, "/register/**").hasAnyAuthority(Credentials.ADMIN_ROLE)
+                .antMatchers(HttpMethod.POST, "/register/**").hasAnyAuthority(Credentials.ADMIN_ROLE)
+                .antMatchers(HttpMethod.GET, "/register/**").hasAnyAuthority(Credentials.DEFAULT_ROLE)
+                .antMatchers(HttpMethod.POST, "/register/**").hasAnyAuthority(Credentials.DEFAULT_ROLE)
+                // tutti gli utenti possono accere alle pagine rimanenti
+                .anyRequest().permitAll()
                 .and().exceptionHandling().accessDeniedPage("/index")
 
                 // LOGIN: qui definiamo come è gestita l'autenticazione

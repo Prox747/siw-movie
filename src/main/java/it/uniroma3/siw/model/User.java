@@ -1,6 +1,7 @@
 package it.uniroma3.siw.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -11,6 +12,9 @@ public class User {
     String name;
     String surname;
     String email;
+
+    @OneToMany(cascade = {CascadeType.ALL} , mappedBy = "author")
+    private List<Review> reviews;
 
     public void setId(Long id) {
         this.id = id;
@@ -42,5 +46,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }
