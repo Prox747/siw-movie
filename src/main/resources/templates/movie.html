@@ -26,6 +26,7 @@
                             <div id="review-text" th:text="${review.content}">Testo</div>
                             <div id="review-author" th:text="${review.author.username}">Autore</div>
                             <div id="review-date" th:text="${review.creationDate}">Data</div>
+                            <a th:href="@{'/admin/deleteReview/' + ${review.id}}">Cancella recensione</a>
                         </div>
                     </div>
                 </li>

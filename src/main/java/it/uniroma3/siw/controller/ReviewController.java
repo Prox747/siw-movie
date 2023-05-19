@@ -1,5 +1,6 @@
 package it.uniroma3.siw.controller;
 
+import it.uniroma3.siw.model.Movie;
 import it.uniroma3.siw.model.Review;
 import it.uniroma3.siw.service.MovieService;
 import it.uniroma3.siw.service.ReviewService;
@@ -34,11 +35,26 @@ public class ReviewController {
             model.addAttribute("messaggioErrore", "Questa recensione ha un titolo che esiste già :(");
             return "registered/formAddReview.html";
         } else {
-
             reviewService.initializeAndSaveReview(rating, movieId, review);
 
             model.addAttribute("movie", movieService.findById(movieId));
             return "movie.html";
         }
+    }
+
+    @GetMapping("/admin/deleteReview/{reviewId}")
+    public String deleteReview(@PathVariable("reviewId") Long reviewId,
+                               Model model) {
+        Review review = reviewService.findById(reviewId);
+        Movie movie = review.getReviewedMovie();
+
+        movie.getReviews().remove(review);
+        review.getAuthor().setReview(null); //bad practice?
+
+        reviewService.deleteById(reviewId);
+        movieService.save(movie);
+
+        model.addAttribute("movie", movie);
+        return "movie.html";
     }
 }
