@@ -21,12 +21,12 @@ public class Movie {
     private Integer year;
     private String imageFileName;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name="artist_id_director")
     private Artist director;
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Artist> actors;
-    @OneToMany(cascade = {CascadeType.ALL} , mappedBy = "reviewedMovie")
+    @OneToMany(cascade = {CascadeType.MERGE} , mappedBy = "reviewedMovie")
     private List<Review> reviews;
 
     public Movie() {

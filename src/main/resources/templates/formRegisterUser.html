@@ -13,8 +13,8 @@
 
   <h1>Registrazione</h1>
   <form class="container" th:action="@{/register}" method="POST">
-    <label for="username">Username</label>
-    <input id="username" type="text" placeholder="username" required th:field="${credentials.username}" /><br>
+    <label for="usernameForRegistration">Username</label>
+    <input id="usernameForRegistration" type="text" placeholder="username" required th:field="${credentials.username}" /><br>
     <span th:if="${#fields.hasErrors('credentials.username')}" th:errors="${credentials.username}"
           th:style="'color:red'">
     </span><br>

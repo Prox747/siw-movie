@@ -40,12 +40,13 @@ body {
 * {
     font-family: Rockwell, sans-serif;
     box-sizing: border-box;
+    color: white;
 }
 
 h1 {
     font-size: 35pt;
     color: #2d8f85;
-    margin: .5rem;
+    margin: 2rem 0.5rem;
 }
 
 a:link, a:visited{
@@ -59,12 +60,6 @@ a {
 
 a:hover{
     text-decoration: underline;
-}
-
-.info {
-    color: white;
-    font-size: 1.3rem;
-    margin: .5rem;
 }
 
 .bottone {
@@ -193,3 +188,9 @@ select {
     content: "\2605";
 }
 /*//////////////////////////////*/
+
+/*PER FORMUPDATEMOVIES*/
+.info {
+    font-size: 1.5rem;
+    margin: 1rem 0.5rem;
+}

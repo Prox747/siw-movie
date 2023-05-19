@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>formAddReview</title>
-    <link rel="stylesheet" href="/static/css/form_style.css" type="text/css">
+    <link rel="stylesheet" href="/css/form_style.css">
 
     <script>
       function handleRatingChange(rating) {
@@ -24,18 +24,12 @@
   <h1>Inserisci un nuovo film</h1>
   <!-- nella form dobbiamo mettere enctype="multipart/form-data" per dire al browser che la form deve poter accettare caricamneto di file
        Mentre sotto dobbiamo mettere nell'input il tipo "file" e per accettare solo immagini mettiamo accept="image/*"-->
-  <form class="container" th:action="@{/registered/addedReview}" method="POST" th:object="${review}">
+  <form class="container" th:action="@{'/registered/addedReview/' + ${movieId}}" method="POST" th:object="${review}">
     <div th:if="${messaggioErrore}">
       <p class="errorMessage" th:text="${messaggioErrore}">...</p>
     </div>
 
-    <label for="titolo">Titolo:</label>
-    <input id="titolo" required type="text" th:field="${review.title}" maxlength="255"/>
-
-    <label for="anno">Contenuto:</label>
-    <input id="anno" placeholder="Scrivi la recensione..." required type="text" th:field="${review.content}" maxlength="255"/>
-
-    <span>Inserisci un voto</span><br/>
+    <label>Voto:</label>
     <div class="star-rating">
       <input type="radio" id="rating1" name="rating" value="1" onclick="handleRatingChange(0)" required>
       <label for="rating1"></label>
@@ -48,6 +42,12 @@
       <input type="radio" id="rating5" name="rating" value="5" onclick="handleRatingChange(4)">
       <label for="rating5"></label>
     </div><br>
+
+    <label for="titolo">Titolo:</label>
+    <input id="titolo" required type="text" th:field="${review.title}" maxlength="255"/>
+
+    <label for="anno">Contenuto:</label>
+    <input id="anno" placeholder="Scrivi la recensione..." required type="text" th:field="${review.content}" maxlength="255"/>
 
     <button type="submit" class="bottone">Inserisci</button>
   </form>

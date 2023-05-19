@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ReviewRepository extends CrudRepository<Review, Long> {
 
-    public boolean existsByTitle(Review review);
+    public boolean existsByTitle(String title);
 }

@@ -4,8 +4,11 @@ import it.uniroma3.siw.model.Artist;
 import it.uniroma3.siw.model.Movie;
 import it.uniroma3.siw.repository.ArtistRepository;
 import it.uniroma3.siw.repository.MovieRepository;
+import it.uniroma3.siw.service.ArtistService;
 import it.uniroma3.siw.service.FileUploadUtil;
+import it.uniroma3.siw.service.MovieService;
 import it.uniroma3.siw.validator.MovieValidator;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +24,10 @@ import java.util.List;
 
 @Controller
 public class MovieController {
-    @Autowired MovieRepository movieRepository;
-    @Autowired ArtistRepository artistRepository;
+    @Autowired
+    MovieService movieService;
+    @Autowired
+    ArtistService artistService;
 
     @Autowired
     MovieValidator movieValidator;
@@ -40,7 +45,7 @@ public class MovieController {
     public String formNewMovie(Model model){
         Movie movie = new Movie();
         model.addAttribute("movie", movie);
-        model.addAttribute("directors", artistRepository.findAll());
+        model.addAttribute("directors", artistService.findAll());
         return "admin/formNewMovie.html";
     }
     @PostMapping("/admin/addedMovie")
@@ -48,17 +53,12 @@ public class MovieController {
         movieValidator.validate(movie, bindingResult);
         if (!bindingResult.hasErrors()) {
 
-            //questa linea è necessaria per evitare attacchi di iniezione di codice attraverso il nome del file
-            // (possono inserire un nome di file che contiene un path e quindi accedere a file che non dovrebbero o cose simili supercattive)
-            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-            movie.setImageFileName(fileName);
-            String uploadDir = "src/main/upload/images/moviesImages/";
-            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+            movieService.addImageToMovie(movie, multipartFile);
 
             if(movie.getDirector() != null){
                 movie.getDirector().getDirectedMovies().add(movie);
             }
-            this.movieRepository.save(movie);
+            this.movieService.save(movie);
             model.addAttribute("movie", movie);
             return "movie.html";
         } else {
@@ -68,12 +68,12 @@ public class MovieController {
     }
     @GetMapping("/movies/{id}")
     public String getMovie(@PathVariable("id") Long id, Model model) {
-        Movie movie = this.movieRepository.findById(id).get();
+        Movie movie = this.movieService.findById(id);
 
         //PER SINCRONIZZARCI COL DATABASE ALL'INIZIO ye
         if(movie.getActors().size()==0) {
-            movie.setActors(this.artistRepository.findAllByMoviesActedInIsContaining(movie));
-            movieRepository.save(movie);
+            movie.setActors(this.artistService.actorsForMovie(movie));
+            movieService.save(movie);
         }
         ////////////////////////////////////////////
 
@@ -83,7 +83,7 @@ public class MovieController {
 
     @GetMapping("/movies")
     public String showMovies(Model model) {
-        model.addAttribute("movies", this.movieRepository.findAllByOrderByYearDesc());
+        model.addAttribute("movies", this.movieService.findAllByOrderByYearDesc());
         return "movies.html";
     }
 
@@ -94,7 +94,7 @@ public class MovieController {
 
     @PostMapping("/searchMovies")
     public String searchMovies(Model model, @RequestParam Integer year) {
-        model.addAttribute("movies", this.movieRepository.findByYear(year));
+        model.addAttribute("movies", this.movieService.findByYear(year));
         //per dire di che anno sono i film (ripeitiamo l'anno che ci hanno dato)
         model.addAttribute("year", year);
         return "foundMovies.html";
@@ -102,67 +102,67 @@ public class MovieController {
 
     @GetMapping("/admin/gestisciMovies")
     public String gestisciMovies(Model model) {
-        model.addAttribute("movies", movieRepository.findAllByOrderByYearDesc());
+        model.addAttribute("movies", movieService.findAllByOrderByYearDesc());
         return "admin/gestisciMovies.html";
     }
     @GetMapping("/admin/formUpdateMovies/{id}")
     public String formUpdateMovies(@PathVariable("id") Long id, Model model) {
-        Movie movie = movieRepository.findById(id).get();
+        Movie movie = movieService.findById(id);
         model.addAttribute("movie", movie);
         model.addAttribute("director", movie.getDirector());
         return "admin/formUpdateMovies.html";
     }
     @GetMapping("/admin/directorsToAdd/{movieId}")
     public String showDirectorsList(@PathVariable("movieId") Long movieId, Model model){
-        model.addAttribute("movie", movieRepository.findById(movieId).get());
-        model.addAttribute("directors", artistRepository.findAll());
+        model.addAttribute("movie", movieService.findById(movieId));
+        model.addAttribute("directors", artistService.findAll());
         return "admin/directorsToAdd.html";
     }
     @GetMapping("/admin/addDirectorToMovie/{movieId}/{dirId}")
-    public String addDirectorToMovie(@PathVariable("movieId") Long movieId, @PathVariable("dirId") Long dirId, Model model){
-        Movie movie = movieRepository.findById(movieId).get();
-        Artist dir = artistRepository.findById(dirId).get();
+    public String addDirectorToMovie(@PathVariable("movieId") Long movieId, @PathVariable("dirId") Long dirId, Model model) throws NotFoundException {
+        Movie movie = movieService.findById(movieId);
+        Artist dir = artistService.findById(dirId);
 
         //dobbiamo rimuovere il film dai film diretti da quell'artista
         if(movie.getDirector() != null)
             movie.getDirector().getDirectedMovies().remove(movie);
 
         movie.setDirector(dir);
-        movieRepository.save(movie);
-        model.addAttribute("movies", movieRepository.findAllByOrderByYearDesc());
+        movieService.save(movie);
+        model.addAttribute("movies", movieService.findAllByOrderByYearDesc());
         return formUpdateMovies(movieId, model);
     }
 
     @GetMapping("/admin/allActorsForMovie/{movieId}")
     public String showActorListForMovie(@PathVariable("movieId") Long idM, Model model) {
-        Movie movie = movieRepository.findById(idM).get();
-        List<Artist> inMovieActors = artistRepository.findAllByMoviesActedInIsContaining(movie);
+        Movie movie = movieService.findById(idM);
+        List<Artist> inMovieActors = artistService.actorsForMovie(movie);
         model.addAttribute("movie", movie);
         //non puo esse che dobbiamo aggiornare tutto ogni volta, mi ammazzo, vabbe mo lo famo così
         //così il movie in caso c'ha i suoi attori
         if(movie.getActors() == null) {
             movie.setActors(new LinkedList<Artist>(inMovieActors));
-            movieRepository.save(movie);
+            movieService.save(movie);
         }
 
-        model.addAttribute("notInMovieActors", artistRepository.findAllByMoviesActedInIsNotContaining(movie));
+        model.addAttribute("notInMovieActors", artistService.actorsNotInMovie(movie));
         model.addAttribute("inMovieActors", inMovieActors);
         return "admin/allActorsForMovie.html";
     }
 
     @GetMapping("/admin/removeActorFromMovie/{movieId}/{actorId}")
-    public String removeActorFromMovie(@PathVariable("actorId") Long idA, @PathVariable("movieId") Long idM, Model model) {
-        Movie movie = movieRepository.findById(idM).get();
-        List<Artist> notInMovieActors = artistRepository.findAllByMoviesActedInIsNotContaining(movie);
-        List<Artist> inMovieActors = artistRepository.findAllByMoviesActedInIsContaining(movie);
+    public String removeActorFromMovie(@PathVariable("actorId") Long idA, @PathVariable("movieId") Long idM, Model model) throws NotFoundException {
+        Movie movie = movieService.findById(idM);
+        List<Artist> notInMovieActors = artistService.actorsNotInMovie(movie);
+        List<Artist> inMovieActors = artistService.actorsForMovie(movie);
 
-        Artist actorToRemove = artistRepository.findById(idA).get();
+        Artist actorToRemove = artistService.findById(idA);
         inMovieActors.remove(actorToRemove);
         notInMovieActors.add(actorToRemove);
         movie.getActors().remove(actorToRemove);
         actorToRemove.getMoviesActedIn().remove(movie);
 
-        movieRepository.save(movie);
+        movieService.save(movie);
 
         model.addAttribute("movie", movie);
         model.addAttribute("notInMovieActors", notInMovieActors);
@@ -171,18 +171,18 @@ public class MovieController {
     }
 
     @GetMapping("/admin/addActorInMovie/{movieId}/{actorId}")
-    public String addActorInMovie(@PathVariable("actorId") Long idA, @PathVariable("movieId") Long idM, Model model) {
-        Movie movie = movieRepository.findById(idM).get();
-        List<Artist> notInMovieActors = artistRepository.findAllByMoviesActedInIsNotContaining(movie);
-        List<Artist> inMovieActors = artistRepository.findAllByMoviesActedInIsContaining(movie);
+    public String addActorInMovie(@PathVariable("actorId") Long idA, @PathVariable("movieId") Long idM, Model model) throws NotFoundException {
+        Movie movie = movieService.findById(idM);
+        List<Artist> notInMovieActors = artistService.actorsNotInMovie(movie);
+        List<Artist> inMovieActors = artistService.actorsForMovie(movie);
 
-        Artist actorToAdd = artistRepository.findById(idA).get();
+        Artist actorToAdd = artistService.findById(idA);
         inMovieActors.add(actorToAdd);
         notInMovieActors.remove(actorToAdd);
         movie.getActors().add(actorToAdd);
         actorToAdd.getMoviesActedIn().add(movie);
 
-        movieRepository.save(movie);
+        movieService.save(movie);
 
         model.addAttribute("movie", movie);
         model.addAttribute("notInMovieActors", notInMovieActors);

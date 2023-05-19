@@ -13,8 +13,8 @@ public class User {
     String surname;
     String email;
 
-    @OneToMany(cascade = {CascadeType.ALL} , mappedBy = "author")
-    private List<Review> reviews;
+    @OneToOne(cascade = {CascadeType.ALL} , mappedBy = "author")
+    private Review review;
 
     public void setId(Long id) {
         this.id = id;
@@ -48,11 +48,11 @@ public class User {
         this.email = email;
     }
 
-    public List<Review> getReviews() {
-        return reviews;
+    public Review getReview() {
+        return review;
     }
 
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
+    public void setReview(Review review) {
+        this.review = review;
     }
 }

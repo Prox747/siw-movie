@@ -2,7 +2,9 @@ package it.uniroma3.siw.controller;
 
 import it.uniroma3.siw.model.Artist;
 import it.uniroma3.siw.repository.ArtistRepository;
+import it.uniroma3.siw.service.ArtistService;
 import it.uniroma3.siw.service.FileUploadUtil;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,17 +19,17 @@ import java.time.format.DateTimeFormatter;
 @Controller
 public class ArtistController {
     @Autowired
-    ArtistRepository artistRepository;
+    ArtistService artistService;
 
     @GetMapping("/artists")
     public String showAllActors(Model model) {
-        model.addAttribute("artists", artistRepository.findAll());
+        model.addAttribute("artists", artistService.findAll());
         return "artists.html";
     }
 
     @GetMapping("/artist/{id}")
-    public String getActor(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("artist", this.artistRepository.findById(id).get());
+    public String getActor(@PathVariable("id") Long id, Model model) throws NotFoundException {
+        model.addAttribute("artist", this.artistService.findById(id));
         return "artist.html";
     }
 
@@ -42,26 +44,15 @@ public class ArtistController {
                             @RequestParam String dateOfDeathString,
                             @RequestParam("image") MultipartFile multipartFile,
                             Model model) throws IOException {
-        // Define the desired date format
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        // Parse the string into a LocalDate object
-        LocalDate dateOfBirth = LocalDate.parse(dateOfBirthString, formatter);
-        artist.setDateOfBirth(dateOfBirth);
-
-        //questa linea è necessaria per evitare attacchi di iniezione di codice attraverso il nome del file
-        // (possono inserire un nome di file che contiene un path e quindi accedere a file che non dovrebbero o cose simili supercattive)
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        artist.setImageFileName(fileName);
-        String uploadDir = "src/main/upload/images/artistsImages/";
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        artistService.setImageForArtist(artist, multipartFile);
+        artistService.setDateOfBirth(artist, dateOfBirthString);
 
         if (!dateOfDeathString.isEmpty()) {
-            LocalDate dateOfDeath = LocalDate.parse(dateOfDeathString, formatter);
-            artist.setDateOfDeath(dateOfDeath);
+            artistService.setDateOfDeath(artist, dateOfDeathString);
         }
 
-        if (!artistRepository.existsArtistByNameAndSurnameAndDateOfBirth(artist.getName(), artist.getSurname(), artist.getDateOfBirth())) {
-            this.artistRepository.save(artist);
+        if (!artistService.existsArtistByNameAndSurnameAndDateOfBirth(artist.getName(), artist.getSurname(), artist.getDateOfBirth())) {
+            this.artistService.save(artist);
             model.addAttribute("artist", artist);
             return "artist.html";
         } else {

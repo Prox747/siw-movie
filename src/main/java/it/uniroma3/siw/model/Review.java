@@ -17,7 +17,7 @@ public class Review {
     @ManyToOne
     @JoinColumn(name = "movie_id")
     private Movie reviewedMovie;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "user_id")
     private User author;
 
