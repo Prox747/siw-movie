@@ -26,7 +26,7 @@ public class Movie {
     private Artist director;
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Artist> actors;
-    @OneToMany(cascade = {CascadeType.MERGE} , mappedBy = "reviewedMovie")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reviewedMovie")
     private List<Review> reviews;
 
     public Movie() {

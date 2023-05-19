@@ -14,12 +14,13 @@ public class Review {
     private String title;
     private String content;
     private int rating;
+    private LocalDate creationDate;
     @ManyToOne
     @JoinColumn(name = "movie_id")
     private Movie reviewedMovie;
     @OneToOne
-    @JoinColumn(name = "user_id")
-    private User author;
+    @JoinColumn(name = "authorCredentials_id")
+    private Credentials author;
 
     public Review() {}
 
@@ -76,12 +77,20 @@ public class Review {
         this.reviewedMovie = reviewedMovie;
     }
 
-    public User getAuthor() {
+    public Credentials getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(Credentials author) {
         this.author = author;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
     }
 }
 

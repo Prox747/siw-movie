@@ -35,7 +35,7 @@ public class ReviewController {
             return "registered/formAddReview.html";
         } else {
 
-            reviewService.initializeReview(rating, movieId, review);
+            reviewService.initializeAndSaveReview(rating, movieId, review);
 
             model.addAttribute("movie", movieService.findById(movieId));
             return "movie.html";

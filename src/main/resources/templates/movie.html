@@ -19,8 +19,15 @@
         <div class="newReview"><a th:href="@{'/registered/formAddReview/' + ${movie.id}}">+ Aggiungi recensione</a></div>
         <div class="reviews" th:unless="${movie.reviews.isEmpty()}">
             <ul>
-                <li class="review" th:each="review : ${movie.reviews}">
-                    <div th:text="${review.title}"></div>
+                <li th:each="review : ${movie.reviews}">
+                    <div class="review-container">
+                        <div class="review">
+                            <div id="review-title" th:text="${review.title}">Titolo</div>
+                            <div id="review-text" th:text="${review.content}">Testo</div>
+                            <div id="review-author" th:text="${review.author.username}">Autore</div>
+                            <div id="review-date" th:text="${review.creationDate}">Data</div>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>

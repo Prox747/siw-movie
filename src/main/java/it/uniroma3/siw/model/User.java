@@ -13,9 +13,6 @@ public class User {
     String surname;
     String email;
 
-    @OneToOne(cascade = {CascadeType.ALL} , mappedBy = "author")
-    private Review review;
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -46,13 +43,5 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Review getReview() {
-        return review;
-    }
-
-    public void setReview(Review review) {
-        this.review = review;
     }
 }

@@ -1,14 +1,12 @@
 package it.uniroma3.siw.service;
 
-import it.uniroma3.siw.model.Artist;
-import it.uniroma3.siw.model.Movie;
-import it.uniroma3.siw.model.Review;
-import it.uniroma3.siw.model.User;
+import it.uniroma3.siw.model.*;
 import it.uniroma3.siw.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +16,7 @@ public class ReviewService {
 
     @Autowired ReviewRepository reviewRepository;
     @Autowired MovieService movieService;
-    @Autowired UserService userService;
+    @Autowired CredentialsService credentialsService;
 
     public boolean existsByTitle(String title) {
         return reviewRepository.existsByTitle(title);
@@ -44,20 +42,24 @@ public class ReviewService {
         reviewRepository.deleteById(id);
     }
 
-    public void initializeReview(int rating, Long movieId, Review review) {
+    public void initializeAndSaveReview(int rating, Long movieId, Review review) {
         Movie movie = this.movieService.findById(movieId);
-        User user = userService.getCurrentUser();
+        Credentials authorCredentials = this.credentialsService.getCurrentCredentials();
 
+        review.setCreationDate(LocalDate.now());
         review.setReviewedMovie(movie);
         review.setRating(rating);
-        review.setAuthor(user);
+        review.setAuthor(authorCredentials);
 
-        user.setReview(review);
+        //ATTENTO A SALVARE PRIMA LA REVIEW E POI A SALVARE IL MOVIE PER UPDATARLO,
+        // SENNO SE INVERTI CREA LA REVIEW DUE VOLTE PERCHE' IL MOVIE HA CASCADE ALL
+        this.save(review);
+
+        authorCredentials.setReview(review);
         movie.getReviews().add(review);
 
         movieService.save(movie);
-        //non va fatto perchè c'è già il cascade
-        //this.save(review);
-        this.userService.saveUser(user);
+
+        this.credentialsService.saveCredentials(authorCredentials);
     }
 }
