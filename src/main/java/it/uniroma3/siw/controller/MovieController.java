@@ -2,17 +2,14 @@ package it.uniroma3.siw.controller;
 
 import it.uniroma3.siw.model.Artist;
 import it.uniroma3.siw.model.Movie;
-import it.uniroma3.siw.repository.ArtistRepository;
-import it.uniroma3.siw.repository.MovieRepository;
 import it.uniroma3.siw.service.ArtistService;
-import it.uniroma3.siw.service.FileUploadUtil;
 import it.uniroma3.siw.service.MovieService;
+import it.uniroma3.siw.util.ModelPreparationUtil;
 import it.uniroma3.siw.validator.MovieValidator;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,9 +25,10 @@ public class MovieController {
     MovieService movieService;
     @Autowired
     ArtistService artistService;
-
     @Autowired
     MovieValidator movieValidator;
+    @Autowired
+    ModelPreparationUtil modelPreparationUtil;
 
     @GetMapping("/admin/operazioniMovies")
     public String operazioniMovies(){
@@ -59,7 +57,7 @@ public class MovieController {
                 movie.getDirector().getDirectedMovies().add(movie);
             }
             this.movieService.save(movie);
-            model.addAttribute("movie", movie);
+            modelPreparationUtil.prepareModelForMovieTemplate(model, movie);
             return "movie.html";
         } else {
             model.addAttribute("messaggioErrore", "Questo film esiste già, inseriscine uno nuovo :)");
@@ -77,7 +75,7 @@ public class MovieController {
         }
         ////////////////////////////////////////////
 
-        model.addAttribute("movie", movie);
+        modelPreparationUtil.prepareModelForMovieTemplate(model, movie);
         return "movie.html";
     }
 

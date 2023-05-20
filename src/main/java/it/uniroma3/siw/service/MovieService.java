@@ -1,8 +1,8 @@
 package it.uniroma3.siw.service;
 
 import it.uniroma3.siw.model.Movie;
-import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.repository.MovieRepository;
+import it.uniroma3.siw.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

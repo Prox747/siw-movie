@@ -1,4 +1,4 @@
-package it.uniroma3.siw.service;
+package it.uniroma3.siw.util;
 
 import org.springframework.web.multipart.MultipartFile;
 

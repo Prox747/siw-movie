@@ -18,6 +18,8 @@ import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.CredentialsService;
 
+import java.util.Optional;
+
 @Controller
 public class AuthenticationController {
 
@@ -38,29 +40,22 @@ public class AuthenticationController {
 
     @GetMapping("/")
     public String index(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof AnonymousAuthenticationToken) {
-            return "index";
+        if (credentialsService.userIsAdmin()) {
+            return "admin/indexAdmin";
         }
         else {
-            UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
-            if (credentials.getRuolo().equals(Credentials.ADMIN_ROLE)) {
-                return "admin/indexAdmin";
-            }
+            return "index";
         }
-        return "index";
     }
 
     @GetMapping("/success")
     public String defaultAfterLogin(Model model) {
-
-        UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
-        if (credentials.getRuolo().equals(Credentials.ADMIN_ROLE)) {
+        if (credentialsService.userIsAdmin()) {
             return "admin/indexAdmin";
         }
-        return "index";
+        else {
+            return "index";
+        }
     }
 
     @PostMapping("/register")
@@ -79,6 +74,7 @@ public class AuthenticationController {
         }
         //SBAGLIATO??? il prof ha messo "registerUser" invece di
         // "formRegisterUser" ma non esiste una pagina con quel nome
+        //boh così sicuro funziona quindi daje
         return "formRegisterUser";
     }
 }

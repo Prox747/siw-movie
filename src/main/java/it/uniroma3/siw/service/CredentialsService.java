@@ -3,6 +3,8 @@ package it.uniroma3.siw.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,9 +36,38 @@ public class CredentialsService {
     }
 
     @Transactional
-    public Credentials getCurrentCredentials() {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return this.getCredentials(userDetails.getUsername());
+    public Optional<Credentials> getCurrentCredentials() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof AnonymousAuthenticationToken) {
+            return Optional.empty();
+        }
+        else {
+            UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            Credentials credentials = this.getCredentials(userDetails.getUsername());
+            return Optional.of(credentials);
+        }
+    }
+
+    @Transactional
+    public boolean userIsAdmin() {
+        Optional<Credentials> currentCredentials = this.getCurrentCredentials();
+        if(currentCredentials.isPresent()) {
+            if(currentCredentials.get().getRuolo().equals(Credentials.ADMIN_ROLE)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Transactional
+    public boolean userIsRegistered() {
+        Optional<Credentials> currentCredentials = this.getCurrentCredentials();
+        if(currentCredentials.isPresent()) {
+            if(currentCredentials.get().getRuolo().equals(Credentials.DEFAULT_ROLE)){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Transactional

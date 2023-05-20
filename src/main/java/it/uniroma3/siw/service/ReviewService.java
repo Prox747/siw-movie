@@ -44,7 +44,8 @@ public class ReviewService {
 
     public void initializeAndSaveReview(int rating, Long movieId, Review review) {
         Movie movie = this.movieService.findById(movieId);
-        Credentials authorCredentials = this.credentialsService.getCurrentCredentials();
+        //in toeria non può essere isPresent() == false perchè per arrivare qui lo user è registrato
+        Credentials authorCredentials = this.credentialsService.getCurrentCredentials().get();
 
         review.setCreationDate(LocalDate.now());
         review.setReviewedMovie(movie);

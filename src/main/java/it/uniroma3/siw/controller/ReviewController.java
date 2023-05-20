@@ -5,6 +5,7 @@ import it.uniroma3.siw.model.Review;
 import it.uniroma3.siw.service.MovieService;
 import it.uniroma3.siw.service.ReviewService;
 import it.uniroma3.siw.service.UserService;
+import it.uniroma3.siw.util.ModelPreparationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,8 @@ public class ReviewController {
     MovieService movieService;
     @Autowired
     UserService userService;
+    @Autowired
+    ModelPreparationUtil modelPreparationUtil;
 
     @GetMapping("/registered/formAddReview/{movieId}")
     public String formAddReview(@PathVariable("movieId") Long movieId, Model model) {
@@ -35,9 +38,10 @@ public class ReviewController {
             model.addAttribute("messaggioErrore", "Questa recensione ha un titolo che esiste già :(");
             return "registered/formAddReview.html";
         } else {
+            Movie movie = movieService.findById(movieId);
             reviewService.initializeAndSaveReview(rating, movieId, review);
 
-            model.addAttribute("movie", movieService.findById(movieId));
+            modelPreparationUtil.prepareModelForMovieTemplate(model, movie);
             return "movie.html";
         }
     }
@@ -54,7 +58,7 @@ public class ReviewController {
         reviewService.deleteById(reviewId);
         movieService.save(movie);
 
-        model.addAttribute("movie", movie);
+        modelPreparationUtil.prepareModelForMovieTemplate(model, movie);
         return "movie.html";
     }
 }

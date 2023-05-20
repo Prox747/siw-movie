@@ -16,7 +16,7 @@
         <div th:unless="${movie.director}" class="info">Regista: non specificato</div>
         <div class="card"><img width="100%" th:src="'/upload/images/moviesImages/' + ${movie.imageFileName}" alt="image"/></div>
 
-        <div class="newReview"><a th:href="@{'/registered/formAddReview/' + ${movie.id}}">+ Aggiungi recensione</a></div>
+        <div th:if="${userCanAddReview}" class="newReview"><a th:href="@{'/registered/formAddReview/' + ${movie.id}}">+ Aggiungi recensione</a></div>
         <div class="reviews" th:unless="${movie.reviews.isEmpty()}">
             <ul>
                 <li th:each="review : ${movie.reviews}">
@@ -26,7 +26,7 @@
                             <div id="review-text" th:text="${review.content}">Testo</div>
                             <div id="review-author" th:text="${review.author.username}">Autore</div>
                             <div id="review-date" th:text="${review.creationDate}">Data</div>
-                            <a th:href="@{'/admin/deleteReview/' + ${review.id}}">Cancella recensione</a>
+                            <a th:if="${userIsAdmin}" th:href="@{'/admin/deleteReview/' + ${review.id}}">Cancella recensione</a>
                         </div>
                     </div>
                 </li>

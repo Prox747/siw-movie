@@ -1,20 +1,15 @@
 package it.uniroma3.siw.controller;
 
 import it.uniroma3.siw.model.Artist;
-import it.uniroma3.siw.repository.ArtistRepository;
 import it.uniroma3.siw.service.ArtistService;
-import it.uniroma3.siw.service.FileUploadUtil;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @Controller
 public class ArtistController {
