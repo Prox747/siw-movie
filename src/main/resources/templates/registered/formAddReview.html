@@ -44,7 +44,7 @@
     </div><br>
 
     <label for="titolo">Titolo:</label>
-    <input id="titolo" required type="text" th:field="${review.title}" maxlength="255"/>
+    <input id="titolo" required type="text" th:field="${review.title}" placeholder="max 20 parole..." maxlength="20"/>
 
     <label for="anno">Contenuto:</label>
     <input id="anno" placeholder="Scrivi la recensione..." required type="text" th:field="${review.content}" maxlength="255"/>

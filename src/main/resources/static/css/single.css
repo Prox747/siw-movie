@@ -67,6 +67,7 @@ h1 {
     column-gap: 4rem;
     flex-wrap: wrap;
     margin: .5rem;
+    row-gap: 2rem;
 }
 
 .reviews-container {
@@ -77,14 +78,15 @@ h1 {
 .reviews {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: start;
-    margin: 0 0.5rem 0.5rem 0.5rem;
-    padding: 0.5rem 3rem;
+    margin: 0;
+    padding: 0.5rem 2.5rem;
     border-radius: 1rem;
     border-color: var(--clr-1);
     background-color: var(--clr-2);
     overflow-y: scroll;
+    row-gap: 1.5rem;
 }
 
 .review-info {
@@ -94,10 +96,11 @@ h1 {
 
 /* per levare il marker */
 ul {
-    width: 100%;
     list-style-type: none;
-    padding: 0;
-    margin: 0.5rem;
+}
+
+li {
+    width: 100%;
 }
 
 .review > * {
@@ -106,6 +109,19 @@ ul {
 
 #review-title {
     display: inline;
+}
+
+.new-review {
+    background: var(--clr-2);
+    color: white;
+    border-radius: 4px;
+    margin: 0 0.5rem 0.5rem 0.5rem;
+    height: 1.5rem;
+}
+
+.delete-review {
+    color: indianred;
+    margin: .5rem;
 }
 
 .card {
@@ -164,5 +180,34 @@ a:hover{
 
 .fullStar {
     color: gold;
+}
+/*//////////////////////////////*/
+
+/*FOR MOBILE*/
+@media only screen and (max-width: 805px) {
+    .reviews-container {
+        width: 100%;
+    }
+
+    .review-header {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #review-title {
+        margin: 1rem 0 0.5rem 0;
+    }
+
+    .card {
+        width: min(100%, 400px);
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .info {
+        font-size: 1.5rem;
+    }
 }
 /*//////////////////////////////*/
