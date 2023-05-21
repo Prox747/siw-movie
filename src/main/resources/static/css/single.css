@@ -87,8 +87,14 @@ h1 {
     overflow-y: scroll;
 }
 
+.review-info {
+    display: flex;
+    justify-content: space-between;
+}
+
 /* per levare il marker */
 ul {
+    width: 100%;
     list-style-type: none;
     padding: 0;
     margin: 0.5rem;
@@ -96,6 +102,10 @@ ul {
 
 .review > * {
     margin: .5rem;
+}
+
+#review-title {
+    display: inline;
 }
 
 .card {
@@ -145,3 +155,14 @@ a:hover{
     color: #0e4b50;
     text-decoration: underline;
 }
+
+/*TO HANDLE STAR RATINGS*/
+.star {
+    color: #ccc;
+    font-size: 1.5rem;
+}
+
+.fullStar {
+    color: gold;
+}
+/*//////////////////////////////*/

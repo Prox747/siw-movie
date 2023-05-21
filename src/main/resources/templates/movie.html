@@ -22,10 +22,23 @@
                     <ul>
                         <li th:each="review : ${movie.reviews}">
                             <div class="review">
-                                <h3 id="review-title" th:text="${review.title}">Titolo</h3>
+                                <div class="review-info">
+                                    <span id="review-author" th:text="${review.author.username}">Autore</span>
+                                    <span id="review-date" th:text="${review.creationDate}">Data</span>
+                                </div>
+                                <div class="review-header">
+                                    <h3 id="review-title" th:text="${review.title}">Titolo</h3>
+                                    <span class="review-rating">
+                                        <span class="star" th:classappend="${review.rating >= 1} ? 'fullStar' : ''">&starf;</span>
+                                        <span class="star" th:classappend="${review.rating >= 2} ? 'fullStar' : ''">&starf;</span>
+                                        <span class="star" th:classappend="${review.rating >= 3} ? 'fullStar' : ''">&starf;</span>
+                                        <span class="star" th:classappend="${review.rating >= 4} ? 'fullStar' : ''">&starf;</span>
+                                        <span class="star" th:classappend="${review.rating >= 5} ? 'fullStar' : ''">&starf;</span>
+                                    </span>
+                                </div>
+
                                 <div id="review-text" th:text="${review.content}">Testo</div>
-                                <div id="review-author" th:text="${review.author.username}">Autore</div>
-                                <div id="review-date" th:text="${review.creationDate}">Data</div>
+
                                 <a th:if="${userIsAdmin}" th:href="@{'/admin/deleteReview/' + ${review.id}}">Cancella recensione</a>
                             </div>
                         </li>
