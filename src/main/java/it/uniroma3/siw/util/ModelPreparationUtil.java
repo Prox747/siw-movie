@@ -14,8 +14,12 @@ public class ModelPreparationUtil {
 
     public void prepareModelForMovieTemplate(Model modelToPrepare, Movie movieToInject) {
         modelToPrepare.addAttribute("movie", movieToInject);
+        //se è admin o è registrato e non ha ancora recensito il film, può aggiungere una recensione
         if(credentialsService.userIsAdmin()) {
+            //se è admin può cancellare le recensioni
             modelToPrepare.addAttribute("userIsAdmin", true);
+            if(credentialsService.getCurrentCredentials().get().getReview() == null)
+                modelToPrepare.addAttribute("userCanAddReview", true);
         }
         if(credentialsService.userIsRegistered()) {
             if(credentialsService.getCurrentCredentials().get().getReview() == null)
