@@ -34,11 +34,11 @@ public class ReviewController {
                               @ModelAttribute("review") Review review,
                               @RequestParam("rating") int rating,
                               Model model) {
-        if (reviewService.existsByTitle(review.getTitle())) {
+        Movie movie = movieService.findById(movieId);
+        if (reviewService.existsByTitleAndReviewedMovie(review.getTitle(), movie)) {
             model.addAttribute("messaggioErrore", "Questa recensione ha un titolo che esiste già :(");
             return "registered/formAddReview.html";
         } else {
-            Movie movie = movieService.findById(movieId);
             reviewService.initializeAndSaveReview(rating, movieId, review);
 
             modelPreparationUtil.prepareModelForMovieTemplate(model, movie);

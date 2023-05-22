@@ -18,8 +18,8 @@ public class ReviewService {
     @Autowired MovieService movieService;
     @Autowired CredentialsService credentialsService;
 
-    public boolean existsByTitle(String title) {
-        return reviewRepository.existsByTitle(title);
+    public boolean existsByTitleAndReviewedMovie(String title, Movie movie) {
+        return reviewRepository.existsByTitleAndReviewedMovie(title, movie);
     }
 
     public List<Review> findAll() {
