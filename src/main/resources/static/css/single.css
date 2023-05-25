@@ -47,8 +47,24 @@ body {
 }
 
 h1 {
-    font-size: 55pt;
+    font-size: 3.5rem;
     color: var(--clr-2);
+    margin: .5rem;
+}
+
+a:link, a:visited{
+    color: #0e4b50;
+    text-decoration: none;
+}
+
+a:hover{
+    color: #0e4b50;
+    text-decoration: underline;
+}
+
+.info {
+    font-size: 20pt;
+    color: white;
     margin: .5rem;
 }
 
@@ -59,7 +75,7 @@ h1 {
     padding: 0 1rem;
 }
 
-/* flex for the movie info plus the reviews card*/
+/* flex for the movie card plus the reviews card*/
 .card-plus-reviews-container {
     display: flex;
     flex-direction: row;
@@ -70,11 +86,23 @@ h1 {
     row-gap: 2rem;
 }
 
+
+/*////////////  REVIEWS  /////////////////*/
 .reviews-container {
-    width: 60%;
+    border-radius: 1rem;
+    border: var(--clr-2) 3px solid;
+    height: 680px;
+    overflow: hidden;
+    flex-grow: 1;
+    padding-bottom: .5rem;
 }
 
-/* flex for the reviews card */
+.reviews-list-wrapper {
+    height: 90%;
+    overflow-y: scroll;
+}
+
+/* flex for the review cards */
 .reviews {
     display: flex;
     flex-direction: column;
@@ -82,11 +110,13 @@ h1 {
     align-items: start;
     margin: 0;
     padding: 0.5rem 2.5rem;
-    border-radius: 1rem;
-    border-color: var(--clr-1);
-    background-color: var(--clr-2);
-    overflow-y: scroll;
+    background-color: transparent;
     row-gap: 1.5rem;
+    height: auto;
+}
+
+.reviews-container h1 {
+    margin-left: 2.5rem;
 }
 
 .review-info {
@@ -96,6 +126,8 @@ h1 {
 
 .review-info span {
     font-style: italic;
+    font-weight: bold;
+    color: var(--clr-2);
 }
 
 /* per levare il marker */
@@ -113,14 +145,22 @@ li {
 
 #review-title {
     display: inline;
+    color: white;
+}
+
+#review-text {
+    color: whitesmoke;
 }
 
 .new-review {
-    background: var(--clr-2);
-    color: white;
+    background: transparent;
     border-radius: 4px;
     margin: 0 0.5rem 0.5rem 0.5rem;
-    height: 1.5rem;
+    height: auto;
+}
+
+.new-review a {
+    color: var(--clr-2);
 }
 
 .delete-review {
@@ -128,6 +168,9 @@ li {
     margin: .5rem;
 }
 
+/*///////////////////////////////////////*/
+
+/*    CARD    */
 .card {
     border-radius: 1rem;
     width: 30%;
@@ -161,21 +204,7 @@ img {
     filter: blur(3.5rem);
 }
 
-.info {
-    font-size: 20pt;
-    color: white;
-    margin: .5rem;
-}
-
-a:link, a:visited{
-    color: #0e4b50;
-    text-decoration: none;
-}
-
-a:hover{
-    color: #0e4b50;
-    text-decoration: underline;
-}
+/*///////////////////////////////////////*/
 
 /*TO HANDLE STAR RATINGS*/
 .star {
@@ -189,9 +218,9 @@ a:hover{
 /*//////////////////////////////*/
 
 /*FOR MOBILE*/
-@media only screen and (max-width: 805px) {
+@media only screen and (max-width: 1160px) {
     .reviews-container {
-        width: 100%;
+        height: 100%;
     }
 
     .review-header {
@@ -216,3 +245,6 @@ a:hover{
     }
 }
 /*//////////////////////////////*/
+
+
+

@@ -21,7 +21,7 @@
 <body>
   <div th:replace="fragments/header :: header"></div>
 
-  <h1>Inserisci un nuovo film</h1>
+  <h1>Scrivi una nuova recensione</h1>
   <!-- nella form dobbiamo mettere enctype="multipart/form-data" per dire al browser che la form deve poter accettare caricamneto di file
        Mentre sotto dobbiamo mettere nell'input il tipo "file" e per accettare solo immagini mettiamo accept="image/*"-->
   <form class="container" th:action="@{'/registered/addedReview/' + ${movieId}}" method="POST" th:object="${review}">

@@ -17,17 +17,19 @@
         <div class="card-plus-reviews-container">
             <div class="card"><img width="100%" th:src="'/upload/images/moviesImages/' + ${movie.imageFileName}" alt="image"/></div>
             <div class="reviews-container">
+                <h1>Recensioni</h1>
                 <div th:if="${userCanAddReview}" class="new-review"><a th:href="@{'/registered/formAddReview/' + ${movie.id}}">+ Aggiungi recensione</a></div>
-                <ul class="reviews" th:unless="${movie.reviews.isEmpty()}">
-                    <li th:each="review : ${movie.reviews}">
-                        <div class="review">
-                            <div class="review-info">
-                                <span id="review-author" th:text="${review.author.username}">Autore</span>
-                                <span id="review-date" th:text="${review.creationDate}">Data</span>
-                            </div>
-                            <div class="review-header">
-                                <h3 id="review-title" th:text="${review.title}">Titolo</h3>
-                                <span class="review-rating">
+                <div class="reviews-list-wrapper">
+                    <ul class="reviews" th:unless="${movie.reviews.isEmpty()}">
+                        <li th:each="review : ${movie.reviews}">
+                            <div class="review">
+                                <div class="review-info">
+                                    <span id="review-author" th:text="${review.author.username}">Autore</span>
+                                    <span id="review-date" th:text="${review.creationDate}">Data</span>
+                                </div>
+                                <div class="review-header">
+                                    <h3 id="review-title" th:text="${review.title}">Titolo</h3>
+                                    <span class="review-rating">
                                 <!-- in pratica puoi assegnare una classe con thymeleaf a un elemento in base a una condizione -->
                                     <span class="star" th:classappend="${review.rating >= 1} ? 'fullStar' : ''">&starf;</span>
                                     <span class="star" th:classappend="${review.rating >= 2} ? 'fullStar' : ''">&starf;</span>
@@ -35,14 +37,15 @@
                                     <span class="star" th:classappend="${review.rating >= 4} ? 'fullStar' : ''">&starf;</span>
                                     <span class="star" th:classappend="${review.rating >= 5} ? 'fullStar' : ''">&starf;</span>
                                 </span>
+                                </div>
+
+                                <div id="review-text" th:text="${review.content}">Testo</div>
+
+                                <a class="delete-review" th:if="${userIsAdmin}" th:href="@{'/admin/deleteReview/' + ${review.id}}">Cancella recensione</a>
                             </div>
-
-                            <div id="review-text" th:text="${review.content}">Testo</div>
-
-                            <a class="delete-review" th:if="${userIsAdmin}" th:href="@{'/admin/deleteReview/' + ${review.id}}">Cancella recensione</a>
-                        </div>
-                    </li>
-                </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
