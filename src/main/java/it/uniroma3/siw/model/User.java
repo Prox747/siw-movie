@@ -13,6 +13,13 @@ public class User {
     String surname;
     String email;
 
+    //i need it for easy use of review objects
+    String username;
+
+    //FORSE QUA IL CASCADE ALL NON SERVE, ATTENTO QUANDO CANCELLI UNA REVIEW
+    @OneToOne(cascade = {CascadeType.ALL}, mappedBy = "author")
+    private Review review;
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -43,5 +50,21 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Review getReview() {
+        return review;
+    }
+
+    public void setReview(Review r) {
+        this.review = r;
     }
 }

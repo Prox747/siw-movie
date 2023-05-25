@@ -81,7 +81,6 @@ a:hover{
     flex-direction: row;
     justify-content: start;
     column-gap: 4rem;
-    flex-wrap: wrap;
     margin: .5rem;
     row-gap: 2rem;
 }
@@ -89,11 +88,12 @@ a:hover{
 
 /*////////////  REVIEWS  /////////////////*/
 .reviews-container {
+    /*l'altezza è definita da js per fare in modo che sia uguale alla card*/
+    height: 100%;
+    width: 60vw;
     border-radius: 1rem;
     border: var(--clr-2) 3px solid;
-    height: 680px;
     overflow: hidden;
-    flex-grow: 1;
     padding-bottom: .5rem;
 }
 
@@ -170,6 +170,12 @@ li {
 
 /*///////////////////////////////////////*/
 
+.emptyList {
+    color: white;
+    font-size: 1.5rem;
+    margin-left: 2.5rem;
+}
+
 /*    CARD    */
 .card {
     border-radius: 1rem;
@@ -218,16 +224,22 @@ img {
 /*//////////////////////////////*/
 
 /*FOR MOBILE*/
-@media only screen and (max-width: 1160px) {
+@media only screen and (max-width: 740px) {
     .reviews-container {
         height: 100%;
+        flex-grow: 1;
     }
 
-    .review-header {
-        display: flex;
-        flex-direction: column;
+    .card-plus-reviews-container {
+        flex-wrap: wrap;
     }
 
+    #review-title {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 1160px) {
     #review-title {
         margin: 1rem 0 0.5rem 0;
     }

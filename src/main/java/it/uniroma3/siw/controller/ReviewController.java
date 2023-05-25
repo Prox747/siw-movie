@@ -41,8 +41,7 @@ public class ReviewController {
         } else {
             reviewService.initializeAndSaveReview(rating, movieId, review);
 
-            modelPreparationUtil.prepareModelForMovieTemplate(model, movie);
-            return "movie.html";
+            return modelPreparationUtil.prepareModelForMovieTemplate("movie.html", model, movie);
         }
     }
 
@@ -58,7 +57,6 @@ public class ReviewController {
         reviewService.deleteById(reviewId);
         movieService.save(movie);
 
-        modelPreparationUtil.prepareModelForMovieTemplate(model, movie);
-        return "movie.html";
+        return modelPreparationUtil.prepareModelForMovieTemplate("movie.html",model, movie);
     }
 }

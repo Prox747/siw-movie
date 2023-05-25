@@ -17,6 +17,7 @@ public class ReviewService {
     @Autowired ReviewRepository reviewRepository;
     @Autowired MovieService movieService;
     @Autowired CredentialsService credentialsService;
+    @Autowired UserService userService;
 
     public boolean existsByTitleAndReviewedMovie(String title, Movie movie) {
         return reviewRepository.existsByTitleAndReviewedMovie(title, movie);
@@ -46,21 +47,22 @@ public class ReviewService {
         Movie movie = this.movieService.findById(movieId);
         //in toeria non può essere isPresent() == false perchè per arrivare qui lo user è registrato
         Credentials authorCredentials = this.credentialsService.getCurrentCredentials().get();
+        User author = authorCredentials.getUser();
 
         review.setCreationDate(LocalDate.now());
         review.setReviewedMovie(movie);
         review.setRating(rating);
-        review.setAuthor(authorCredentials);
+        review.setAuthor(author);
 
         //ATTENTO A SALVARE PRIMA LA REVIEW E POI A SALVARE IL MOVIE PER UPDATARLO,
         // SENNO SE INVERTI CREA LA REVIEW DUE VOLTE PERCHE' IL MOVIE HA CASCADE ALL
         this.save(review);
 
-        authorCredentials.setReview(review);
+        author.setReview(review);
         movie.getReviews().add(review);
 
         movieService.save(movie);
 
-        this.credentialsService.saveCredentials(authorCredentials);
+        this.userService.saveUser(author);
     }
 }

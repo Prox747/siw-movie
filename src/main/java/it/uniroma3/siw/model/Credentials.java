@@ -18,10 +18,6 @@ public class Credentials {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     User user;
 
-    //FORSE QUA IL CASCADE ALL NON SERVE, ATTENTO QUANDO CANCELLI UNA REVIEW
-    @OneToOne(cascade = {CascadeType.ALL}, mappedBy = "author")
-    private Review review;
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -35,6 +31,8 @@ public class Credentials {
 
     public void setUsername(String username) {
         this.username = username;
+        if(this.user != null)
+            this.user.setUsername(username);
     }
 
     public String getPassword() {
@@ -59,13 +57,5 @@ public class Credentials {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Review getReview() {
-        return review;
-    }
-
-    public void setReview(Review review) {
-        this.review = review;
     }
 }

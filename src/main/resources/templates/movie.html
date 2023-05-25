@@ -4,8 +4,31 @@
     <meta charset="UTF-8">
     <title>Movie</title>
     <link rel="stylesheet" href="/css/single.css" type="text/css"/>
+    <script>
+        // chiama la funzione appena si loada l'html e tutte le risorse esterne
+        window.onload = function() {
+            setHeightForReviewsContainer();
+        };
+
+        // setto l'altezza del container delle recensioni in base all'altezza della card
+        //oppure se non ci sono recensioni, setto l'altezza a 250px
+        function setHeightForReviewsContainer() {
+            const reviewsIsEmpty = JSON.parse(document.getElementById("reviewsIsEmpty").getAttribute("data-isEmpty"));
+            const reviewsContainer = document.getElementsByClassName("reviews-container")[0];
+            const card = document.getElementsByClassName("card")[0];
+            if (reviewsIsEmpty) {
+                reviewsContainer.style.height = "150px";
+                return;
+            }
+            reviewsContainer.style.height = card.clientHeight + "px";
+        }
+    </script>
 </head>
 <body>
+    <!-- Questo div serve per passare un bool in formato JSON a
+    javascript che dice a js se il film ha recensioni-->
+    <div style="display: none" id="reviewsIsEmpty" th:data-isEmpty="${movie.reviews.isEmpty()}"></div>
+
     <div th:replace="fragments/header :: header"></div>
 
     <div th:if="${movie}" class="container">
@@ -19,8 +42,9 @@
             <div class="reviews-container">
                 <h1>Recensioni</h1>
                 <div th:if="${userCanAddReview}" class="new-review"><a th:href="@{'/registered/formAddReview/' + ${movie.id}}">+ Aggiungi recensione</a></div>
-                <div class="reviews-list-wrapper">
-                    <ul class="reviews" th:unless="${movie.reviews.isEmpty()}">
+                <div class="emptyList" th:if="${movie.reviews.isEmpty()}">Ancora nessuna recensione</div>
+                <div class="reviews-list-wrapper" th:unless="${movie.reviews.isEmpty()}">
+                    <ul class="reviews">
                         <li th:each="review : ${movie.reviews}">
                             <div class="review">
                                 <div class="review-info">

@@ -20,7 +20,7 @@ public class Review {
     private Movie reviewedMovie;
     @OneToOne
     @JoinColumn(name = "authorCredentials_id")
-    private Credentials author;
+    private User author;
 
     public Review() {}
 
@@ -77,11 +77,11 @@ public class Review {
         this.reviewedMovie = reviewedMovie;
     }
 
-    public Credentials getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(Credentials author) {
+    public void setAuthor(User author) {
         this.author = author;
     }
 

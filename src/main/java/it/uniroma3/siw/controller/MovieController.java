@@ -57,8 +57,7 @@ public class MovieController {
                 movie.getDirector().getDirectedMovies().add(movie);
             }
             this.movieService.save(movie);
-            modelPreparationUtil.prepareModelForMovieTemplate(model, movie);
-            return "movie.html";
+            return modelPreparationUtil.prepareModelForMovieTemplate("movie.html",model, movie);
         } else {
             model.addAttribute("messaggioErrore", "Questo film esiste già, inseriscine uno nuovo :)");
             return "admin/formNewMovie.html";
@@ -75,8 +74,7 @@ public class MovieController {
         }
         ////////////////////////////////////////////
 
-        modelPreparationUtil.prepareModelForMovieTemplate(model, movie);
-        return "movie.html";
+        return modelPreparationUtil.prepareModelForMovieTemplate("movie.html",model, movie);
     }
 
     @GetMapping("/movies")
