@@ -33,6 +33,7 @@ header {
 #home1, #home2, #login, #username, #logout  {
     color: white;
     font-size: 1.3rem;
+    font-style: normal;
 }
 /*//////////////////////////////*/
 
