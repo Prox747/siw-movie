@@ -1,6 +1,8 @@
 package it.uniroma3.siw.service;
 
+import it.uniroma3.siw.model.Artist;
 import it.uniroma3.siw.model.Movie;
+import it.uniroma3.siw.model.Review;
 import it.uniroma3.siw.repository.MovieRepository;
 import it.uniroma3.siw.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +56,25 @@ public class MovieService {
         movie.setImageFileName(fileName);
         String uploadDir = "src/main/upload/images/moviesImages/";
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+    }
+
+    public void deleteMovie(Long movieId) {
+        Movie movieToDelete = movieRepository.findById(movieId).get();
+        wipeFields(movieToDelete);
+        movieRepository.delete(movieToDelete);
+    }
+
+    private void wipeFields(Movie movieToDelete) {
+        //in teoria nulla referenzia più le recensioni così
+        for (Review r: movieToDelete.getReviews()
+             ) {
+            r.getAuthor().setReview(null);
+        }
+        //aggiornaiamo le liste dentro artist
+        for (Artist a: movieToDelete.getActors()
+        ) {
+            a.getMoviesActedIn().remove(movieToDelete);
+            a.getDirectedMovies().remove(movieToDelete);
+        }
     }
 }

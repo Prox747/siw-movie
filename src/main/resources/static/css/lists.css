@@ -89,6 +89,18 @@ a:hover{
     font-size: 1.3rem;
 }
 
+#deleteItem {
+    font-size: 1.4rem;
+    color: orangered;
+    text-decoration: none;
+    background: none;
+    font-style: italic;
+}
+
+#deleteItem:hover {
+    text-decoration: underline;
+}
+
 .emptyList {
     color:white;
 }

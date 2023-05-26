@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
+import java.util.List;
+
 @Component
 public class ModelPreparationUtil {
     @Autowired
@@ -29,6 +31,19 @@ public class ModelPreparationUtil {
         if(credentialsService.userIsRegistered()) {
             if(currentUserReview == null)
                 modelToPrepare.addAttribute("userCanAddReview", true);
+        }
+        return template;
+    }
+
+    public String prepareModelForMovieListTemplate(String template, Model modelToPrepare, List<Movie> movieList) {
+        modelToPrepare.addAttribute("movies", movieList);
+        //se non siamo loggati
+        if(!credentialsService.getCurrentCredentials().isPresent()) {
+            return template;
+        }
+        if(credentialsService.userIsAdmin()) {
+            //se è admin può cancellare le recensioni
+            modelToPrepare.addAttribute("userIsAdmin", true);
         }
         return template;
     }

@@ -63,6 +63,13 @@ public class MovieController {
             return "admin/formNewMovie.html";
         }
     }
+
+    @GetMapping("/admin/deleteMovie/{movieId}")
+    public String deleteMovie(@PathVariable("movieId") Long movieId, Model model) {
+        movieService.deleteMovie(movieId);
+        return showMovies(model);
+    }
+
     @GetMapping("/movies/{id}")
     public String getMovie(@PathVariable("id") Long id, Model model) {
         Movie movie = this.movieService.findById(id);
@@ -79,8 +86,8 @@ public class MovieController {
 
     @GetMapping("/movies")
     public String showMovies(Model model) {
-        model.addAttribute("movies", this.movieService.findAllByOrderByYearDesc());
-        return "movies.html";
+        List<Movie> movieList = this.movieService.findAllByOrderByYearDesc();
+        return modelPreparationUtil.prepareModelForMovieListTemplate("movies.html", model, movieList);
     }
 
     @GetMapping("/formSearchMovies")

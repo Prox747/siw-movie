@@ -14,6 +14,7 @@
     <li th:each="movie : ${movies}">
       <a th:href="@{'/movies' + '/' + ${movie.id}}"
          th:text="${movie.title} + ' (' + ${movie.year} + ')'">Up! (2000)</a>
+      <a id="deleteItem" th:if="${userIsAdmin}" th:href="@{'/admin/deleteMovie/' + ${movie.id}}">Cancella</a>
     </li>
   </ul>
 </body>
