@@ -43,20 +43,6 @@ body {
     box-sizing: border-box;
 }
 
-.container {
-    display: grid;
-    place-content: center;
-    justify-items: center;
-    grid-gap: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.wrapperbox {
-    border: 4px solid #0e4b50;
-    border-radius: 15px;
-}
-
 img {
     width: min(90vw, 1000px);
     margin: 2rem;
@@ -70,29 +56,88 @@ h1 {
     text-align: center;
 }
 
-.container-operazioni {
-    display: grid;
-    grid-row-gap: 1rem;
-    grid-template-rows: min-content;
-    font-size: 20pt;
-}
+/*VECCHIO STILE*/
 
-.operazione {
-    /* per mettere il testo al centro della box */
+/*.container {*/
+/*    display: grid;*/
+/*    place-content: center;*/
+/*    justify-items: center;*/
+/*    grid-gap: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*}*/
+
+/*.wrapperbox {*/
+/*    border: 4px solid #0e4b50;*/
+/*    border-radius: 15px;*/
+/*}*/
+
+/*.container-operazioni {*/
+/*    display: grid;*/
+/*    grid-row-gap: 1rem;*/
+/*    grid-template-rows: min-content;*/
+/*    font-size: 20pt;*/
+/*}*/
+
+/*.operazione {*/
+/*    !* per mettere il testo al centro della box *!*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+
+/*    border: 4px solid transparent;*/
+/*    border-radius: 15px;*/
+/*    padding: 8px;*/
+/*    transition: all 300ms ease-in;*/
+/*}*/
+
+/*.operazione:hover {*/
+/*    border: 4px solid #0e4b50;*/
+/*    background-color: #2d8f85;*/
+/*}*/
+
+/*///////////////////////////////////////*/
+
+/*NUOVO*/
+.container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border: 4px solid transparent;
-    border-radius: 15px;
-    padding: 8px;
-    transition: all 300ms ease-in;
+    flex-direction: column;
+    row-gap: 2rem;
 }
 
-.operazione:hover {
-    border: 4px solid #0e4b50;
-    background-color: #2d8f85;
+.carousel {
+    display: flex;
+    overflow-x: scroll;
 }
+
+.card-info {
+    color: white;
+    margin: 0 3.5rem;
+    font-size: 1rem;
+    text-align: center;
+}
+
+#movie-year {
+    font-size: .8rem;
+    color: #ccc;
+    margin-top: -1rem;
+    font-weight: normal;
+}
+
+.card {
+    width: 15vw;
+    margin: 1.5rem;
+    border-radius: 10px;
+}
+
+h2 {
+    color: white;
+    margin: 0 1.5rem;
+    font-size: 3.5rem;
+}
+
+
+/*///////////////////*/
 
 a:link, a:visited{
     color: #0e4b50;

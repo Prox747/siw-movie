@@ -2,6 +2,8 @@ package it.uniroma3.siw.controller;
 
 import javax.validation.Valid;
 
+import it.uniroma3.siw.service.ArtistService;
+import it.uniroma3.siw.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,6 +27,10 @@ public class AuthenticationController {
 
     @Autowired
     private CredentialsService credentialsService;
+    @Autowired
+    MovieService movieService;
+    @Autowired
+    ArtistService artistService;
 
     @GetMapping("/register")
     public String showRegisterForm (Model model) {
@@ -40,6 +46,8 @@ public class AuthenticationController {
 
     @GetMapping("/")
     public String index(Model model) {
+        model.addAttribute("artists", artistService.findAll());
+        model.addAttribute("movies", movieService.findAllByOrderByYearDesc());
         if (credentialsService.userIsAdmin()) {
             return "admin/indexAdmin";
         }
