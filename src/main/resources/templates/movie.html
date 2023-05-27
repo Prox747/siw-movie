@@ -7,6 +7,14 @@
     <script>
         // chiama la funzione appena si loada l'html e tutte le risorse esterne
         window.onload = function() {
+            //serve a mandare l'utente alla home
+            //quando va indietro nel browser
+            //così non si bugga se hai appena fatto operazioni di modifica
+            window.history.pushState(null, null, window.location.href);
+            window.addEventListener('popstate', function(event) {
+                window.location.replace("/");
+            });
+
             setHeightForReviewsContainer();
         };
 
@@ -34,15 +42,20 @@
     <div th:if="${movie}" class="container">
         <h1 th:text="${movie.title}"></h1>
         <div class="info" id="year">Anno: <span th:text="'(' + ${movie.year} + ')'">2000</span></div>
-        <div th:if="${movie.director}" class="info" id="regista">Regista: <span th:text="${movie.director.name} + ' ' + ${movie.director.surname}">Pippo Pluto</span></div>
+        <div class="info" id="regista">Regista:
+            <span th:if="${movie.director}" th:text="${movie.director.name} + ' ' + ${movie.director.surname}">Pippo Pluto</span>
+            <span th:unless="${movie.director}" class="info">non specificato</span>
+            <a id="changeDirector" th:if="${userIsAdmin}" th:href="@{'/admin/directorsToAdd' + '/' + ${movie.id}}"> - Modifica</a>
+        </div>
         <div th:unless="${movie.director}" class="info">Regista: non specificato</div>
 
         <div class="card-plus-reviews-container">
             <div class="card"><img width="100%" th:src="'/upload/images/moviesImages/' + ${movie.imageFileName}" alt="image"/></div>
+            <!--RECENSIONI-->
             <div class="reviews-container">
                 <h1>Recensioni</h1>
                 <div th:if="${userCanAddReview}" class="new-review"><a th:href="@{'/registered/formAddReview/' + ${movie.id}}">+ Aggiungi recensione</a></div>
-                <div class="emptyList" th:if="${movie.reviews.isEmpty()}">Ancora nessuna recensione</div>
+                <div id="noReviews" th:if="${movie.reviews.isEmpty()}">Ancora nessuna recensione</div>
                 <div class="reviews-list-wrapper" th:unless="${movie.reviews.isEmpty()}">
                     <ul class="reviews">
                         <li th:each="review : ${movie.reviews}">
@@ -53,26 +66,49 @@
                                 </div>
                                 <div class="review-header">
                                     <h3 id="review-title" th:text="${review.title}">Titolo</h3>
+                                    <!--STELLINE-->
                                     <span class="review-rating">
-                                <!-- in pratica puoi assegnare una classe con thymeleaf a un elemento in base a una condizione -->
-                                    <span class="star" th:classappend="${review.rating >= 1} ? 'fullStar' : ''">&starf;</span>
-                                    <span class="star" th:classappend="${review.rating >= 2} ? 'fullStar' : ''">&starf;</span>
-                                    <span class="star" th:classappend="${review.rating >= 3} ? 'fullStar' : ''">&starf;</span>
-                                    <span class="star" th:classappend="${review.rating >= 4} ? 'fullStar' : ''">&starf;</span>
-                                    <span class="star" th:classappend="${review.rating >= 5} ? 'fullStar' : ''">&starf;</span>
-                                </span>
+                                        <!-- in pratica puoi assegnare una classe con thymeleaf a un elemento in base a una condizione -->
+                                        <span class="star" th:classappend="${review.rating >= 1} ? 'fullStar' : ''">&starf;</span>
+                                        <span class="star" th:classappend="${review.rating >= 2} ? 'fullStar' : ''">&starf;</span>
+                                        <span class="star" th:classappend="${review.rating >= 3} ? 'fullStar' : ''">&starf;</span>
+                                        <span class="star" th:classappend="${review.rating >= 4} ? 'fullStar' : ''">&starf;</span>
+                                        <span class="star" th:classappend="${review.rating >= 5} ? 'fullStar' : ''">&starf;</span>
+                                    </span>
                                 </div>
 
                                 <div id="review-text" th:text="${review.content}">Testo</div>
 
-                                <a class="delete-review" th:if="${userIsAdmin}" th:href="@{'/admin/deleteReview/' + ${review.id}}">Cancella recensione</a>
+                                <a id="delete-review" th:if="${userIsAdmin}" th:href="@{'/admin/deleteReview/' + ${review.id}}">Cancella recensione</a>
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
+        <!--ATTORI-->
+        <div class="artists-container">
+            <span>
+                <span class="carousel-title">Attori
+                    <a id="changeActors" th:if="${userIsAdmin}" th:href="@{'/admin/allActorsForMovie' + '/' + ${movie.id}}">Modifica</a></span>
+                </span>
+            <div class="emptyList" th:if="${actors.isEmpty()}">Non c'è ancora nessun artista registrato per questo film</div>
+            <div class="carousel" th:unless="${actors.isEmpty()}">
+                <span th:each="actor : ${actors}">
+                    <a th:href="@{'/artists/' + ${actor.id}}">
+                        <img class="actor-card" width="100%" th:src="'/upload/images/artistsImages/' + ${actor.imageFileName}" alt="image"/>
+                    </a>
+                    <span class="actor-card-info" th:text="${actor.name} + ' ' + ${actor.surname}">attore pazzo</span>
+                </span>
+            </div>
+        </div>
+        <!--DELETE BUTTON-->
+        <div class="deleteItemContainer" th:if="${userIsAdmin}">
+            <button>
+                <a id="deleteItem" th:href="@{'/admin/deleteMovie/' + ${movie.id}}">CANCELLA FILM</a>
+            </button>
+        </div>
     </div>
-    <div th:unless="${movie}">Non esiste questo film (bug)</div>
+    <div class="error" th:unless="${movie}">Non esiste questo film (bug)</div>
 </body>
 </html>

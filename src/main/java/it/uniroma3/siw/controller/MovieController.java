@@ -67,7 +67,11 @@ public class MovieController {
     @GetMapping("/admin/deleteMovie/{movieId}")
     public String deleteMovie(@PathVariable("movieId") Long movieId, Model model) {
         movieService.deleteMovie(movieId);
-        return showMovies(model);
+        return modelPreparationUtil.prepareModelForIndexTemplate(
+                "index.html",
+                model,
+                artistService.findAll(),
+                movieService.findAllByOrderByYearDesc());
     }
 
     @GetMapping("/movies/{id}")
@@ -82,12 +86,6 @@ public class MovieController {
         ////////////////////////////////////////////
 
         return modelPreparationUtil.prepareModelForMovieTemplate("movie.html",model, movie);
-    }
-
-    @GetMapping("/movies")
-    public String showMovies(Model model) {
-        List<Movie> movieList = this.movieService.findAllByOrderByYearDesc();
-        return modelPreparationUtil.prepareModelForMovieListTemplate("movies.html", model, movieList);
     }
 
     @GetMapping("/formSearchMovies")
@@ -132,8 +130,10 @@ public class MovieController {
 
         movie.setDirector(dir);
         movieService.save(movie);
-        model.addAttribute("movies", movieService.findAllByOrderByYearDesc());
-        return formUpdateMovies(movieId, model);
+        return modelPreparationUtil.prepareModelForMovieTemplate(
+                "movie.html",
+                        model,
+                        movie);
     }
 
     @GetMapping("/admin/allActorsForMovie/{movieId}")
@@ -141,10 +141,9 @@ public class MovieController {
         Movie movie = movieService.findById(idM);
         List<Artist> inMovieActors = artistService.actorsForMovie(movie);
         model.addAttribute("movie", movie);
-        //non puo esse che dobbiamo aggiornare tutto ogni volta, mi ammazzo, vabbe mo lo famo così
         //così il movie in caso c'ha i suoi attori
         if(movie.getActors() == null) {
-            movie.setActors(new LinkedList<Artist>(inMovieActors));
+            movie.setActors(new LinkedList<>(inMovieActors));
             movieService.save(movie);
         }
 

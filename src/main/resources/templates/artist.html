@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <title>Artist</title>
     <link rel="stylesheet" href="/css/single.css" type="text/css">
+    <script>
+        window.onload = function() {
+            //serve a mandare l'utente alla home
+            //quando va indietro nel browser
+            //così non si bugga se hai appena fatto operazioni di modifica
+            window.history.pushState(null, null, window.location.href);
+            window.addEventListener('popstate', function (event) {
+                window.location.replace("/");
+            });
+        }
+    </script>
 </head>
 <body>
     <div th:replace="fragments/header :: header"></div>
@@ -15,7 +26,19 @@
         <div class="info" th:if="${artist.dateOfDeath}"><span th:text="'Data di morte: (' + ${artist.dateOfDeath} + ')'">2000</span></div>
 
         <div class="card"><img width="100%" th:src="'/upload/images/artistsImages/' + ${artist.imageFileName}" alt="image"/></div>
+        <div>
+            <span>Ha diretto:</span>
+        </div>
+        <div>
+            <span>Appare in:</span>
+        </div>
+<!--    DELETE BUTTON-->
+        <div class="deleteItemContainer" th:if="${userIsAdmin}">
+            <button>
+                <a id="deleteItem" th:href="@{'/admin/deleteArtist/' + ${artist.id}}">CANCELLA ARTISTA</a>
+            </button>
+        </div>
     </div>
-    <div th:unless="${artist}">Artista inesistente o errore</div>
+    <div class="error" th:unless="${artist}">Artista inesistente o errore</div>
 </body>
 </html>

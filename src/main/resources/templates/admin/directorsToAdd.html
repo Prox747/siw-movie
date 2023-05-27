@@ -8,7 +8,7 @@
 <body>
     <div th:replace="fragments/header :: header"></div>
 
-    <h1 th:text="'Scegli un Regista per ' + ${movie.title}">Scegli un Regista per ...</h1>
+    <h1 th:text="'Scegli un Regista per \'\'' + ${movie.title} + '\'\''">Scegli un Regista per ...</h1>
     <div th:if="${directors.isEmpty()}">Non ci sono artisti nel sistema</div>
     <ul>
         <li th:each="director : ${directors}">

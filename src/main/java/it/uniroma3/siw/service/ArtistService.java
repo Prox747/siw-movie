@@ -2,8 +2,10 @@ package it.uniroma3.siw.service;
 
 import it.uniroma3.siw.model.Artist;
 import it.uniroma3.siw.model.Movie;
+import it.uniroma3.siw.model.Review;
 import it.uniroma3.siw.repository.ArtistRepository;
 import it.uniroma3.siw.util.FileUploadUtil;
+import it.uniroma3.siw.util.ModelPreparationUtil;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,7 @@ import java.util.List;
 public class ArtistService {
     @Autowired
     ArtistRepository artistRepository;
+
     public List<Artist> findAll() {
         List<Artist> result = new ArrayList<>();
         Iterable<Artist> iterable = this.artistRepository.findAll();
@@ -78,5 +81,24 @@ public class ArtistService {
         // Parse the string into a LocalDate object
         LocalDate dateOfDeath = LocalDate.parse(dateOfDeathString, formatter);
         artist.setDateOfDeath(dateOfDeath);
+    }
+
+    public void deleteArtist(Long artistId) {
+        Artist artistToDelete = artistRepository.findById(artistId).get();
+        wipeReferences(artistToDelete);
+        artistRepository.delete(artistToDelete);
+    }
+
+    private void wipeReferences(Artist artistToDelete) {
+        //aggiorniamo i direttori dei movies
+        for (Movie m: artistToDelete.getDirectedMovies()
+        ) {
+            m.setDirector(null);
+        }
+        //aggiornaiamo la lista dentro movie
+        for (Movie m: artistToDelete.getMoviesActedIn()
+        ) {
+            m.getActors().remove(artistToDelete);
+        }
     }
 }

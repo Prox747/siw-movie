@@ -60,11 +60,11 @@ public class MovieService {
 
     public void deleteMovie(Long movieId) {
         Movie movieToDelete = movieRepository.findById(movieId).get();
-        wipeFields(movieToDelete);
+        wipeReferences(movieToDelete);
         movieRepository.delete(movieToDelete);
     }
 
-    private void wipeFields(Movie movieToDelete) {
+    private void wipeReferences(Movie movieToDelete) {
         //in teoria nulla referenzia più le recensioni così
         for (Review r: movieToDelete.getReviews()
              ) {

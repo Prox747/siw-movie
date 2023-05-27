@@ -10,29 +10,45 @@
 
     <div class="container">
         <div class="logo"><a href="/"><img src="/upload/images/logo-siw.png" alt="logo"/></a></div>
+        <!--FILM-->
         <div class="movies-container">
-            <h2>Film</h2>
-            <div th:if="${movies.isEmpty()}">Non c'è ancora nessun film</div>
+            <span>
+                <span class="carousel-title">Film</span>
+                <span th:if="${userIsAdmin}">
+                    <a class="addElement" href="/admin/formNewMovie">Aggiungi film</a>
+                </span>
+            </span>
+            <div class="emptyList" th:if="${movies.isEmpty()}">Non c'è ancora nessun film</div>
             <div class="carousel" th:unless="${movies.isEmpty()}">
                 <span th:each="movie : ${movies}">
-                    <img class="card" width="100%" th:src="'/upload/images/moviesImages/' + ${movie.imageFileName}" alt="image"/>
-                    <h3 class="card-info" th:text="${movie.title}">Movie</h3><br>
-                    <h3 class="card-info" id="movie-year" th:text="${movie.year}">1990</h3>
+                    <a th:href="@{'/movies/' + ${movie.id}}">
+                        <img class="card" width="100%" th:src="'/upload/images/moviesImages/' + ${movie.imageFileName}" alt="image"/>
+                    </a>
+                    <span class="card-info" th:text="${movie.title}">Movie</span><br>
+                    <span class="card-info" id="movie-year" th:text="${movie.year}">1990</span>
                 </span>
             </div>
         </div>
+        <!--ARTISTI-->
         <div class="artists-container">
-            <h2>Artisti</h2>
-            <div th:if="${artists.isEmpty()}">Non c'è ancora nessun artista registrato</div>
+            <span>
+                <span class="carousel-title">Artisti</span>
+                <span th:if="${userIsAdmin}">
+                    <a class="addElement" href="/admin/formAddArtist">Aggiungi artista</a>
+                </span>
+            </span>
+            <div class="emptyList" th:if="${artists.isEmpty()}">Non c'è ancora nessun artista registrato</div>
             <div class="carousel" th:unless="${artists.isEmpty()}">
                 <span th:each="artist : ${artists}">
-                    <img class="card" width="100%" th:src="'/upload/images/artistsImages/' + ${artist.imageFileName}" alt="image"/>
-                    <h3 class="card-info" th:text="${artist.name} + ' ' + ${artist.surname}">attore pazzo</h3>
+                    <a th:href="@{'/artists/' + ${artist.id}}">
+                        <img class="card" width="100%" th:src="'/upload/images/artistsImages/' + ${artist.imageFileName}" alt="image"/>
+                    </a>
+                    <span class="card-info" th:text="${artist.name} + ' ' + ${artist.surname}">attore pazzo</span>
                 </span>
             </div>
         </div>
 
-        </div>
+    </div>
 <!--        <div class="wrapperbox">-->
 <!--            <h1>Consulta archivio</h1>-->
 <!--            <div class="container-operazioni" >-->
@@ -41,6 +57,5 @@
 <!--                <div class="operazione"><a href="/artists">Elenco artisti</a></div>-->
 <!--            </div>-->
 <!--        </div>-->
-    </div>
 </body>
 </html>

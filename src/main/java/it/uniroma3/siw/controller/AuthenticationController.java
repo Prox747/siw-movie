@@ -1,14 +1,12 @@
 package it.uniroma3.siw.controller;
 
-import javax.validation.Valid;
-
+import it.uniroma3.siw.model.Credentials;
+import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.ArtistService;
+import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.MovieService;
+import it.uniroma3.siw.util.ModelPreparationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,11 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import it.uniroma3.siw.model.Credentials;
-import it.uniroma3.siw.model.User;
-import it.uniroma3.siw.service.CredentialsService;
-
-import java.util.Optional;
+import javax.validation.Valid;
 
 @Controller
 public class AuthenticationController {
@@ -31,6 +25,8 @@ public class AuthenticationController {
     MovieService movieService;
     @Autowired
     ArtistService artistService;
+    @Autowired
+    ModelPreparationUtil modelPreparationUtil;
 
     @GetMapping("/register")
     public String showRegisterForm (Model model) {
@@ -46,24 +42,16 @@ public class AuthenticationController {
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("artists", artistService.findAll());
-        model.addAttribute("movies", movieService.findAllByOrderByYearDesc());
-        if (credentialsService.userIsAdmin()) {
-            return "admin/indexAdmin";
-        }
-        else {
-            return "index";
-        }
+        return modelPreparationUtil.prepareModelForIndexTemplate(
+                "index.html",
+                        model,
+                        artistService.findAll(),
+                        movieService.findAllByOrderByYearDesc());
     }
 
     @GetMapping("/success")
     public String defaultAfterLogin(Model model) {
-        if (credentialsService.userIsAdmin()) {
-            return "admin/indexAdmin";
-        }
-        else {
-            return "index";
-        }
+        return index(model);
     }
 
     @PostMapping("/register")
@@ -80,9 +68,6 @@ public class AuthenticationController {
             model.addAttribute("user", user);
             return "registrationSuccessful";
         }
-        //SBAGLIATO??? il prof ha messo "registerUser" invece di
-        // "formRegisterUser" ma non esiste una pagina con quel nome
-        //boh così sicuro funziona quindi daje
         return "formRegisterUser";
     }
 }

@@ -8,21 +8,24 @@
 <body>
     <div th:replace="fragments/header :: header"></div>
 
-    <a th:href="@{'/admin/formUpdateMovies/' + ${movie.id}}"><- Torna al film</a>
     <h1 th:text="'Scegli attori da aggiungere o rimuovere per il film: ' + ${movie.title}">Attori per film ...</h1>
     <ul class="attori" id="attoriNelFilm">
         <h2><em>Attori presenti nel film:</em></h2>
         <li th:each="actor : ${inMovieActors}">
             <span class="actorinfo" th:text="${actor.name} + ' ' + ${actor.surname} + ':   -   '">Pippetto</span>
-            <a class="actorinfo" th:href="@{'/admin/removeActorFromMovie' + '/' + ${movie.id} + '/' + ${actor.id}}"><em>Rimuovi</em></a>
+            <a class="actorinfo" id="removeActor" th:href="@{'/admin/removeActorFromMovie' + '/' + ${movie.id} + '/' + ${actor.id}}"><em>Rimuovi</em></a>
         </li>
     </ul>
     <ul class="attori" id="attoriNonNelFilm">
         <h2><em>Attori non presenti nel film:</em></h2>
         <li th:each="actor : ${notInMovieActors}">
             <span  class="actorinfo" th:text="${actor.name} + ' ' + ${actor.surname} + ':   -   '">Pippetto</span>
-            <a class="actorinfo" th:href="@{'/admin/addActorInMovie' + '/' + ${movie.id} + '/' + ${actor.id}}"><em>Aggiungi</em></a>
+            <a class="actorinfo" id="addActor" th:href="@{'/admin/addActorInMovie' + '/' + ${movie.id} + '/' + ${actor.id}}"><em>Aggiungi</em></a>
         </li>
     </ul>
+    <a id="confirmActors" th:href="@{'/movies/' + ${movie.id}}">
+        Conferma
+    </a>
+
 </body>
 </html>

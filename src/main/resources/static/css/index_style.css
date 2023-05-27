@@ -108,13 +108,16 @@ h1 {
 .carousel {
     display: flex;
     overflow-x: scroll;
+    padding-bottom: 1rem;
 }
 
 .card-info {
     color: white;
-    margin: 0 3.5rem;
     font-size: 1rem;
     text-align: center;
+    width: 100%;
+    display: inline-block;
+    padding: 0 1.5rem;
 }
 
 #movie-year {
@@ -125,15 +128,28 @@ h1 {
 }
 
 .card {
-    width: 15vw;
+    width: clamp(150px, 15vw, 300px);
     margin: 1.5rem;
     border-radius: 10px;
+    transition: all ease-in-out 300ms;
 }
 
-h2 {
+.card:hover {
+    cursor: pointer;
+    transform: scale(110%);
+    transition: all ease-in-out 300ms;
+}
+
+.carousel-title {
     color: white;
     margin: 0 1.5rem;
     font-size: 3.5rem;
+}
+
+.addElement {
+    font-size: 2rem;
+    font-style: italic;
+    color: white;
 }
 
 
@@ -148,4 +164,10 @@ a:hover{
     color: #0e4b50;
     text-decoration: underline;
     transition: color 200ms ease-in-out;
+}
+
+.emptyList {
+    color: white;
+    font-size: 1.5rem;
+    margin-left: 1.5rem;
 }

@@ -2,6 +2,8 @@ package it.uniroma3.siw.controller;
 
 import it.uniroma3.siw.model.Artist;
 import it.uniroma3.siw.service.ArtistService;
+import it.uniroma3.siw.service.MovieService;
+import it.uniroma3.siw.util.ModelPreparationUtil;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,17 +17,17 @@ import java.io.IOException;
 public class ArtistController {
     @Autowired
     ArtistService artistService;
+    @Autowired
+    MovieService movieService;
+    @Autowired
+    ModelPreparationUtil modelPreparationUtil;
 
-    @GetMapping("/artists")
-    public String showAllActors(Model model) {
-        model.addAttribute("artists", artistService.findAll());
-        return "artists.html";
-    }
-
-    @GetMapping("/artist/{id}")
+    @GetMapping("/artists/{id}")
     public String getActor(@PathVariable("id") Long id, Model model) throws NotFoundException {
-        model.addAttribute("artist", this.artistService.findById(id));
-        return "artist.html";
+        return modelPreparationUtil.prepareModelForArtistTemplate(
+                "artist.html",
+                        model,
+                        this.artistService.findById(id));
     }
 
     @GetMapping("/admin/formAddArtist")
@@ -48,11 +50,23 @@ public class ArtistController {
 
         if (!artistService.existsArtistByNameAndSurnameAndDateOfBirth(artist.getName(), artist.getSurname(), artist.getDateOfBirth())) {
             this.artistService.save(artist);
-            model.addAttribute("artist", artist);
-            return "artist.html";
+            return modelPreparationUtil.prepareModelForArtistTemplate(
+                    "artist.html",
+                    model,
+                    artist);
         } else {
             model.addAttribute("messaggioErrore", "Questo artista esiste già");
             return "formAddArtist.html";
         }
+    }
+
+    @GetMapping("/admin/deleteArtist/{artistId}")
+    public String deleteMovie(@PathVariable("artistId") Long artistId, Model model) {
+        artistService.deleteArtist(artistId);
+        return modelPreparationUtil.prepareModelForIndexTemplate(
+                "index.html",
+                model,
+                artistService.findAll(),
+                movieService.findAllByOrderByYearDesc());
     }
 }

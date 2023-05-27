@@ -69,6 +69,18 @@ a:hover{
     margin: .5rem;
 }
 
+#changeDirector {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--clr-2);
+}
+
+#changeActors {
+    font-size: 0.7em;
+    margin-left: 1rem;
+    font-style: italic;
+}
+
 /* flex for the whole content */
 .container {
     display: flex;
@@ -164,20 +176,68 @@ li {
     color: var(--clr-2);
 }
 
-.delete-review {
+#delete-review {
     color: indianred;
     margin: .5rem;
 }
 
-/*///////////////////////////////////////*/
-
-.emptyList {
+#noReviews {
     color: white;
     font-size: 1.5rem;
-    margin-left: 2.5rem;
+    margin: 1rem 2.5rem;
 }
 
-/*    CARD    */
+/*///////////////////////////////////////*/
+
+
+/* ACTORS CAROUSEL */
+
+.artists-container {
+    margin: 2rem 0;
+}
+
+.carousel {
+    display: flex;
+    overflow-x: scroll;
+    padding-bottom: 1rem;
+    width: 100%;
+}
+
+.carousel > span {
+    flex-shrink: 1;
+}
+
+.actor-card-info {
+    color: white;
+    font-size: 1rem;
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+}
+
+.actor-card {
+    width: clamp(100px, 13vw, 250px);
+    margin: 1.5rem;
+    border-radius: 10px;
+    transition: all ease-in-out 300ms;
+}
+
+.actor-card:hover {
+    cursor: pointer;
+    transform: scale(110%);
+    transition: all ease-in-out 300ms;
+}
+
+.carousel-title {
+    color: var(--clr-2);
+    margin: 0 0.5rem;
+    font-size: 3.5rem;
+}
+
+/*//////////////////////////////*/
+
+
+/*    MOVIE CARD    */
 .card {
     border-radius: 1rem;
     width: 30%;
@@ -223,6 +283,42 @@ img {
     color: gold;
 }
 /*//////////////////////////////*/
+
+/*OTHERS*/
+.emptyList {
+    color: white;
+    font-size: 1.5rem;
+    margin: 1rem 0.5rem;
+}
+
+#deleteItem {
+    color: white;
+    font-size: 1.8rem;
+}
+
+.deleteItemContainer {
+    display: flex;
+    place-content: center;
+}
+
+button {
+    background: indianred;
+    border-radius: 8px;
+    text-align: center;
+    border: white 2px solid;
+    width: 300px;
+    height: 75px;
+    margin: 2rem;
+}
+
+.error {
+    color: white;
+    font-size: inherit;
+    margin-left: 1.5rem;
+}
+
+/*////////////////////////*/
+
 
 /*FOR MOBILE*/
 @media only screen and (max-width: 740px) {
