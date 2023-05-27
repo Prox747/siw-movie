@@ -205,6 +205,7 @@ li {
 
 .carousel > span {
     flex-shrink: 1;
+    flex-basis: clamp(100px, 13vw, 250px);
 }
 
 .actor-card-info {
