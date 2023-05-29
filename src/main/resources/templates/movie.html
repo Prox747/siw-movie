@@ -47,7 +47,6 @@
             <span th:unless="${movie.director}" class="info">non specificato</span>
             <a id="changeDirector" th:if="${userIsAdmin}" th:href="@{'/admin/directorsToAdd' + '/' + ${movie.id}}"> - Modifica</a>
         </div>
-        <div th:unless="${movie.director}" class="info">Regista: non specificato</div>
 
         <div class="card-plus-reviews-container">
             <div class="card"><img width="100%" th:src="'/upload/images/moviesImages/' + ${movie.imageFileName}" alt="image"/></div>
