@@ -1,6 +1,7 @@
 package it.uniroma3.siw.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,7 +12,9 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank
     private String title;
+    @NotBlank
     private String content;
     private int rating;
     private LocalDate creationDate;

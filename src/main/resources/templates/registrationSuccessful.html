@@ -10,15 +10,15 @@
   <div th:replace="fragments/header :: header"></div>
 
   <h1>Congratulazioni ti sei registrato!</h1>
-  <div class="info">
+  <div class="registration-info">
     <span>Nome: </span>
     <span th:text="${user.name}"></span>
   </div>
-  <div class="info">
+  <div class="registration-info">
     <span>Cognome: </span>
     <span th:text="${user.surname}"></span>
   </div>
-  <div class="info">
+  <div class="registration-info">
     <span>Email: </span>
     <span th:text="${user.email}"></span>
   </div>

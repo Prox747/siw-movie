@@ -56,7 +56,7 @@ public class ArtistController {
                     artist);
         } else {
             model.addAttribute("messaggioErrore", "Questo artista esiste già");
-            return "formAddArtist.html";
+            return formAddArtist(model);
         }
     }
 

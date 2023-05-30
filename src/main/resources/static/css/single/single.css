@@ -1,41 +1,16 @@
+/* FOR THE HEADER */
+@import '../header-fragment.css';
+/*//////////////////////////////*/
+
+/* FOR THE FOOTER */
+@import 'reviews-fragment.css';
+/*//////////////////////////////*/
+
 :root {
     --clr-1: #0e4b50;
     --clr-2: #2d8f85;
     --clr-3: #637c54;
 }
-
-/* FOR THE HEADER */
-header {
-    height: 3.5rem;
-    width: 100%;
-    background-color: var(--clr-1);
-    border-radius: 0;
-    margin-bottom: 0.5rem;
-}
-
-.headerElements {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-    padding: 0 0.5rem;
-}
-
-.whitespace {
-    width: 1.5rem;
-    display: inline-block;
-    text-align: center;
-    color: white;
-    font-weight: bold;
-}
-
-#home1, #home2, #login, #username, #logout  {
-    color: white;
-    font-size: 1.3rem;
-    font-style: normal;
-}
-/*//////////////////////////////*/
 
 * {
     font-family: Rockwell, sans-serif;
@@ -54,12 +29,12 @@ h1 {
 }
 
 a:link, a:visited{
-    color: #0e4b50;
+    color: var(--clr-1);
     text-decoration: none;
 }
 
 a:hover{
-    color: #0e4b50;
+    color: var(--clr-1);
     text-decoration: underline;
 }
 
@@ -97,98 +72,6 @@ a:hover{
     margin: .5rem;
     row-gap: 2rem;
 }
-
-
-/*////////////  REVIEWS  /////////////////*/
-.reviews-container {
-    /*l'altezza è definita da js per fare in modo che sia uguale alla card*/
-    height: 100%;
-    width: 60vw;
-    border-radius: 1rem;
-    border: var(--clr-2) 3px solid;
-    overflow: hidden;
-    padding-bottom: .5rem;
-}
-
-.reviews-list-wrapper {
-    height: 90%;
-    overflow-y: scroll;
-}
-
-/* flex for the review cards */
-.reviews {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: start;
-    margin: 0;
-    padding: 0.5rem 2.5rem;
-    background-color: transparent;
-    row-gap: 1.5rem;
-    height: auto;
-}
-
-.reviews-container h1 {
-    margin-left: 2.5rem;
-}
-
-.review-info {
-    display: flex;
-    justify-content: space-between;
-}
-
-.review-info span {
-    font-style: italic;
-    font-weight: bold;
-    color: var(--clr-2);
-}
-
-/* per levare il marker */
-ul {
-    list-style-type: none;
-}
-
-li {
-    width: 100%;
-}
-
-.review > * {
-    margin: .5rem;
-}
-
-#review-title {
-    display: inline;
-    color: white;
-}
-
-#review-text {
-    color: whitesmoke;
-}
-
-.new-review {
-    background: transparent;
-    border-radius: 4px;
-    margin: 0 0.5rem 0.5rem 2.5rem;
-    height: auto;
-}
-
-.new-review a {
-    color: var(--clr-2);
-}
-
-#delete-review {
-    color: indianred;
-    margin: .5rem;
-}
-
-#noReviews {
-    color: white;
-    font-size: 1.5rem;
-    margin: 1rem 2.5rem;
-}
-
-/*///////////////////////////////////////*/
-
 
 /* ACTORS CAROUSEL */
 
@@ -274,6 +157,8 @@ img {
 
 /*///////////////////////////////////////*/
 
+
+
 /*TO HANDLE STAR RATINGS*/
 .star {
     color: #ccc;
@@ -352,6 +237,3 @@ button {
     }
 }
 /*//////////////////////////////*/
-
-
-

@@ -45,11 +45,12 @@ public class MovieController {
     public String formNewMovie(Model model){
         Movie movie = new Movie();
         model.addAttribute("movie", movie);
-        model.addAttribute("directors", artistService.findAll());
+        if(artistService.findAll().size() != 0)
+            model.addAttribute("directors", artistService.findAll());
         return "admin/formNewMovie.html";
     }
     @PostMapping("/admin/addedMovie")
-    public String newMovie(@Valid @ModelAttribute("movie") Movie movie, @RequestParam("image") MultipartFile multipartFile, BindingResult bindingResult, Model model) throws IOException {
+    public String newMovie(@RequestParam("image") MultipartFile multipartFile, @Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult, Model model) throws IOException {
         movieValidator.validate(movie, bindingResult);
         if (!bindingResult.hasErrors()) {
 
@@ -62,7 +63,7 @@ public class MovieController {
             return modelPreparationUtil.prepareModelForMovieTemplate("movie.html",model, movie);
         } else {
             model.addAttribute("messaggioErrore", "Questo film esiste già, inseriscine uno nuovo :)");
-            return "admin/formNewMovie.html";
+            return formNewMovie(model);
         }
     }
 
@@ -90,31 +91,6 @@ public class MovieController {
         return modelPreparationUtil.prepareModelForMovieTemplate("movie.html",model, movie);
     }
 
-    @GetMapping("/formSearchMovies")
-    public String formSearchMovies(Model model) {
-        return "formSearchMovies.html";
-    }
-
-    @PostMapping("/searchMovies")
-    public String searchMovies(Model model, @RequestParam Integer year) {
-        model.addAttribute("movies", this.movieService.findByYear(year));
-        //per dire di che anno sono i film (ripeitiamo l'anno che ci hanno dato)
-        model.addAttribute("year", year);
-        return "foundMovies.html";
-    }
-
-    @GetMapping("/admin/gestisciMovies")
-    public String gestisciMovies(Model model) {
-        model.addAttribute("movies", movieService.findAllByOrderByYearDesc());
-        return "admin/gestisciMovies.html";
-    }
-    @GetMapping("/admin/formUpdateMovies/{id}")
-    public String formUpdateMovies(@PathVariable("id") Long id, Model model) {
-        Movie movie = movieService.findById(id);
-        model.addAttribute("movie", movie);
-        model.addAttribute("director", movie.getDirector());
-        return "admin/formUpdateMovies.html";
-    }
     @GetMapping("/admin/directorsToAdd/{movieId}")
     public String showDirectorsList(@PathVariable("movieId") Long movieId, Model model){
         model.addAttribute("movie", movieService.findById(movieId));

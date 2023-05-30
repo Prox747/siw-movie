@@ -26,12 +26,13 @@
         <span class="errorMessage" th:if="${#fields.hasErrors('year')}" th:errors="${movie.year}"></span>
 
         <label for="regista">Scegli un regista:</label>
-        <select id="regista" required th:field="${movie.director}">
+        <span class="noDirectors" th:unless="${directors}"> non ci sono artisti da poter scegliere</span>
+        <select id="regista" required th:field="${movie.director}" th:if="${directors}">
             <option th:each="director : ${directors}" th:value="${director.id}" th:text="${director.name} + ' ' + ${director.surname}"></option>
         </select>
 
         <label for="image">Immagine:</label>
-        <input id="image" type="file" name="image" accept="image/*"/>
+        <input id="image" required type="file" name="image" accept="image/*"/>
 
         <button type="submit" class="bottone">Inserisci</button>
     </form>

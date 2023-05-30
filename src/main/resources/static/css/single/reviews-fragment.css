@@ -1,0 +1,89 @@
+/*////////////  REVIEWS  /////////////////*/
+.reviews-container {
+    /*l'altezza è definita da js per fare in modo che sia uguale alla card*/
+    height: 100%;
+    width: 60vw;
+    border-radius: 1rem;
+    border: var(--clr-2) 3px solid;
+    overflow: hidden;
+    padding-bottom: .5rem;
+}
+
+.reviews-list-wrapper {
+    height: 90%;
+    overflow-y: scroll;
+}
+
+/* flex for the review cards */
+.reviews {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: start;
+    margin: 0;
+    padding: 0.5rem 2.5rem;
+    background-color: transparent;
+    row-gap: 1.5rem;
+    height: auto;
+}
+
+.reviews-container h1 {
+    margin-left: 2.5rem;
+}
+
+.review-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.review-info span {
+    font-style: italic;
+    font-weight: bold;
+    color: var(--clr-2);
+}
+
+/* per levare il marker */
+ul {
+    list-style-type: none;
+}
+
+li {
+    width: 100%;
+}
+
+.review > * {
+    margin: .5rem;
+}
+
+#review-title {
+    display: inline;
+    color: white;
+}
+
+#review-text {
+    color: whitesmoke;
+}
+
+.new-review {
+    background: transparent;
+    border-radius: 4px;
+    margin: 0 0.5rem 0.5rem 2.5rem;
+    height: auto;
+}
+
+.new-review a {
+    color: var(--clr-2);
+}
+
+#delete-review {
+    color: indianred;
+    margin: .5rem;
+}
+
+#noReviews {
+    color: white;
+    font-size: 1.5rem;
+    margin: 1rem 2.5rem;
+}
+
+/*///////////////////////////////////////*/

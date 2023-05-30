@@ -37,7 +37,7 @@ public class ReviewController {
         Movie movie = movieService.findById(movieId);
         if (reviewService.existsByTitleAndReviewedMovie(review.getTitle(), movie)) {
             model.addAttribute("messaggioErrore", "Questa recensione ha un titolo che esiste già :(");
-            return "registered/formAddReview.html";
+            return formAddReview(movieId, model);
         } else {
             reviewService.initializeAndSaveReview(rating, movieId, review);
 

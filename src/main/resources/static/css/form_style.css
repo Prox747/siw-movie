@@ -1,35 +1,6 @@
 
 /* FOR THE HEADER */
-header {
-    height: 3.5rem;
-    width: 100%;
-    background-color: #0e4b50;
-    border-radius: 0px;
-    margin-bottom: 0.5rem;
-}
-
-.headerElements {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-    padding: 0 0.5rem;
-}
-
-.whitespace {
-    width: 1.5rem;
-    display: inline-block;
-    text-align: center;
-    color: white;
-    font-weight: bold;
-}
-
-#home1, #home2, #login, #username, #logout  {
-    color: white;
-    font-size: 1.3rem;
-    font-style: normal;
-}
+@import 'header-fragment.css';
 /*//////////////////////////////*/
 
 body {
@@ -114,6 +85,8 @@ select {
     margin: .5rem;
     color: black;
     background-color: white;
+    border-radius: 6px;
+    padding: 0 1rem;
 }
 
 #image {
@@ -125,24 +98,25 @@ select {
     font-size: 1.2rem;
     /*questo vuol dire che si estende dalla prima all'ultima colonna(-1)*/
     grid-column: 1/-1;
+    margin: .5rem;
+}
+
+.noDirectors {
+    color: white;
+    font-size: 1.2rem;
+    margin: .5rem;
+    grid-column: 2;
+}
+
+.registration-info {
+    font-size: 1.4rem;
+    margin: 2.5rem;
 }
 
 .register {
     grid-column: 2;
     margin: 0.5rem;
     justify-self: end;
-}
-
-#labelCercaAnno {
-    grid-column: 1/-1;
-}
-
-#inputCercaAnno {
-    grid-column: 1/-1;
-}
-
-#bottoneCercaAnno {
-    grid-column: 1/-1;
 }
 
 /*FOR MOBILE*/

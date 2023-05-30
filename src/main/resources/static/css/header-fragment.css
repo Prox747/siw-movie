@@ -1,0 +1,35 @@
+header {
+    height: 3.5rem;
+    width: 100%;
+    background-color: #0e4b50;
+    border-radius: 0px;
+    margin-bottom: 0.5rem;
+}
+
+.headerElements {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 0 0.5rem;
+}
+
+.whitespace {
+    width: 1.5rem;
+    display: inline-block;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+#home1, #home2, #login, #username, #logout  {
+    color: white;
+    font-size: 1.3rem;
+    font-style: normal;
+    text-decoration: none;
+}
+
+#home1:hover, #home2:hover, #login:hover, #username:hover, #logout:hover {
+    text-decoration: underline;
+}

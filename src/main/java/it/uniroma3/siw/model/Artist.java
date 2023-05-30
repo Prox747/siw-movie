@@ -1,6 +1,10 @@
 package it.uniroma3.siw.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,8 +15,11 @@ public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank
     private String name;
+    @NotBlank
     private String surname;
+    @NotBlank
     private String nationality;
     private LocalDate dateOfBirth;
     private LocalDate dateOfDeath;

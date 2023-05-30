@@ -1,0 +1,134 @@
+
+/* FOR THE HEADER */
+@import '../header-fragment.css';
+/*//////////////////////////////*/
+
+/* FOR THE CARDS */
+@import 'carousel-card.css';
+/*//////////////////////////////*/
+
+body {
+    background: #0A0A0A;
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    font-family: Rockwell, sans-serif;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+.logo {
+    width: 70vw;
+    margin: 2rem;
+}
+
+h1 {
+    margin: 2rem 4rem;
+    font-size: 40pt;
+    text-decoration: none;
+    color: #637c54;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    margin: 2rem 10vw;
+    border-radius: 3rem;
+    background: #0e4b50;
+}
+
+p {
+    font-size: 1.4rem;
+    color: white;
+    text-align: center;
+    opacity: 0.7;
+}
+
+.carousel {
+    display: flex;
+    overflow-x: scroll;
+    padding-bottom: 1rem;
+}
+
+/* the carousel has to be 100% width but every element has to be clamp(150px, 15vw, 300px), flex basis is great*/
+.carousel > span {
+    flex-basis: clamp(150px, 15vw, 300px);
+}
+
+.searchInput {
+    width: 200px;
+    height: 40px;
+    font-size: inherit;
+    border-radius: 10px;
+    background: transparent;
+    border: white 2px solid;
+    color: white;
+    padding: 0 0.5rem;
+}
+
+#addActor, #addMovie {
+    border: white 2px dashed;
+    display: grid;
+    place-content: center;
+    aspect-ratio: 2/3;
+}
+
+#addMovie:hover, #addActor:hover {
+    background: #2a2a2a;
+}
+
+/* per l'icona "+" */
+#addActor > div, #addMovie > div {
+    font-size: 4rem;
+    color: white;
+}
+
+/* to remove the outline when the input is focused, annoyingly blue */
+.searchInput:focus {
+    outline: none;
+}
+
+.emptyList {
+    color: white;
+    font-size: 1.5rem;
+    margin: 1.5rem;
+}
+
+/*   MOBILE   */
+@media only screen and (width < 600px) {
+    .carousel-header {
+        justify-content: center;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .carousel-title {
+        font-size: 2rem;
+    }
+
+    .card-info {
+        font-size: .8rem;
+    }
+
+    .searchInput {
+        width: 150px;
+        height: 30px;
+        font-size: .8rem;
+    }
+}

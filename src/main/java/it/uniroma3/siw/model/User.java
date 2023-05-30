@@ -1,6 +1,7 @@
 package it.uniroma3.siw.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.List;
 
 @Entity
@@ -11,6 +12,7 @@ public class User {
     private Long id;
     String name;
     String surname;
+    @Email(message = "Email not valid")
     String email;
 
     //i need it for easy use of review objects
