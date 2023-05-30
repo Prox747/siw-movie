@@ -46,7 +46,7 @@ public class AuthenticationController {
                 "index.html",
                         model,
                         artistService.findAll(),
-                        movieService.findByYear(2023));
+                        movieService.findAllByOrderByYearDesc());
     }
 
     @GetMapping("/success")
