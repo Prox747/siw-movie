@@ -30,6 +30,12 @@ header {
     text-decoration: none;
 }
 
-#home1:hover, #home2:hover, #login:hover, #username:hover, #logout:hover {
+#home1:hover, #home2:hover, #login:hover, #logout:hover {
     text-decoration: underline;
+}
+
+.endElements {
+    display: flex;
+    align-content: center;
+    justify-content: center;
 }
