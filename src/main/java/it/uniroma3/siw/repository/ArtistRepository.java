@@ -6,9 +6,10 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 public interface ArtistRepository extends CrudRepository<Artist, Long> {
-    public List<Artist> findAllByMoviesActedInIsNotContaining(Movie movie);
-    public List<Artist> findAllByMoviesActedInIsContaining(Movie movie);
+    public Set<Artist> findAllByMoviesActedInIsNotContaining(Movie movie);
+    public Set<Artist> findAllByMoviesActedInIsContaining(Movie movie);
     public boolean existsArtistByNameAndSurnameAndDateOfBirth(String name, String surname, LocalDate dateOfBirth);
 }

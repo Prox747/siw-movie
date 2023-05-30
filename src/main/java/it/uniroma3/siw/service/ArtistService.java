@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -38,11 +39,11 @@ public class ArtistService {
                 .orElseThrow(() -> new NotFoundException("Artist not found with id: " + id));
     }
 
-    public List<Artist> actorsNotInMovie(Movie movie) {
+    public Set<Artist> actorsNotInMovie(Movie movie) {
         return artistRepository.findAllByMoviesActedInIsNotContaining(movie);
     }
 
-    public List<Artist> actorsForMovie(Movie movie) {
+    public Set<Artist> actorsForMovie(Movie movie) {
         return artistRepository.findAllByMoviesActedInIsContaining(movie);
     }
 

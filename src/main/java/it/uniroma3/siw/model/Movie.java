@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+
 @Entity
 public class Movie {
     @Id
@@ -25,14 +27,11 @@ public class Movie {
     @JoinColumn(name="artist_id_director")
     private Artist director;
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<Artist> actors;
+    private Set<Artist> actors;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "reviewedMovie")
     private List<Review> reviews;
 
-    public Movie() {
-        this.actors = new ArrayList<Artist>();
-        this.reviews = new ArrayList<Review>();
-    }
+    public Movie() {}
 
     @Override
     public boolean equals(Object o) {
@@ -63,9 +62,9 @@ public class Movie {
         this.director = director;
     }
 
-    public List<Artist> getActors() {return actors;}
+    public Set<Artist> getActors() {return actors;}
 
-    public void setActors(List<Artist> actors) {
+    public void setActors(Set<Artist> actors) {
         this.actors = actors;
     }
 

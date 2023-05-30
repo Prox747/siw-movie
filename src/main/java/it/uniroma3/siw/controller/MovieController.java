@@ -16,8 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class MovieController {
@@ -139,11 +141,11 @@ public class MovieController {
     @GetMapping("/admin/allActorsForMovie/{movieId}")
     public String showActorListForMovie(@PathVariable("movieId") Long idM, Model model) {
         Movie movie = movieService.findById(idM);
-        List<Artist> inMovieActors = artistService.actorsForMovie(movie);
+        Set<Artist> inMovieActors = artistService.actorsForMovie(movie);
         model.addAttribute("movie", movie);
         //così il movie in caso c'ha i suoi attori
         if(movie.getActors() == null) {
-            movie.setActors(new LinkedList<>(inMovieActors));
+            movie.setActors(new HashSet<>(inMovieActors));
             movieService.save(movie);
         }
 
@@ -155,8 +157,8 @@ public class MovieController {
     @GetMapping("/admin/removeActorFromMovie/{movieId}/{actorId}")
     public String removeActorFromMovie(@PathVariable("actorId") Long idA, @PathVariable("movieId") Long idM, Model model) throws NotFoundException {
         Movie movie = movieService.findById(idM);
-        List<Artist> notInMovieActors = artistService.actorsNotInMovie(movie);
-        List<Artist> inMovieActors = artistService.actorsForMovie(movie);
+        Set<Artist> notInMovieActors = artistService.actorsNotInMovie(movie);
+        Set<Artist> inMovieActors = artistService.actorsForMovie(movie);
 
         Artist actorToRemove = artistService.findById(idA);
         inMovieActors.remove(actorToRemove);
@@ -175,8 +177,8 @@ public class MovieController {
     @GetMapping("/admin/addActorInMovie/{movieId}/{actorId}")
     public String addActorInMovie(@PathVariable("actorId") Long idA, @PathVariable("movieId") Long idM, Model model) throws NotFoundException {
         Movie movie = movieService.findById(idM);
-        List<Artist> notInMovieActors = artistService.actorsNotInMovie(movie);
-        List<Artist> inMovieActors = artistService.actorsForMovie(movie);
+        Set<Artist> notInMovieActors = artistService.actorsNotInMovie(movie);
+        Set<Artist> inMovieActors = artistService.actorsForMovie(movie);
 
         Artist actorToAdd = artistService.findById(idA);
         inMovieActors.add(actorToAdd);
