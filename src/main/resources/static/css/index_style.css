@@ -156,7 +156,8 @@ p {
     transition: all ease-in-out 300ms;
 }
 
-.card:hover {
+/* to make the card bigger when hovered but not for the addElement cards */
+.card:hover:not(#addMovie, #addActor) {
     cursor: pointer;
     transform: scale(110%);
     transition: all ease-in-out 300ms;
@@ -166,12 +167,6 @@ p {
     color: white;
     margin: 0 1.5rem;
     font-size: 3.5rem;
-}
-
-.addElement {
-    font-size: 2rem;
-    font-style: italic;
-    color: white;
 }
 
 .carousel-header {
@@ -191,23 +186,29 @@ p {
     padding: 0 0.5rem;
 }
 
+#addActor, #addMovie {
+    border: white 2px dashed;
+    display: grid;
+    place-content: center;
+    aspect-ratio: 2/3;
+}
+
+#addMovie:hover, #addActor:hover {
+    background: #2a2a2a;
+}
+
+/* per l'icona "+" */
+#addActor > div, #addMovie > div {
+    font-size: 3rem;
+    color: white;
+}
+
 /* to remove the outline when the input is focused, annoyingly blue */
 .searchInput:focus {
     outline: none;
 }
 
 /*///////////////////*/
-
-a:link, a:visited{
-    color: #0e4b50;
-    text-decoration: none;
-}
-
-a:hover{
-    color: #0e4b50;
-    text-decoration: underline;
-    transition: color 200ms ease-in-out;
-}
 
 .emptyList {
     color: white;
@@ -222,5 +223,19 @@ a:hover{
 
     p {
         font-size: 1rem;
+    }
+
+    .carousel-title {
+        font-size: 2rem;
+    }
+
+    .card-info {
+        font-size: .8rem;
+    }
+
+    .searchInput {
+        width: 150px;
+        height: 30px;
+        font-size: .8rem;
     }
 }

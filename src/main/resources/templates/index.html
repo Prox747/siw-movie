@@ -21,12 +21,17 @@
                 <span class="carousel-title">Film</span>
                 <input type="text" th:unless="${movies.isEmpty()}" placeholder="Cerca per titolo..."
                        class="searchInput" id="movieSearchInput" oninput="filterMoviesBasedOnSearchText()">
-                <span th:if="${userIsAdmin}">
-                    <a class="addElement" href="/admin/formNewMovie">Aggiungi film</a>
-                </span>
             </span>
             <div class="emptyList" th:if="${movies.isEmpty()}">Non c'è ancora nessun film</div>
             <div class="carousel" id="movie-carousel" th:unless="${movies.isEmpty()}">
+                <!-- ADD MOVIE CARD -->
+                <span th:if="${userIsAdmin}" class="ignoreInJs">
+                    <a href="/admin/formNewMovie">
+                        <div class="card" id="addMovie"><div>+</div></div>
+                    </a>
+                    <span class="card-info">Aggiungi film</span>
+                </span>
+
                 <span th:each="movie : ${movies}" th:data-title="${movie.title}">
                     <a th:href="@{'/movies/' + ${movie.id}}">
                         <img class="card" width="100%" th:src="'/upload/images/moviesImages/' + ${movie.imageFileName}" alt="image"/>
@@ -43,13 +48,16 @@
                 <span class="carousel-title">Artisti</span>
                 <input type="text" th:unless="${artists.isEmpty()}" placeholder="Cerca artista..."
                        class="searchInput" id="artistSearchInput" oninput="filterArtistsBasedOnSearchText()">
-                <span th:if="${userIsAdmin}"/>
-                <span th:if="${userIsAdmin}">
-                    <a class="addElement" href="/admin/formAddArtist">Aggiungi artista</a>
-                </span>
             </span>
             <div class="emptyList" th:if="${artists.isEmpty()}">Non c'è ancora nessun artista registrato</div>
             <div class="carousel" id="artist-carousel" th:unless="${artists.isEmpty()}">
+                <!-- ADD ARTIST CARD -->
+                <span th:if="${userIsAdmin}" class="ignoreInJs">
+                    <a href="/admin/formAddArtist">
+                        <div class="card" id="addActor"><div>+</div></div>
+                    </a>
+                    <span class="card-info">Aggiungi artista</span>
+                </span>
                 <span th:each="artist : ${artists}" th:data-name="${artist.name}" th:data-surname="${artist.surname}">
                     <a th:href="@{'/artists/' + ${artist.id}}">
                         <img class="card" width="100%" th:src="'/upload/images/artistsImages/' + ${artist.imageFileName}" alt="image"/>
