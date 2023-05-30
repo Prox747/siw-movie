@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
     <title>OperazioniMovies</title>
     <link rel="stylesheet" href="/css/index_style.css"/>
+    <script src="/js/indexSearch.js"></script>
 </head>
 <body>
     <div th:replace="fragments/header :: header"></div>
@@ -16,15 +17,17 @@
 
         <!--FILM-->
         <div class="movies-container">
-            <span>
+            <span class="carousel-header">
                 <span class="carousel-title">Film</span>
+                <input type="text" th:unless="${movies.isEmpty()}" placeholder="Cerca per titolo..."
+                       class="searchInput" id="movieSearchInput" oninput="filterMoviesBasedOnSearchText()">
                 <span th:if="${userIsAdmin}">
                     <a class="addElement" href="/admin/formNewMovie">Aggiungi film</a>
                 </span>
             </span>
             <div class="emptyList" th:if="${movies.isEmpty()}">Non c'è ancora nessun film</div>
-            <div class="carousel" th:unless="${movies.isEmpty()}">
-                <span th:each="movie : ${movies}">
+            <div class="carousel" id="movie-carousel" th:unless="${movies.isEmpty()}">
+                <span th:each="movie : ${movies}" th:data-title="${movie.title}">
                     <a th:href="@{'/movies/' + ${movie.id}}">
                         <img class="card" width="100%" th:src="'/upload/images/moviesImages/' + ${movie.imageFileName}" alt="image"/>
                     </a>
@@ -33,17 +36,21 @@
                 </span>
             </div>
         </div>
+
         <!--ARTISTI-->
         <div class="artists-container">
-            <span>
+            <span class="carousel-header">
                 <span class="carousel-title">Artisti</span>
+                <input type="text" th:unless="${artists.isEmpty()}" placeholder="Cerca artista..."
+                       class="searchInput" id="artistSearchInput" oninput="filterArtistsBasedOnSearchText()">
+                <span th:if="${userIsAdmin}"/>
                 <span th:if="${userIsAdmin}">
                     <a class="addElement" href="/admin/formAddArtist">Aggiungi artista</a>
                 </span>
             </span>
             <div class="emptyList" th:if="${artists.isEmpty()}">Non c'è ancora nessun artista registrato</div>
             <div class="carousel" th:unless="${artists.isEmpty()}">
-                <span th:each="artist : ${artists}">
+                <span th:each="artist : ${artists}" th:data-name="${artist.name}" th:data-surname="${artist.surname}">
                     <a th:href="@{'/artists/' + ${artist.id}}">
                         <img class="card" width="100%" th:src="'/upload/images/artistsImages/' + ${artist.imageFileName}" alt="image"/>
                     </a>
