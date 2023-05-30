@@ -49,7 +49,7 @@
                 </span>
             </span>
             <div class="emptyList" th:if="${artists.isEmpty()}">Non c'è ancora nessun artista registrato</div>
-            <div class="carousel" th:unless="${artists.isEmpty()}">
+            <div class="carousel" id="artist-carousel" th:unless="${artists.isEmpty()}">
                 <span th:each="artist : ${artists}" th:data-name="${artist.name}" th:data-surname="${artist.surname}">
                     <a th:href="@{'/artists/' + ${artist.id}}">
                         <img class="card" width="100%" th:src="'/upload/images/artistsImages/' + ${artist.imageFileName}" alt="image"/>

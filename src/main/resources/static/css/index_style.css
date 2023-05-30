@@ -185,8 +185,16 @@ p {
     height: 40px;
     font-size: inherit;
     border-radius: 10px;
+    background: transparent;
+    border: white 2px solid;
+    color: white;
+    padding: 0 0.5rem;
 }
 
+/* to remove the outline when the input is focused, annoyingly blue */
+.searchInput:focus {
+    outline: none;
+}
 
 /*///////////////////*/
 
