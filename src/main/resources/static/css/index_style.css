@@ -128,6 +128,11 @@ p {
     padding-bottom: 1rem;
 }
 
+/* the carousel has to be 100% width but every element has to be clamp(150px, 15vw, 300px), flex basis is great*/
+.carousel > span {
+    flex-basis: clamp(150px, 15vw, 300px);
+}
+
 .card-info {
     color: white;
     font-size: 1rem;
