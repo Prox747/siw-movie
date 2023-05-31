@@ -22,7 +22,7 @@
             <a id="changeDirector" th:if="${userIsAdmin}" th:href="@{'/admin/directorsToAdd' + '/' + ${movie.id}}"> - Modifica</a>
         </div>
 
-        <div class="card-plus-reviews-container">
+        <div class="card-plus-content-container">
             <div class="card"><img width="100%" th:src="'/upload/images/moviesImages/' + ${movie.imageFileName}" alt="image"/></div>
             <!--RECENSIONI-->
             <div class="reviews-container">

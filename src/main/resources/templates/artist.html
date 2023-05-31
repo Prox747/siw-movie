@@ -14,15 +14,37 @@
 
         <span class="info" th:text="'Data di nascita: (' + ${artist.dateOfBirth} + ')'">2000</span>
         <div class="info" th:if="${artist.dateOfDeath}"><span th:text="'Data di morte: (' + ${artist.dateOfDeath} + ')'">2000</span></div>
+        <div class="card-plus-content-container">
+            <div class="card"><img width="100%" th:src="'/upload/images/artistsImages/' + ${artist.imageFileName}" alt="image"/></div>
+            <div class="movies-carousels">
+                <div class="directedMovies-container">
+                    <h2 class="carousel-title">Ha diretto:</h2>
+                    <div class="carousel">
+                        <div class="emptyList" th:if="${artist.directedMovies.isEmpty()}">Quest'artista non ha ancora diretto nessun film</div>
+                        <span th:each="movie : ${artist.directedMovies}" th:unless="${artist.directedMovies.isEmpty()}">
+                            <a th:href="@{'/movies/' + ${movie.id}}">
+                                <img class="actor-movies-card" width="100%" th:src="'/upload/images/moviesImages/' + ${movie.imageFileName}" alt="image"/>
+                            </a>
+                            <span class="actor-movies-card-info" th:text="${movie.title}">film pazzo</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="moviesActedIn-container">
+                    <h2 class="carousel-title">Appare in:</h2>
+                    <div class="carousel">
+                        <div class="emptyList" th:if="${artist.moviesActedIn.isEmpty()}">Quest'artista non è apparso ancora in nessun film</div>
+                        <span th:each="movie : ${artist.moviesActedIn}" th:unless="${artist.moviesActedIn.isEmpty()}">
+                            <a th:href="@{'/movies/' + ${movie.id}}">
+                                <img class="actor-movies-card" width="100%" th:src="'/upload/images/moviesImages/' + ${movie.imageFileName}" alt="image"/>
+                            </a>
+                            <span class="actor-movies-card-info" th:text="${movie.title}">film pazzo</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <div class="card"><img width="100%" th:src="'/upload/images/artistsImages/' + ${artist.imageFileName}" alt="image"/></div>
-        <div>
-            <span>Ha diretto:</span>
-        </div>
-        <div>
-            <span>Appare in:</span>
-        </div>
-<!--    DELETE BUTTON-->
+        <!-- DELETE BUTTON-->
         <div class="deleteItemContainer" th:if="${userIsAdmin}">
             <button>
                 <a id="deleteItem" th:href="@{'/admin/deleteArtist/' + ${artist.id}}">CANCELLA ARTISTA</a>
