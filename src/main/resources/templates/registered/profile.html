@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+  <div class="profile-card">
+      <div class="profile-pic">
+          <img th:unless="${user.imageFileName}" src="/upload/images/userProfilePics/default_pic.jpg" alt="profile pic">
+          <img th:if="${user.imageFileName}" th:src="@{'/upload/images/userProfilePics/' + ${user.imageFileName}}" alt="profile_pic">
+      </div>
+      <div class="username" th:text="${user.username}">username</div>
+      <div class="user-info" >
+          <div th:text="'Nome: ' + ${user.name}">nome</div>
+          <div th:text="'Cognome: ' + ${user.surname}">cognome</div>
+          <div th:text="'Email: ' + ${user.email}">email</div>
+      </div>
+      <div class="favourites">
+          Preferiti
+      </div>
+  </div>
+
+</body>
+</html>

@@ -1,6 +1,6 @@
 //So che usare il DB era MOLTO più veloce ma è difficile perchè dovrei
 //chiamare una funzione su spring boot che mi ritorna una lista di film
-//poi dovrei prima di passarli a js, convertirli in JSON, e poi
+//poi dovrei, prima di passarli a js, convertirli in JSON, e poi
 //ricostruire gli oggetti in hmtl, è molto codice
 function filterMoviesBasedOnSearchText() {
     const input = document.getElementById("movieSearchInput");

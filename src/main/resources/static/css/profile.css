@@ -1,0 +1,40 @@
+
+/* FOR THE HEADER */
+@import 'header-fragment.css';
+/*//////////////////////////////*/
+
+:root {
+    --clr-1: #0e4b50;
+    --clr-2: #2d8f85;
+    --clr-3: #637c54;
+}
+
+* {
+    font-family: Rockwell, sans-serif;
+}
+
+body {
+    background: #0A0A0A;
+    margin: 0;
+    padding: 0;
+}
+
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: grey;
+    margin: 2rem;
+    border-radius: 3rem;
+    row-gap: 2rem;
+    padding: 2rem;
+}
+
+.profile-pic > img {
+    object-fit: cover;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}

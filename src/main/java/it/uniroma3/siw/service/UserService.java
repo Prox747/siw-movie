@@ -37,11 +37,13 @@ public class UserService {
         return result.orElse(null);
     }
 
+    //returs: null if there is no logged user
     @Transactional
     public User getCurrentUser() {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
-        return credentials.getUser();
+        Optional<Credentials> currentCredentials = credentialsService.getCurrentCredentials();
+        if(currentCredentials.isPresent())
+            return currentCredentials.get().getUser();
+        else return null;
     }
 
     /**

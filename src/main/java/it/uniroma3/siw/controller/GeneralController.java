@@ -5,6 +5,7 @@ import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.ArtistService;
 import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.MovieService;
+import it.uniroma3.siw.service.UserService;
 import it.uniroma3.siw.util.ModelPreparationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 
 @Controller
-public class AuthenticationController {
+public class GeneralController {
 
     @Autowired
     private CredentialsService credentialsService;
+    @Autowired
+    UserService userService;
     @Autowired
     MovieService movieService;
     @Autowired
@@ -69,5 +72,12 @@ public class AuthenticationController {
             return "registrationSuccessful";
         }
         return "formRegisterUser";
+    }
+
+    //lo user deve essere registrato o admin per accedere
+    @GetMapping("/registered/profile")
+    public String getProfilePage(Model model) {
+        model.addAttribute("user", userService.getCurrentUser());
+        return "registered/profile.html";
     }
 }

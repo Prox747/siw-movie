@@ -15,6 +15,8 @@ public class User {
     @Email(message = "Email not valid")
     String email;
 
+    String imageFileName;
+
     //i need it for easy use of review objects
     String username;
 
@@ -68,5 +70,12 @@ public class User {
 
     public void setReview(Review r) {
         this.review = r;
+    }
+    public String getImageFileName() {
+        return imageFileName;
+    }
+
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
     }
 }
