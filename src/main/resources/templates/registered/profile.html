@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
+    <link rel="stylesheet" href="/css/profile.css" type="text/css">
 </head>
 <body>
-  <div class="profile-card">
+
+    <div th:replace="fragments/header :: header"></div>
+
+    <div class="profile-card">
       <div class="profile-pic">
           <img th:unless="${user.imageFileName}" src="/upload/images/userProfilePics/default_pic.jpg" alt="profile pic">
           <img th:if="${user.imageFileName}" th:src="@{'/upload/images/userProfilePics/' + ${user.imageFileName}}" alt="profile_pic">

@@ -25,7 +25,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: grey;
+    background: var(--clr-1);
+    color: white;
     margin: 2rem;
     border-radius: 3rem;
     row-gap: 2rem;
@@ -35,6 +36,12 @@ body {
 .profile-pic > img {
     object-fit: cover;
     border-radius: 50%;
-    height: 100px;
-    width: 100px;
+    height: 10rem;
+    aspect-ratio: 1;
+}
+
+.username {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: -1.5rem;
 }
