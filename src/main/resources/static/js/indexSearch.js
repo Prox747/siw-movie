@@ -28,8 +28,9 @@ function filterArtistsBasedOnSearchText() {
 
         const name = artists[i].getAttribute("data-name");
         const surname = artists[i].getAttribute("data-surname");
+        const nameAndSurname = name + ' ' + surname;
 
-        if (name.toUpperCase().includes(searchText) || surname.toUpperCase().includes(searchText)) {
+        if (nameAndSurname.toUpperCase().includes(searchText)) {
             artists[i].style.display = "";
         } else {
             artists[i].style.display = "none";
