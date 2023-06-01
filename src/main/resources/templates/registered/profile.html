@@ -11,6 +11,10 @@
 
     <div class="profile-card">
       <div class="profile-pic">
+          <form class="modifyProfilePic" th:action="@{/registered/addedPic}" method="post" enctype="multipart/form-data" >
+              <label id="modifyProfilePicLabel" for="uploadImage">Modifica</label>
+              <input id="uploadImage" name="image" type="file" accept="image/*" onchange="form.submit()">
+          </form>
           <img th:unless="${user.imageFileName}" src="/upload/images/userProfilePics/default_pic.jpg" alt="profile pic">
           <img th:if="${user.imageFileName}" th:src="@{'/upload/images/userProfilePics/' + ${user.imageFileName}}" alt="profile_pic">
       </div>
@@ -21,7 +25,17 @@
           <div th:text="'Email: ' + ${user.email}">email</div>
       </div>
       <div class="favourites">
-          Preferiti
+          <div class="favourites-title">Preferiti</div>
+          <div class="emptyList" th:if="${user.favourites.isEmpty()}">Non hai ancora inserito nessun film tra i preferiti 💔</div>
+          <div class="carousel" th:unless="${user.favourites.isEmpty()}">
+              <span th:each="movie : ${user.favourites}">
+                    <a th:href="@{'/movies/' + ${movie.id}}">
+                        <img class="card" width="100%" th:src="'/upload/images/moviesImages/' + ${movie.imageFileName}" alt="image"/>
+                    </a>
+                    <span class="card-info" th:text="${movie.title}">Movie</span><br>
+                    <span class="card-info" id="movie-year" th:text="${movie.year}">1990</span>
+              </span>
+          </div>
       </div>
   </div>
 

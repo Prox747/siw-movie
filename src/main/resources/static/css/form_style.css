@@ -94,7 +94,7 @@ select {
 }
 
 .errorMessage {
-    color: white;
+    color: orangered;
     font-size: 1.2rem;
     /*questo vuol dire che si estende dalla prima all'ultima colonna(-1)*/
     grid-column: 1/-1;

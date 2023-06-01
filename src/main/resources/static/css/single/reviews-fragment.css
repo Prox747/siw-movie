@@ -71,10 +71,6 @@ li {
     height: auto;
 }
 
-.new-review a {
-    color: var(--clr-2);
-}
-
 #delete-review {
     color: indianred;
     margin: .5rem;

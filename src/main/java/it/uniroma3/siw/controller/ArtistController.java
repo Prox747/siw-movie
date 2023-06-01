@@ -41,7 +41,16 @@ public class ArtistController {
                             @RequestParam String dateOfDeathString,
                             @RequestParam("image") MultipartFile multipartFile,
                             Model model) throws IOException {
-        artistService.setImageForArtist(artist, multipartFile);
+
+        if (!multipartFile.isEmpty()) {
+            try {
+                artistService.setImageForArtist(artist, multipartFile);
+            } catch (IOException e) {
+                model.addAttribute("erroreUpload", "Errore nel caricamento dell'immagine");
+                return formAddArtist(model);
+            }
+        }
+
         artistService.setDateOfBirth(artist, dateOfBirthString);
 
         if (!dateOfDeathString.isEmpty()) {

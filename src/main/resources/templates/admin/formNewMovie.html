@@ -16,6 +16,8 @@
             <p class="errorMessage" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
         </div>
 
+        <div class="errorMessage" th:if="${erroreUpload}" th:text="${erroreUpload}">errore</div>
+
         <label for="titolo">Titolo:</label>
         <input id="titolo" required type="text" th:field="${movie.title}" maxlength="255"/>
         <span class="errorMessage" th:if="${#fields.hasErrors('title')}" th:errors="${movie.title}"></span>

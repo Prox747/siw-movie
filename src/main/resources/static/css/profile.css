@@ -33,15 +33,119 @@ body {
     padding: 2rem;
 }
 
+.profile-pic {
+    aspect-ratio: 1;
+    height: 10rem;
+    z-index: 1;
+}
+
 .profile-pic > img {
     object-fit: cover;
     border-radius: 50%;
     height: 10rem;
     aspect-ratio: 1;
+    z-index: 1;
+}
+
+#modifyProfilePicLabel {
+    opacity: 1;
+}
+
+.modifyProfilePic {
+    color: white;
+    border-radius: 50%;
+    background: black;
+    opacity: 0;
+    z-index: 1;
+    position: absolute;
+    aspect-ratio: 1;
+    height: 10rem;
+    display: grid;
+    place-content: center;
+    font-size: 1.3rem;
+}
+
+.modifyProfilePic:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+#uploadImage {
+    aspect-ratio: inherit;
+    height: inherit;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    border-radius: inherit;
 }
 
 .username {
-    font-size: 2rem;
+    font-size: 2.3rem;
     font-weight: bold;
     margin-top: -1.5rem;
+}
+
+.user-info {
+    display: flex;
+    column-gap: 2rem;
+    font-size: 1.3rem;
+    flex-wrap: wrap;
+    margin: .5rem;
+}
+
+
+.favourites-title {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+/* FAVOURITES CARDS */
+
+.carousel {
+    display: flex;
+    overflow-x: scroll;
+    padding-bottom: 1rem;
+    justify-content: center;
+}
+
+/* the carousel has to be 100% width but every element has to be clamp(150px, 15vw, 300px), flex basis is great*/
+.carousel > span {
+    flex-basis: clamp(100px, 13vw, 250px);
+}
+
+.card-info {
+    color: white;
+    font-size: 1rem;
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+    padding: 0 1.5rem;
+}
+
+#movie-year {
+    font-size: .8rem;
+    color: #ccc;
+    margin-top: -1rem;
+    font-weight: normal;
+}
+
+.card {
+    width: clamp(100px, 13vw, 250px);
+    margin: 1.5rem;
+    border-radius: 10px;
+    transition: all ease-in-out 300ms;
+}
+
+/* to make the card bigger when hovered but not for the addElement cards */
+.card:hover {
+    cursor: pointer;
+    transform: scale(110%);
+    transition: all ease-in-out 300ms;
+}
+
+/*////////////////////////////////////*/
+
+.emptyList {
+    margin: .5rem;
+    font-style: italic;
 }

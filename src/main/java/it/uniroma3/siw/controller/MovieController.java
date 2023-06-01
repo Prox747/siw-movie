@@ -32,15 +32,6 @@ public class MovieController {
     @Autowired
     ModelPreparationUtil modelPreparationUtil;
 
-    @GetMapping("/admin/operazioniMovies")
-    public String operazioniMovies(){
-        return "admin/operazioniMovies.html";
-    }
-
-    @GetMapping("/admin/operazioniArtisti")
-    public String operazioniArtisti(){
-        return "admin/operazioniArtisti.html";
-    }
     @GetMapping("/admin/formNewMovie")
     public String formNewMovie(Model model){
         Movie movie = new Movie();
@@ -52,9 +43,13 @@ public class MovieController {
     @PostMapping("/admin/addedMovie")
     public String newMovie(@RequestParam("image") MultipartFile multipartFile, @Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult, Model model) throws IOException {
         movieValidator.validate(movie, bindingResult);
-        if (!bindingResult.hasErrors()) {
-
-            movieService.addImageToMovie(movie, multipartFile);
+        if (!bindingResult.hasErrors() || multipartFile.isEmpty()) {
+            try{
+                movieService.addImageToMovie(movie, multipartFile);
+            } catch (IOException e) {
+                model.addAttribute("erroreUpload", "Errore nel caricamento dell'immagine");
+                return formNewMovie(model);
+            }
 
             if(movie.getDirector() != null){
                 movie.getDirector().getDirectedMovies().add(movie);
@@ -62,7 +57,6 @@ public class MovieController {
             this.movieService.save(movie);
             return modelPreparationUtil.prepareModelForMovieTemplate("movie.html",model, movie);
         } else {
-            model.addAttribute("messaggioErrore", "Questo film esiste già, inseriscine uno nuovo :)");
             return formNewMovie(model);
         }
     }

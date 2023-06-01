@@ -1,6 +1,8 @@
 package it.uniroma3.siw.service;
 
 import it.uniroma3.siw.model.Credentials;
+import it.uniroma3.siw.model.Movie;
+import it.uniroma3.siw.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,7 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.repository.UserRepository;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -69,5 +74,14 @@ public class UserService {
         for(User user : iterable)
             result.add(user);
         return result;
+    }
+
+    public void addImageToUser(User user, MultipartFile multipartFile) throws IOException {
+        //questa linea è necessaria per evitare attacchi di iniezione di codice attraverso il nome del file
+        // (possono inserire un nome di file che contiene un path e quindi accedere a file che non dovrebbero o cose simili supercattive)
+        String fileName = user.getUsername() + "_profile_pic.jpg";
+        user.setImageFileName(fileName);
+        String uploadDir = "src/main/upload/images/userProfilePics/";
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
     }
 }

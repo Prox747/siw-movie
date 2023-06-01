@@ -9,7 +9,7 @@
 :root {
     --clr-1: #0e4b50;
     --clr-2: #2d8f85;
-    --clr-3: #637c54;
+    --clr-3: #a4dcd1;
 }
 
 * {
@@ -29,12 +29,12 @@ h1 {
 }
 
 a:link, a:visited{
-    color: var(--clr-1);
+    color: var(--clr-2);
     text-decoration: none;
 }
 
 a:hover{
-    color: var(--clr-1);
+    color: var(--clr-3);
     text-decoration: underline;
 }
 
@@ -51,6 +51,7 @@ a:hover{
 }
 
 #changeActors {
+    color: var(--clr-1);
     font-size: 0.7em;
     margin-left: 1rem;
     font-style: italic;
