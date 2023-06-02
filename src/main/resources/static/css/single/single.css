@@ -52,9 +52,20 @@ a:hover{
 
 #changeActors {
     color: var(--clr-1);
-    font-size: 0.7em;
     margin-left: 1rem;
     font-style: italic;
+    font-size: 0.5em;
+    border: var(--clr-1) 3px solid;
+    padding: .5rem;
+    border-radius: 20px;
+    background: var(--clr-2);
+    display: grid;
+    place-content: center;
+}
+
+#changeActors:hover, #changeDirector:hover {
+    color: var(--clr-3);
+    cursor: pointer;
 }
 
 /* flex for the whole content */
@@ -90,6 +101,10 @@ a:hover{
 .carousel > span {
     flex-shrink: 1;
     flex-basis: clamp(100px, 13vw, 250px);
+}
+
+.actor-movies-carousels {
+    width: 67%;
 }
 
 .actor-card-info {
@@ -131,6 +146,7 @@ a:hover{
     color: var(--clr-2);
     margin: 0 0.5rem;
     font-size: 3.5rem;
+    display: flex;
 }
 
 /*//////////////////////////////*/
@@ -139,7 +155,7 @@ a:hover{
 /*    MOVIE CARD    */
 .card {
     border-radius: 1rem;
-    width: 30%;
+    width: 33%;
     height: fit-content;
     position: relative;
     margin: 0.5rem;
@@ -222,17 +238,6 @@ button {
 
 
 /*FOR MOBILE*/
-@media only screen and (max-width: 740px) {
-    .reviews-container {
-        height: 100%;
-        flex-grow: 1;
-    }
-
-    .card-plus-content-container {
-        flex-wrap: wrap;
-    }
-}
-
 @media only screen and (max-width: 1160px) {
     #review-title {
         margin: 1rem 0 0.5rem 0;
@@ -249,6 +254,29 @@ button {
 
     .info {
         font-size: 1.5rem;
+    }
+
+    .carousel-title {
+        font-size: 2.5rem;
+    }
+
+    .actor-movies-carousels {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 740px) {
+    .reviews-container {
+        height: 100%;
+        flex-grow: 1;
+    }
+
+    .card-plus-content-container {
+        flex-wrap: wrap;
+    }
+
+    .actor-movies-carousels {
+        width: 100%;
     }
 }
 /*//////////////////////////////*/
