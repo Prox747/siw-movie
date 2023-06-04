@@ -39,3 +39,17 @@ header {
     align-content: center;
     justify-content: center;
 }
+
+.username-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 6.2rem;
+    border-radius: 10px;
+    border: 2px white solid;
+}
+
+.profile-pic {
+    aspect-ratio: 1;
+    width: 1.7rem;
+}
