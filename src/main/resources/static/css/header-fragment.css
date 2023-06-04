@@ -1,3 +1,9 @@
+:root {
+    --clr-1: #0e4b50;
+    --clr-2: #2d8f85;
+    --clr-3: #a4dcd1;
+}
+
 header {
     height: 3.5rem;
     width: 100%;
@@ -28,15 +34,16 @@ header {
     font-size: 1.3rem;
     font-style: normal;
     text-decoration: none;
+    margin: 0 0.5rem;
 }
 
-#home1:hover, #home2:hover, #login:hover, #username:hover, #logout:hover {
+#home1:hover, #home2:hover, #login:hover, #logout:hover {
     text-decoration: underline;
 }
 
 .endElements {
     display: flex;
-    align-content: center;
+    align-items: center;
     justify-content: center;
 }
 
@@ -44,12 +51,22 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 6.2rem;
     border-radius: 10px;
     border: 2px white solid;
+    width: auto;
+    height: 2.6rem;
 }
 
-.profile-pic {
+.username-container:hover {
+    background: var(--clr-2);
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+}
+
+.profile-pic-header {
     aspect-ratio: 1;
-    width: 1.7rem;
+    width: 2.3rem;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 0.5rem;
 }

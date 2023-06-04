@@ -6,6 +6,7 @@ import it.uniroma3.siw.service.ArtistService;
 import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.MovieService;
 import it.uniroma3.siw.service.UserService;
+import it.uniroma3.siw.util.FileUploadUtil;
 import it.uniroma3.siw.util.ModelPreparationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,6 +58,9 @@ public class GeneralController {
 
     @GetMapping("/success")
     public String defaultAfterLogin(Model model) {
+        //in toeria non puo' essere null, ma per sicurezza
+        if(userService.getCurrentUser() != null)
+            FileUploadUtil.saveCurrentUserProfilePicForHeader(userService.getCurrentUser());
         return index(model);
     }
 
