@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <title>Profile</title>
     <link rel="stylesheet" href="/css/profile.css" type="text/css">
+    <script>
+
+        //così fixo lo styling del carousel quando ci sono più di 5 film preferiti, è più bello
+        window.onload = function() {
+            const favouritesCount = document.getElementsByClassName("favourites")[0].getAttribute("data-favouritesCount");
+            if (favouritesCount > 5) {
+                const carousel = document.getElementsByClassName("carousel")[0];
+                carousel.style.justifyContent = "flex-start";
+            }
+        }
+    </script>
 </head>
 <body>
 
@@ -24,8 +35,9 @@
           <div th:text="'Cognome: ' + ${user.surname}">cognome</div>
           <div th:text="'Email: ' + ${user.email}">email</div>
       </div>
-      <div class="favourites">
-          <div class="favourites-title">Preferiti</div>
+
+      <div class="favourites" th:data-favouritesCount="${user.favourites.size()}">
+          <div class="favourites-title">Preferiti 💞</div>
           <div class="emptyList" th:if="${user.favourites.isEmpty()}">Non hai ancora inserito nessun film tra i preferiti 💔</div>
           <div class="carousel" th:unless="${user.favourites.isEmpty()}">
               <span th:each="movie : ${user.favourites}">

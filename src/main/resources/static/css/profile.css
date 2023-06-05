@@ -94,9 +94,12 @@ body {
     margin: .5rem;
 }
 
+.favourites {
+    width: 100%;
+}
 
 .favourites-title {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     text-align: center;
 }
 
@@ -149,4 +152,5 @@ body {
 .emptyList {
     margin: .5rem;
     font-style: italic;
+    text-align: center;
 }

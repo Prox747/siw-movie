@@ -10,11 +10,10 @@
         <div class="headerElements" th:if="${#request.userPrincipal}">
             <a class="home" id="home1" href="/">Home</a>
             <span class="endElements">
-                <span class="username-container">
+                <a class="username-container" href="/registered/profile">
                     <img class="profile-pic-header" src="/upload/images/userProfilePics/current_user_pic.jpg" alt="profile pic">
-                    <a id="username" th:text="${#request.userPrincipal.principal.username}"
-                       href="/registered/profile"></a>
-                </span>
+                    <span id="username" th:text="${#request.userPrincipal.principal.username}"></span>
+                </a>
                 <span class="whitespace">-</span>
                 <a id="logout" href="/logout">Logout</a>
             </span>

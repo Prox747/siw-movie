@@ -55,11 +55,13 @@ header {
     border: 2px white solid;
     width: auto;
     height: 2.6rem;
+    text-decoration: none;
 }
 
 .username-container:hover {
     background: var(--clr-2);
     cursor: pointer;
+    text-decoration: none;
     transition: background 0.2s ease-in-out;
 }
 

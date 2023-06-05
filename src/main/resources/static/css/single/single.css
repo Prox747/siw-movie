@@ -28,6 +28,10 @@ h1 {
     margin: .5rem;
 }
 
+#title {
+    display: inline;
+}
+
 a:link, a:visited{
     color: var(--clr-2);
     text-decoration: none;
@@ -48,17 +52,18 @@ a:hover{
 #favourite-icon-full {
     color: red;
     display: inline;
-    font-size: 2rem;
+    font-size: 3.5rem;
 }
 
 #favourite-icon-empty {
     color: #cccccc;
     display: inline;
-    font-size: 2rem;
+    font-size: 3.5rem;
 }
 
 #favourite-icon-full:hover, #favourite-icon-empty:hover {
     cursor: pointer;
+    text-decoration: none;
 }
 
 #favourite-icon-empty:hover {
@@ -285,6 +290,10 @@ button {
 
     .actor-movies-carousels {
         width: 50%;
+    }
+
+    #favourite-icon-empty, #favourite-icon-full {
+        font-size: 2.5rem;
     }
 }
 
