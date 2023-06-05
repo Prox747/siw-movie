@@ -93,6 +93,7 @@ public class GeneralController {
         User user = userService.getCurrentUser();
         try {
             userService.addImageToUser(user, multipartFile);
+            FileUploadUtil.saveCurrentUserProfilePicForHeader(userService.getCurrentUser());
         } catch (IOException e) {
             model.addAttribute("erroreUpload", "Errore durante l'upload dell'immagine");
             return getProfilePage(model);
