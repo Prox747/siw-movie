@@ -1,6 +1,7 @@
 package it.uniroma3.siw.controller;
 
 import it.uniroma3.siw.model.Credentials;
+import it.uniroma3.siw.model.Movie;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.ArtistService;
 import it.uniroma3.siw.service.CredentialsService;
@@ -12,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
@@ -101,5 +99,26 @@ public class GeneralController {
         userService.saveUser(user);
 
         return getProfilePage(model);
+    }
+
+    @GetMapping("/registered/removeMovieToFavourites/{movieId}")
+    public String removeMovieToFavourites(@PathVariable("movieId") Long movieId, Model model) {
+        Movie movie = movieService.findById(movieId);
+        User currentUser = userService.getCurrentUser();
+
+        currentUser.getFavourites().remove(movie);
+
+        return modelPreparationUtil.prepareModelForMovieTemplate("movie.html",model, movie);
+    }
+
+
+    @GetMapping("/registered/addMovieToFavourites/{movieId}")
+    public String addMovieToFavourites(@PathVariable("movieId") Long movieId, Model model) {
+        Movie movie = movieService.findById(movieId);
+        User currentUser = userService.getCurrentUser();
+
+        currentUser.getFavourites().add(movie);
+
+        return modelPreparationUtil.prepareModelForMovieTemplate("movie.html",model, movie);
     }
 }

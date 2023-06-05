@@ -14,7 +14,14 @@
     <div th:replace="fragments/header :: header"></div>
 
     <div th:if="${movie}" class="container">
-        <h1 th:text="${movie.title}"></h1>
+        <div class="title">
+            <h1 th:text="${movie.title}"></h1>
+            <span th:if="${userIsRegistered}">
+                <a th:href="@{'/registered/removeMovieToFavourites/' + ${movie.id}}" th:if="${isUserFavourite}" id="favourite-icon-full">&hearts;</a>
+                <a th:href="@{'/registered/addMovieToFavourites/' + ${movie.id}}" th:unless="${isUserFavourite}" id="favourite-icon-empty">&hearts;</a>
+            </span>
+        </div>
+
         <div class="info" id="year">Anno: <span th:text="'(' + ${movie.year} + ')'">2000</span></div>
         <div class="info" id="regista">Regista:
             <span th:if="${movie.director}" th:text="${movie.director.name} + ' ' + ${movie.director.surname}">Pippo Pluto</span>

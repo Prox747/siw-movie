@@ -2,6 +2,7 @@ package it.uniroma3.siw.controller;
 
 import it.uniroma3.siw.model.Artist;
 import it.uniroma3.siw.model.Movie;
+import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.ArtistService;
 import it.uniroma3.siw.service.MovieService;
 import it.uniroma3.siw.util.ModelPreparationUtil;
@@ -164,3 +165,4 @@ public class MovieController {
         return "admin/allActorsForMovie.html";
     }
 }
+

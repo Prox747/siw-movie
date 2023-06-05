@@ -44,6 +44,29 @@ a:hover{
     margin: .5rem;
 }
 
+/* PREFERITI */
+#favourite-icon-full {
+    color: red;
+    display: inline;
+    font-size: 2rem;
+}
+
+#favourite-icon-empty {
+    color: #cccccc;
+    display: inline;
+    font-size: 2rem;
+}
+
+#favourite-icon-full:hover, #favourite-icon-empty:hover {
+    cursor: pointer;
+}
+
+#favourite-icon-empty:hover {
+    color: indianred;
+}
+
+/*/////////////////////////*/
+
 #changeDirector {
     font-size: 1.5rem;
     font-style: italic;

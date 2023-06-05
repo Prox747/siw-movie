@@ -2,6 +2,7 @@ package it.uniroma3.siw.util;
 import it.uniroma3.siw.model.Artist;
 import it.uniroma3.siw.model.Movie;
 import it.uniroma3.siw.model.Review;
+import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.CredentialsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,18 +23,28 @@ public class ModelPreparationUtil {
         if(!credentialsService.getCurrentCredentials().isPresent()) {
             return template;
         }
-        Review currentUserReview = credentialsService.getCurrentCredentials().get().getUser().getReview();
+
+        //se siamo loggati
+        User currentUser = credentialsService.getCurrentCredentials().get().getUser();
+        Review currentUserReview = currentUser.getReview();
         //se è admin o è registrato e non ha ancora recensito il film, può aggiungere una recensione
         if(credentialsService.userIsAdmin()) {
             //se è admin può cancellare le recensioni
             modelToPrepare.addAttribute("userIsAdmin", true);
+            modelToPrepare.addAttribute("userIsRegistered", true);
             if(currentUserReview == null)
                 modelToPrepare.addAttribute("userCanAddReview", true);
         }
         if(credentialsService.userIsRegistered()) {
+            modelToPrepare.addAttribute("userIsRegistered", true);
             if(currentUserReview == null)
                 modelToPrepare.addAttribute("userCanAddReview", true);
         }
+
+        //ci dice se l'utente ha messo il film tra i preferiti
+        if(currentUser.getFavourites().contains(movieToInject))
+            modelToPrepare.addAttribute("isUserFavourite", true);
+
         return template;
     }
 
