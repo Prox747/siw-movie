@@ -6,12 +6,14 @@
     <link rel="stylesheet" href="/css/profile.css" type="text/css">
     <script>
 
-        //così fixo lo styling del carousel quando ci sono più di 5 film preferiti, è più bello
+        //così fixo lo styling del carousel quando ci sono più di 5 film preferiti o lo schermo è troppo stretto, è più bello
         window.onload = function() {
             const favouritesCount = document.getElementsByClassName("favourites")[0].getAttribute("data-favouritesCount");
+            const carousel = document.getElementsByClassName("carousel")[0];
             if (favouritesCount > 5) {
-                const carousel = document.getElementsByClassName("carousel")[0];
                 carousel.style.justifyContent = "flex-start";
+            } else {
+                carousel.style.justifyContent = "center";
             }
         }
     </script>

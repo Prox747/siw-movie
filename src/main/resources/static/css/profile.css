@@ -154,3 +154,9 @@ body {
     font-style: italic;
     text-align: center;
 }
+
+@media screen and (width <= 1000px) {
+    .carousel {
+        justify-content: flex-start !important;
+    }
+}
