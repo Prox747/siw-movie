@@ -47,7 +47,7 @@
      
      NOTA: 
      questo progetto agli albori del corso era un github condiviso con un mio amico di corso, per seguire in modo coordinato il corso stesso.
-     E' quindi presente come collaboratore di questa repository, ma se si controllano i commit pubblicati, ha solo aggiornato il sito durante le prime
+     E' quindi stato in passato un collaboratore di questa repository, ma se si controllano i commit pubblicati, ha solo aggiornato il sito durante le prime
      settimane del corso con i tutorial pubblicati dal docente (se ricordo bene fino all'aggiunta/rimozione di attori dai film)
      
 Per concludere, il corso mi è piaciuto tanto, sopratutto il focus sulla pratica senza però diventare delle scimmiette che scrivono codice a caso 🐵
