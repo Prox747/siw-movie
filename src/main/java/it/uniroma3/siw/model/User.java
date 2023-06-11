@@ -14,7 +14,7 @@ public class User {
     private Long id;
     String name;
     String surname;
-    @Email(message = "Email not valid")
+    @Email(message = "Email non valida")
     String email;
 
     String imageFileName;

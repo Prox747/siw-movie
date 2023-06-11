@@ -41,15 +41,24 @@ public class MovieController {
             model.addAttribute("directors", artistService.findAll());
         return "admin/formNewMovie.html";
     }
+
+
+    //we need this to return to the form with the error messages, and eliminate duplicate code
+    public String returnToFormNewMovie(Model model){
+        if(artistService.findAll().size() != 0)
+            model.addAttribute("directors", artistService.findAll());
+        return "admin/formNewMovie.html";
+    }
+
     @PostMapping("/admin/addedMovie")
-    public String newMovie(@RequestParam("image") MultipartFile multipartFile, @Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult, Model model) throws IOException {
+    public String newMovie(@RequestParam("image") MultipartFile multipartFile, @Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult, Model model) {
         movieValidator.validate(movie, bindingResult);
-        if (!bindingResult.hasErrors() || multipartFile.isEmpty()) {
+        if (!bindingResult.hasErrors() && !multipartFile.isEmpty()) {
             try{
                 movieService.addImageToMovie(movie, multipartFile);
             } catch (IOException e) {
                 model.addAttribute("erroreUpload", "Errore nel caricamento dell'immagine");
-                return formNewMovie(model);
+                return returnToFormNewMovie(model);
             }
 
             if(movie.getDirector() != null){
@@ -58,7 +67,7 @@ public class MovieController {
             this.movieService.save(movie);
             return modelPreparationUtil.prepareModelForMovieTemplate("movie.html",model, movie);
         } else {
-            return formNewMovie(model);
+            return returnToFormNewMovie(model);
         }
     }
 

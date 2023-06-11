@@ -25,7 +25,7 @@
   <!-- nella form dobbiamo mettere enctype="multipart/form-data" per dire al browser che la form deve poter accettare caricamneto di file
        Mentre sotto dobbiamo mettere nell'input il tipo "file" e per accettare solo immagini mettiamo accept="image/*"-->
   <form class="container" th:action="@{'/registered/addedReview/' + ${movieId}}" method="POST" th:object="${review}">
-    <div th:if="${messaggioErrore}">
+    <div id="error-container" th:if="${messaggioErrore}">
       <p class="errorMessage" th:text="${messaggioErrore}">...</p>
     </div>
 
@@ -45,9 +45,11 @@
 
     <label for="titolo">Titolo:</label>
     <input id="titolo" required type="text" th:field="${review.title}" placeholder="max 20 parole..." maxlength="20"/>
+    <span class="errorMessage" th:if="${#fields.hasErrors('title')}" th:errors="${review.title}"></span>
 
     <label for="anno">Contenuto:</label>
     <input id="anno" placeholder="Scrivi la recensione..." required type="text" th:field="${review.content}" maxlength="255"/>
+    <span class="errorMessage" th:if="${#fields.hasErrors('content')}" th:errors="${review.content}"></span>
 
     <button type="submit" class="bottone">Inserisci</button>
   </form>

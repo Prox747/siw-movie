@@ -69,7 +69,7 @@ public class GeneralController {
                                BindingResult credentialsBindingResult,
                                Model model) {
 
-        // se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
+        // se user e credential hanno entrambi contenuti validi, memorizza User e le Credentials nel DB
         if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
             credentials.setUser(user);
             credentialsService.saveCredentials(credentials);

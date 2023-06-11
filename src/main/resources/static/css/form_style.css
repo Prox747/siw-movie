@@ -96,9 +96,13 @@ select {
 .errorMessage {
     color: orangered;
     font-size: 1.2rem;
+    margin: .5rem;
+    grid-column: 1/-1;
+}
+
+#error-container {
     /*questo vuol dire che si estende dalla prima all'ultima colonna(-1)*/
     grid-column: 1/-1;
-    margin: .5rem;
 }
 
 .noDirectors {

@@ -12,16 +12,23 @@
     <!-- nella form dobbiamo mettere enctype="multipart/form-data" per dire al browser che la form deve poter accettare caricamneto di file
          Mentre sotto dobbiamo mettere nell'input il tipo "file" e per accettare solo immagini mettiamo accept="image/*"-->
     <form class="container" th:action="@{/admin/addedArtist}" method="POST" th:object="${artist}" enctype="multipart/form-data">
+        <div id="error-container" th:if="${#fields.hasGlobalErrors()}">
+            <p class="errorMessage" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+        </div>
+
         <span class="errorMessage" th:if="${erroreUpload}" th:text="${erroreUpload}">Errore</span>
 
         <label for="name">Nome:</label>
         <input id="name" required type="text" th:field="${artist.name}" maxlength="255"/>
+        <span class="errorMessage" th:if="${#fields.hasErrors('name')}" th:errors="${artist.name}"></span>
 
         <label for="surname">Cognome:</label>
         <input id="surname" required type="text" th:field="${artist.surname}" maxlength="255"/>
+        <span class="errorMessage" th:if="${#fields.hasErrors('surname')}" th:errors="${artist.surname}"></span>
 
         <label for="nationality">Nazionalità:</label>
         <input id="nationality" required type="text" th:field="${artist.nationality}" maxlength="255"/>
+        <span class="errorMessage" th:if="${#fields.hasErrors('nationality')}" th:errors="${artist.nationality}"></span>
 
         <label for="dateofbirth">Data di nascita:</label>
         <input id="dateofbirth" required type="date" name="dateOfBirthString"/>
@@ -30,7 +37,7 @@
         <input id="dateofdeath" type="date" name="dateOfDeathString"/>
 
         <label for="image">Immagine:</label>
-        <input id="image" type="file" name="image" accept="image/*"/>
+        <input id="image" required type="file" name="image" accept="image/*"/>
 
         <button type="submit" class="bottone">Inserisci</button>
     </form>

@@ -4,19 +4,24 @@ import it.uniroma3.siw.model.Artist;
 import it.uniroma3.siw.service.ArtistService;
 import it.uniroma3.siw.service.MovieService;
 import it.uniroma3.siw.util.ModelPreparationUtil;
+import it.uniroma3.siw.validator.ArtistValidator;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.IOException;
 
 @Controller
 public class ArtistController {
     @Autowired
     ArtistService artistService;
+    @Autowired
+    ArtistValidator artistValidator;
     @Autowired
     MovieService movieService;
     @Autowired
@@ -37,35 +42,35 @@ public class ArtistController {
     }
 
     @PostMapping("/admin/addedArtist")
-    public String addArtist(@ModelAttribute("artist") Artist artist, @RequestParam String dateOfBirthString,
+    public String addArtist(@RequestParam String dateOfBirthString,
                             @RequestParam String dateOfDeathString,
                             @RequestParam("image") MultipartFile multipartFile,
+                            @Valid @ModelAttribute("artist") Artist artist,
+                            BindingResult bindingResult,
                             Model model) throws IOException {
 
-        if (!multipartFile.isEmpty()) {
+        artistValidator.validate(artist, bindingResult);
+        if (!multipartFile.isEmpty() && !bindingResult.hasErrors()) {
             try {
                 artistService.setImageForArtist(artist, multipartFile);
             } catch (IOException e) {
                 model.addAttribute("erroreUpload", "Errore nel caricamento dell'immagine");
-                return formAddArtist(model);
+                return "admin/formAddArtist.html";
             }
-        }
 
-        artistService.setDateOfBirth(artist, dateOfBirthString);
+            artistService.setDateOfBirth(artist, dateOfBirthString);
 
-        if (!dateOfDeathString.isEmpty()) {
-            artistService.setDateOfDeath(artist, dateOfDeathString);
-        }
+            if (!dateOfDeathString.isEmpty()) {
+                artistService.setDateOfDeath(artist, dateOfDeathString);
+            }
 
-        if (!artistService.existsArtistByNameAndSurnameAndDateOfBirth(artist.getName(), artist.getSurname(), artist.getDateOfBirth())) {
             this.artistService.save(artist);
             return modelPreparationUtil.prepareModelForArtistTemplate(
                     "artist.html",
-                    model,
-                    artist);
+                            model,
+                            artist);
         } else {
-            model.addAttribute("messaggioErrore", "Questo artista esiste già");
-            return formAddArtist(model);
+            return "admin/formAddArtist.html";
         }
     }
 

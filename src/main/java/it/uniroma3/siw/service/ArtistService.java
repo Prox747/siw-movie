@@ -47,8 +47,8 @@ public class ArtistService {
         return artistRepository.findAllByMoviesActedInIsContaining(movie);
     }
 
-    public boolean existsArtistByNameAndSurnameAndDateOfBirth(String name, String surname, LocalDate dateOfBirth) {
-        return artistRepository.existsArtistByNameAndSurnameAndDateOfBirth(name, surname, dateOfBirth);
+    public boolean existsByNameAndSurnameAndDateOfBirth(String name, String surname, LocalDate dateOfBirth) {
+        return artistRepository.existsByNameAndSurnameAndDateOfBirth(name, surname, dateOfBirth);
     }
 
     public Artist save(Artist artist) {
