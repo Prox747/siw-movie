@@ -46,7 +46,7 @@ public class ReviewController {
         }
     }
 
-    @GetMapping("/admin/deleteReview/{reviewId}")
+    @GetMapping("/registered/deleteReview/{reviewId}")
     public String deleteReview(@PathVariable("reviewId") Long reviewId,
                                Model model) {
         Review review = reviewService.findById(reviewId);

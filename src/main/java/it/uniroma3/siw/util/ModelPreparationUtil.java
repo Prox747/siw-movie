@@ -21,6 +21,8 @@ public class ModelPreparationUtil {
             modelToPrepare.addAttribute("actors", movieToInject.getActors());
         //se non siamo loggati
         if(!credentialsService.getCurrentCredentials().isPresent()) {
+            modelToPrepare.addAttribute("userIsRegistered", false);
+            modelToPrepare.addAttribute("userIsAdmin", false);
             return template;
         }
 
@@ -37,8 +39,16 @@ public class ModelPreparationUtil {
         }
         if(credentialsService.userIsRegistered()) {
             modelToPrepare.addAttribute("userIsRegistered", true);
+            modelToPrepare.addAttribute("userIsAdmin", false);
             if(currentUserReview == null)
                 modelToPrepare.addAttribute("userCanAddReview", true);
+        }
+
+        //se l'utente ha già recensito il film, può cancellare la sua recensione
+        //ci serviamo del suo id per fare dei check
+        if(currentUserReview != null &&
+                currentUserReview.getReviewedMovie().getId().equals(movieToInject.getId())) {
+            modelToPrepare.addAttribute("currentUserId", currentUser.getId());
         }
 
         //ci dice se l'utente ha messo il film tra i preferiti

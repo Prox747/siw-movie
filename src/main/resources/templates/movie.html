@@ -59,7 +59,7 @@
 
                                 <div id="review-text" th:text="${review.content}">Testo</div>
 
-                                <a id="delete-review" th:if="${userIsAdmin}" th:href="@{'/admin/deleteReview/' + ${review.id}}">Cancella recensione</a>
+                                <a id="delete-review" th:if="${userIsAdmin or currentUserId == review.author.id}" th:href="@{'/registered/deleteReview/' + ${review.id}}">Cancella recensione</a>
                             </div>
                         </li>
                     </ul>
