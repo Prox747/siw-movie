@@ -23,7 +23,6 @@ public class Artist {
     @NotBlank
     private String nationality;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull
     private LocalDate dateOfBirth;
     private LocalDate dateOfDeath;
     private String imageFileName;

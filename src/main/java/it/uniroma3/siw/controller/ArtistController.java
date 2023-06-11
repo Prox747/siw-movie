@@ -47,7 +47,10 @@ public class ArtistController {
                             @RequestParam("image") MultipartFile multipartFile,
                             @Valid @ModelAttribute("artist") Artist artist,
                             BindingResult bindingResult,
-                            Model model) throws IOException {
+                            Model model) {
+
+        //va prima assegnata la data di nascita, altrimenti non si può validare
+        artistService.setDateOfBirth(artist, dateOfBirthString);
 
         artistValidator.validate(artist, bindingResult);
         if (!multipartFile.isEmpty() && !bindingResult.hasErrors()) {
@@ -55,10 +58,8 @@ public class ArtistController {
                 artistService.setImageForArtist(artist, multipartFile);
             } catch (IOException e) {
                 model.addAttribute("erroreUpload", "Errore nel caricamento dell'immagine");
-                return "admin/formAddArtist.html";
+                return "admin/formAddArtist";
             }
-
-            artistService.setDateOfBirth(artist, dateOfBirthString);
 
             if (!dateOfDeathString.isEmpty()) {
                 artistService.setDateOfDeath(artist, dateOfDeathString);
@@ -70,7 +71,7 @@ public class ArtistController {
                             model,
                             artist);
         } else {
-            return "admin/formAddArtist.html";
+            return "admin/formAddArtist";
         }
     }
 
