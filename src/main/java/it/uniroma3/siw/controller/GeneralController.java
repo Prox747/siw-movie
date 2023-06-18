@@ -70,12 +70,15 @@ public class GeneralController {
                                Model model) {
 
         // se user e credential hanno entrambi contenuti validi, memorizza User e le Credentials nel DB
-        if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
+        if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()
+                && userService.isUsernameAvailable(credentials.getUsername())) {
             credentials.setUser(user);
             credentialsService.saveCredentials(credentials);
             model.addAttribute("user", user);
             return "registrationSuccessful";
         }
+        if(!userService.isUsernameAvailable(credentials.getUsername()))
+            model.addAttribute("usernameNotAvailable", "Username non disponibile");
         return "formRegisterUser";
     }
 

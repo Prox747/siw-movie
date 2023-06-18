@@ -13,11 +13,14 @@
 
   <h1>Registrazione</h1>
   <form class="container" th:action="@{/register}" method="POST">
+
     <label for="usernameForRegistration">Username</label>
     <input id="usernameForRegistration" type="text" placeholder="username" required th:field="${credentials.username}" /><br>
     <span class="errorMessage" th:if="${#fields.hasErrors('credentials.username')}" th:errors="${credentials.username}"
           th:style="'color:red'">
     </span><br>
+
+    <span class="errorMessage" th:if="${usernameNotAvailable}" th:text="${usernameNotAvailable}"></span>
 
     <label for="password">Password</label>
     <input id="password" type="password" placeholder="password" required th:field="${credentials.password}"/><br>
