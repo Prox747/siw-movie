@@ -31,8 +31,6 @@ _In questa scaletta di casi d'uso, ogni successivo tipo di utente può effettuar
 Tutti gli utenti possono modificare la dimensione della scheda del browser, e il sito si adatterà automaticamente:  
 **Il sito è completamente responsive.**
 
----
-
 ## 💭 **Note Finali e Considerazioni**
 
 Ho trovato **Spring Boot** uno strumento molto potente, soprattutto accoppiato con **Intellij IDEA**. Ho cercato di usare il meno possibile funzioni o "trucchi" che non comprendevo a fondo, limitando l'uso di **JavaScript** solo dove strettamente necessario.  
