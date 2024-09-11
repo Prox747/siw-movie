@@ -1,55 +1,42 @@
-# siw-movie - Progetto per corso di SIW RomaTre Ingegneria Informatica 3o anno
+# 🛠️ **SIW Movie**  
+### Progetto per il corso di Sistemi Informativi su Web RomaTre Ingegneria Informatica - 3° anno
 
-**CASI D'USO:**
-     _In questa scaletta di casi d'uso, ogni successivo tipo di utente può effettuare tutte le operazioni del tipo precedente_
-     
-     
-     Utente occassionale: 
-          1. Qualsiasi utente può visualizzare tutte le informazioni su film e artisti, nonchè le recensioni dei film
-               1.1 Può visualizzare di un film tutti gli artisti coinvolti, direttore e attori e accedere alla loro pagina descrizione
-               1.2 Per ogni artista, può visualizzare tutti i film diretti o in cui è apparso, e la data di nascita e morte (opzionale)
-          2. Qualsiasi utente può effettuare la ricerca di film per titolo e artisti per nome e cognome
-          3. (Lo metto anche se scontato) Qualsiasi utente si può registrare e accedere al servizio con l'account registrato
-     ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-     Utente registrato:
-          1. Un utente registrato può accedere alla propria pagina del profilo
-          2. Un utente registrato può aggiungere o cambiare la propria immagine del profilo
-          3. Un utente registrato può aggiungere o rimuovere un film dai suoi "preferiti". I film preferiti saranno visualizzabili sulla propria pagina del profilo
-          4. Un utente registrato può aggiungere una recensione di un film con titolo, contenuto e voto. Tutti potranno visualizzarla
-          5. Un utente registrato può cancellare la SUA recensione
-     ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-     Utente amministratore:
-          1. Un utente admin può aggiungere un film, con le informazioni necessarie
-          2. Un utente admin può rimuovere un film e conseguentemente tutte le sue recensioni
-          3. Un utente admin può aggiungere un artista, con le informazioni necessarie e opzionali
-          4. Un utente admin può rimuovere un artista e conseguentemente i suoi collegamenti con i film diretti/recitati
-          5. Un utente admin può rimuovere una, qualcuna o tutte le recensioni relative ad un film
-          6. Un utente admin può aggiornare le informazioni sui film, cambiando direttore e aggiungendo o rimuovendo attori
-     ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-     non so se definibile caso d'uso:
-          *******************************************************************************************************************
-          Ogni utente può decidere di modificare la grandezza della scheda del browser e il sito si comporterà di conseguenza
-          IN PRATICA: IL SITO E' RESPONSIVE
-          *******************************************************************************************************************
-          
+## 📋 **Casi d'Uso**
 
-**NOTE FINALI E CONSIDERAZIONI:**
+_In questa scaletta di casi d'uso, ogni successivo tipo di utente può effettuare tutte le operazioni del tipo precedente._
 
-     Ho trovato Spring Boot uno strumento molto potente, ancora di più accoppiato con Intellij IDEA (un IDE). Ho cercato di usare il meno possibile
-     funzioni/trick che non comprendevo fino in fondo. Ho cercato infatti di usare JavaScript solo in caso di estrema necessità, capendo ogni riga
-     che scrivevo. Ho anche usato GitHub Copilot, che se tu in primis sai cosa vuoi fare, ti aiuta molto, altrimenti è un disastro.
-     Ho cercato di validare il più possibile i dati in entrata, anche se, non avendo politiche di validazioni complesse, ho usato per lo più
-     le annotazioni e ho verificato che non ci potessero essere oggetti "non passati" (null). Ho preferito, invece di creare molti doppioni di pagine
-     html per admin/registrato e non, di creare una classe di utilità che mi permette di controllare se l'utente corrente è admin o registrato o 
-     occasionale, per poi decidere che cosa aggiungere al modello e conseguentemente cosa mostrare nel template. Per gli stili, tranne alcune cose
-     (la card del film, che alla fine ho capito come funziona), mi sono mantenuto sul semplice con un tema scuro e UI principalmente costruito con
-     flexbox e qualche griglia. 
-     
-     NOTA: 
-     questo progetto agli albori del corso era un github condiviso con un mio amico di corso, per seguire in modo coordinato il corso stesso.
-     E' quindi stato in passato un collaboratore di questa repository, ma se si controllano i commit pubblicati, ha solo aggiornato il sito durante le prime
-     settimane del corso con i tutorial pubblicati dal docente (se ricordo bene fino all'aggiunta/rimozione di attori dai film)
-     
-Per concludere, il corso mi è piaciuto tanto, sopratutto il focus sulla pratica senza però diventare delle scimmiette che scrivono codice a caso 🐵
-     
-               
+### 👤 Utente Occasionale
+- Qualsiasi utente può visualizzare tutte le informazioni su film e artisti, nonché le recensioni dei film.
+   - Può visualizzare di un film tutti gli artisti coinvolti (regista e attori) e accedere alla loro pagina descrittiva.
+   - Per ogni artista, può visualizzare tutti i film diretti o in cui è apparso, insieme alla data di nascita e morte (opzionale).
+- Qualsiasi utente può cercare film per titolo e artisti per nome e cognome.
+- Qualsiasi utente può registrarsi e accedere al servizio con un account registrato.
+
+### 📝 Utente Registrato
+- Un utente registrato può accedere alla propria pagina del profilo.
+- Un utente registrato può aggiungere o cambiare l'immagine del profilo.
+- Un utente registrato può aggiungere o rimuovere un film dai "preferiti", che saranno visibili nel profilo.
+- Un utente registrato può aggiungere una recensione di un film, specificando titolo, contenuto e voto, visibile a tutti.
+- Un utente registrato può cancellare la propria recensione.
+
+### 🛡️ Utente Amministratore
+- Un admin può aggiungere un film, fornendo tutte le informazioni necessarie.
+- Un admin può rimuovere un film e le relative recensioni.
+- Un admin può aggiungere un artista con le informazioni necessarie e opzionali.
+- Un admin può rimuovere un artista, cancellando anche i suoi collegamenti con i film.
+- Un admin può rimuovere una, alcune o tutte le recensioni relative a un film.
+- Un admin può aggiornare le informazioni sui film, cambiando il regista o aggiungendo/rimuovendo attori.
+
+### 🌐 Responsività del Sito
+Tutti gli utenti possono modificare la dimensione della scheda del browser, e il sito si adatterà automaticamente:  
+**Il sito è completamente responsive.**
+
+---
+
+## 💭 **Note Finali e Considerazioni**
+
+Ho trovato **Spring Boot** uno strumento molto potente, soprattutto accoppiato con **Intellij IDEA**. Ho cercato di usare il meno possibile funzioni o "trucchi" che non comprendevo a fondo, limitando l'uso di **JavaScript** solo dove strettamente necessario.  
+Ho anche utilizzato **GitHub Copilot**, che è utile solo se si sa esattamente cosa si vuole fare, altrimenti può risultare poco efficace.  
+
+Per la validazione dei dati, ho adottato un approccio semplice con annotazioni e controlli per evitare oggetti nulli. Invece di duplicare pagine HTML per admin, utenti registrati e occasionali, ho creato una classe di utilità per gestire i permessi e decidere cosa visualizzare nel template.  
+Per quanto riguarda lo stile, ho mantenuto un approccio semplice, con un tema scuro e una **UI** costruita principalmente con **Flexbox** e alcune griglie.
